@@ -1,0 +1,30 @@
+{
+  "name": "TPlaboratorioIV2016",
+  "homepage": "https://github.com/alejoasotelo/TPlaboratorioIV2016",
+  "description": "Tp laboratorio IV 2016",
+  "main": "index.html",
+  "keywords": [
+    "tp",
+    "angular"
+  ],
+  "authors": [
+    "Alejo Sotelo"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular": "^1.5.8",
+    "angular-ui-router": "^0.3.1",
+    "bootstrap": "^3.3.7",
+    "ngmap": "^1.17.8",
+    "pdfmake": "^0.1.20",
+    "jquery": "^3.1.1"
+  }
+}
