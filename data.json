@@ -1,0 +1,501 @@
+[{
+  "id": 1,
+  "password": "MHjfD3ukrwxO",
+  "nombre_completo": "Steven Wheeler",
+  "tipo": "cliente"
+}, {
+  "id": 2,
+  "password": "FCxWL8w1JKl",
+  "nombre_completo": "Gregory Mitchell",
+  "tipo": "cliente"
+}, {
+  "id": 3,
+  "password": "H6mwbBdIUv",
+  "nombre_completo": "Matthew Allen",
+  "tipo": "cliente"
+}, {
+  "id": 4,
+  "password": "oh6e5IjTk",
+  "nombre_completo": "Sandra Banks",
+  "tipo": "cliente"
+}, {
+  "id": 5,
+  "password": "N57KhwuPJv",
+  "nombre_completo": "George Wagner",
+  "tipo": "encargado"
+}, {
+  "id": 6,
+  "password": "HiVg4K",
+  "nombre_completo": "Emily Willis",
+  "tipo": "encargado"
+}, {
+  "id": 7,
+  "password": "TrrZAPXeO3Mv",
+  "nombre_completo": "Aaron Fuller",
+  "tipo": "administrador"
+}, {
+  "id": 8,
+  "password": "dRRm1OdwZ",
+  "nombre_completo": "Joe Davis",
+  "tipo": "administrador"
+}, {
+  "id": 9,
+  "password": "d2Ft1K4",
+  "nombre_completo": "Melissa Riley",
+  "tipo": "cliente"
+}, {
+  "id": 10,
+  "password": "mHx6dMMdd",
+  "nombre_completo": "Brenda Alexander",
+  "tipo": "encargado"
+}, {
+  "id": 11,
+  "password": "J5RSLdXsif",
+  "nombre_completo": "Jessica Perkins",
+  "tipo": "empleado"
+}, {
+  "id": 12,
+  "password": "h4rSR75xF7nR",
+  "nombre_completo": "Catherine Welch",
+  "tipo": "encargado"
+}, {
+  "id": 13,
+  "password": "RHvMHZcE",
+  "nombre_completo": "Brenda Cook",
+  "tipo": "administrador"
+}, {
+  "id": 14,
+  "password": "0NFDdt8",
+  "nombre_completo": "Margaret Jenkins",
+  "tipo": "empleado"
+}, {
+  "id": 15,
+  "password": "3OGYhz",
+  "nombre_completo": "Steve Cox",
+  "tipo": "administrador"
+}, {
+  "id": 16,
+  "password": "RuDlq3R",
+  "nombre_completo": "Joyce Moore",
+  "tipo": "encargado"
+}, {
+  "id": 17,
+  "password": "B58MhoR8",
+  "nombre_completo": "Kimberly Greene",
+  "tipo": "encargado"
+}, {
+  "id": 18,
+  "password": "46BhZkqR8",
+  "nombre_completo": "Jane Gutierrez",
+  "tipo": "empleado"
+}, {
+  "id": 19,
+  "password": "yHFkVQO",
+  "nombre_completo": "Stephen Meyer",
+  "tipo": "cliente"
+}, {
+  "id": 20,
+  "password": "ouCiTy",
+  "nombre_completo": "Diana Gordon",
+  "tipo": "administrador"
+}, {
+  "id": 21,
+  "password": "3SrwyZ6",
+  "nombre_completo": "Henry Hernandez",
+  "tipo": "empleado"
+}, {
+  "id": 22,
+  "password": "6GU5GLVOIL",
+  "nombre_completo": "Dennis George",
+  "tipo": "empleado"
+}, {
+  "id": 23,
+  "password": "6fzCFw5",
+  "nombre_completo": "Lawrence Coleman",
+  "tipo": "administrador"
+}, {
+  "id": 24,
+  "password": "LIs5unQvKx9l",
+  "nombre_completo": "Denise Hall",
+  "tipo": "administrador"
+}, {
+  "id": 25,
+  "password": "9p77eMXrr",
+  "nombre_completo": "Sarah Jacobs",
+  "tipo": "encargado"
+}, {
+  "id": 26,
+  "password": "IcwVQEFzg",
+  "nombre_completo": "Timothy Fuller",
+  "tipo": "encargado"
+}, {
+  "id": 27,
+  "password": "qyxlEMWqyVv",
+  "nombre_completo": "Peter Lee",
+  "tipo": "empleado"
+}, {
+  "id": 28,
+  "password": "8UccDj",
+  "nombre_completo": "Amy Ferguson",
+  "tipo": "encargado"
+}, {
+  "id": 29,
+  "password": "EknRLTNT",
+  "nombre_completo": "Lori Hudson",
+  "tipo": "administrador"
+}, {
+  "id": 30,
+  "password": "tajxWYcgixNp",
+  "nombre_completo": "Lawrence Schmidt",
+  "tipo": "encargado"
+}, {
+  "id": 31,
+  "password": "WmwFDwHhL",
+  "nombre_completo": "Gregory Hayes",
+  "tipo": "encargado"
+}, {
+  "id": 32,
+  "password": "BXdODFTw0",
+  "nombre_completo": "Christopher Simpson",
+  "tipo": "cliente"
+}, {
+  "id": 33,
+  "password": "qei5iWA",
+  "nombre_completo": "Mary Harper",
+  "tipo": "empleado"
+}, {
+  "id": 34,
+  "password": "xGRzFlb81",
+  "nombre_completo": "Terry Brown",
+  "tipo": "encargado"
+}, {
+  "id": 35,
+  "password": "LKrRDw7",
+  "nombre_completo": "Howard Bryant",
+  "tipo": "cliente"
+}, {
+  "id": 36,
+  "password": "TIvnyfc6W",
+  "nombre_completo": "Dennis Edwards",
+  "tipo": "empleado"
+}, {
+  "id": 37,
+  "password": "0PioD7yJ",
+  "nombre_completo": "Heather Ross",
+  "tipo": "encargado"
+}, {
+  "id": 38,
+  "password": "co34Cafd6z7",
+  "nombre_completo": "Joshua Warren",
+  "tipo": "cliente"
+}, {
+  "id": 39,
+  "password": "XVcmYK",
+  "nombre_completo": "Sandra Long",
+  "tipo": "cliente"
+}, {
+  "id": 40,
+  "password": "zLa97h3Mk",
+  "nombre_completo": "Lawrence Powell",
+  "tipo": "cliente"
+}, {
+  "id": 41,
+  "password": "rUlhzprabxbP",
+  "nombre_completo": "Charles Fowler",
+  "tipo": "administrador"
+}, {
+  "id": 42,
+  "password": "OEr4ZQ",
+  "nombre_completo": "Maria Burns",
+  "tipo": "encargado"
+}, {
+  "id": 43,
+  "password": "VkhEim",
+  "nombre_completo": "Kevin Patterson",
+  "tipo": "cliente"
+}, {
+  "id": 44,
+  "password": "pXeDbO901np",
+  "nombre_completo": "Stephanie Shaw",
+  "tipo": "empleado"
+}, {
+  "id": 45,
+  "password": "VlLdvDMzz",
+  "nombre_completo": "Ashley Scott",
+  "tipo": "empleado"
+}, {
+  "id": 46,
+  "password": "EOt3SkcI9",
+  "nombre_completo": "Ann Payne",
+  "tipo": "administrador"
+}, {
+  "id": 47,
+  "password": "FPgyWGp",
+  "nombre_completo": "Janet Sims",
+  "tipo": "empleado"
+}, {
+  "id": 48,
+  "password": "QbAtM9eLwzIB",
+  "nombre_completo": "Aaron Chapman",
+  "tipo": "administrador"
+}, {
+  "id": 49,
+  "password": "J4GtMX",
+  "nombre_completo": "Kevin Fisher",
+  "tipo": "administrador"
+}, {
+  "id": 50,
+  "password": "R4UuSFz246Q",
+  "nombre_completo": "Amanda Williams",
+  "tipo": "cliente"
+}, {
+  "id": 51,
+  "password": "ODiVWhE5YE6t",
+  "nombre_completo": "Bonnie Grant",
+  "tipo": "encargado"
+}, {
+  "id": 52,
+  "password": "1wDJyB0",
+  "nombre_completo": "Ralph Andrews",
+  "tipo": "administrador"
+}, {
+  "id": 53,
+  "password": "UM7O9Db8I1h5",
+  "nombre_completo": "Justin Burton",
+  "tipo": "administrador"
+}, {
+  "id": 54,
+  "password": "wo3MbA8nXVt7",
+  "nombre_completo": "Jack Romero",
+  "tipo": "empleado"
+}, {
+  "id": 55,
+  "password": "yqH1158",
+  "nombre_completo": "Robert Williamson",
+  "tipo": "encargado"
+}, {
+  "id": 56,
+  "password": "gywvDii6BfKB",
+  "nombre_completo": "Joan Roberts",
+  "tipo": "encargado"
+}, {
+  "id": 57,
+  "password": "wQFapHRIch3N",
+  "nombre_completo": "Diana Palmer",
+  "tipo": "encargado"
+}, {
+  "id": 58,
+  "password": "Vwg9MCp1E7s",
+  "nombre_completo": "Jane Miller",
+  "tipo": "encargado"
+}, {
+  "id": 59,
+  "password": "RnDGyg52",
+  "nombre_completo": "Jane Rodriguez",
+  "tipo": "encargado"
+}, {
+  "id": 60,
+  "password": "f3EeFvUNMQ0",
+  "nombre_completo": "Jonathan Alvarez",
+  "tipo": "cliente"
+}, {
+  "id": 61,
+  "password": "lKDhyBKjJrk",
+  "nombre_completo": "Sean Garrett",
+  "tipo": "cliente"
+}, {
+  "id": 62,
+  "password": "w0AfFgCYz",
+  "nombre_completo": "Matthew Alexander",
+  "tipo": "administrador"
+}, {
+  "id": 63,
+  "password": "FyXhjW5V",
+  "nombre_completo": "Harry Hunter",
+  "tipo": "cliente"
+}, {
+  "id": 64,
+  "password": "8vPK5z",
+  "nombre_completo": "Jerry Williams",
+  "tipo": "empleado"
+}, {
+  "id": 65,
+  "password": "Dlfesr3P",
+  "nombre_completo": "Mark Rice",
+  "tipo": "empleado"
+}, {
+  "id": 66,
+  "password": "SaMQ9YT",
+  "nombre_completo": "William Matthews",
+  "tipo": "empleado"
+}, {
+  "id": 67,
+  "password": "oHDJrQo",
+  "nombre_completo": "Peter Sullivan",
+  "tipo": "encargado"
+}, {
+  "id": 68,
+  "password": "EGZQEGLMaX",
+  "nombre_completo": "Matthew Simmons",
+  "tipo": "encargado"
+}, {
+  "id": 69,
+  "password": "YezUij",
+  "nombre_completo": "Pamela Long",
+  "tipo": "cliente"
+}, {
+  "id": 70,
+  "password": "xjEMJsJ",
+  "nombre_completo": "James Sanchez",
+  "tipo": "empleado"
+}, {
+  "id": 71,
+  "password": "zLf0ZcDlkpfX",
+  "nombre_completo": "Irene Garza",
+  "tipo": "administrador"
+}, {
+  "id": 72,
+  "password": "bIdMfD",
+  "nombre_completo": "Louis Hicks",
+  "tipo": "empleado"
+}, {
+  "id": 73,
+  "password": "xN7Z5xUBcNR",
+  "nombre_completo": "Andrea Miller",
+  "tipo": "administrador"
+}, {
+  "id": 74,
+  "password": "tpgL7jJdlLoO",
+  "nombre_completo": "Brandon Wilson",
+  "tipo": "administrador"
+}, {
+  "id": 75,
+  "password": "RqOxZMUp",
+  "nombre_completo": "Robin White",
+  "tipo": "encargado"
+}, {
+  "id": 76,
+  "password": "wlY8ZnwBO",
+  "nombre_completo": "Ruby Woods",
+  "tipo": "empleado"
+}, {
+  "id": 77,
+  "password": "KqmuQnk",
+  "nombre_completo": "Joyce Andrews",
+  "tipo": "cliente"
+}, {
+  "id": 78,
+  "password": "pNwVcIoVA2",
+  "nombre_completo": "Harold Duncan",
+  "tipo": "encargado"
+}, {
+  "id": 79,
+  "password": "XMgPpM9Yu",
+  "nombre_completo": "Dennis Tucker",
+  "tipo": "cliente"
+}, {
+  "id": 80,
+  "password": "m9A90bk1",
+  "nombre_completo": "Maria Wells",
+  "tipo": "cliente"
+}, {
+  "id": 81,
+  "password": "gpBrBPco",
+  "nombre_completo": "Deborah Howell",
+  "tipo": "cliente"
+}, {
+  "id": 82,
+  "password": "1RupClF",
+  "nombre_completo": "Fred Wilson",
+  "tipo": "administrador"
+}, {
+  "id": 83,
+  "password": "xwsoH4IOe7f4",
+  "nombre_completo": "Melissa Bell",
+  "tipo": "empleado"
+}, {
+  "id": 84,
+  "password": "1ol6eL2",
+  "nombre_completo": "Ashley Kim",
+  "tipo": "empleado"
+}, {
+  "id": 85,
+  "password": "NuqiZwPjz3RT",
+  "nombre_completo": "Ronald Daniels",
+  "tipo": "empleado"
+}, {
+  "id": 86,
+  "password": "7hv5Rqh",
+  "nombre_completo": "Gregory Pierce",
+  "tipo": "empleado"
+}, {
+  "id": 87,
+  "password": "QWR1BKI",
+  "nombre_completo": "Joseph Taylor",
+  "tipo": "encargado"
+}, {
+  "id": 88,
+  "password": "FCjiw3v3I",
+  "nombre_completo": "David Dean",
+  "tipo": "administrador"
+}, {
+  "id": 89,
+  "password": "jy6t8cdl0YWk",
+  "nombre_completo": "Carlos Burton",
+  "tipo": "empleado"
+}, {
+  "id": 90,
+  "password": "KSCL30fpu",
+  "nombre_completo": "Craig Hansen",
+  "tipo": "administrador"
+}, {
+  "id": 91,
+  "password": "JxKSBAwfg",
+  "nombre_completo": "Doris Bryant",
+  "tipo": "cliente"
+}, {
+  "id": 92,
+  "password": "vSlvBBNt",
+  "nombre_completo": "Jerry Gonzales",
+  "tipo": "encargado"
+}, {
+  "id": 93,
+  "password": "ApkNCqKT",
+  "nombre_completo": "Tammy Black",
+  "tipo": "encargado"
+}, {
+  "id": 94,
+  "password": "W2h32eIP",
+  "nombre_completo": "Juan Matthews",
+  "tipo": "empleado"
+}, {
+  "id": 95,
+  "password": "qOJrzmGU",
+  "nombre_completo": "Dorothy West",
+  "tipo": "cliente"
+}, {
+  "id": 96,
+  "password": "bPJwBEi",
+  "nombre_completo": "Michael Harrison",
+  "tipo": "cliente"
+}, {
+  "id": 97,
+  "password": "2r5wJqDnh2",
+  "nombre_completo": "Virginia Stevens",
+  "tipo": "cliente"
+}, {
+  "id": 98,
+  "password": "JKIkjAP",
+  "nombre_completo": "Arthur Allen",
+  "tipo": "empleado"
+}, {
+  "id": 99,
+  "password": "1FAVNBbH8x",
+  "nombre_completo": "Earl Butler",
+  "tipo": "encargado"
+}, {
+  "id": 100,
+  "password": "HnbSwJm3IS0P",
+  "nombre_completo": "Ernest Ryan",
+  "tipo": "administrador"
+}]
