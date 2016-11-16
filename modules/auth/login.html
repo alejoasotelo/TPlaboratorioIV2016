@@ -1,0 +1,52 @@
+
+<div class="row" ng-if="!isAuthenticated">
+	<div class="center-form panel">
+		<div class="panel-body">
+			<h2 class="text-center">Inicio de sesión</h2>
+			<form id="formLogin" class="form">
+
+				<div class="mensajes" ng-if="mensajes.length > 0">
+					<p>{{mensajes}}</p>
+				</div>
+
+				<div class="form-group has-feedback">
+					<label for="username">Usuario</label>
+					<input type="text" name="username" ng-model="user.username" class="form-control"/>
+				</div>
+				<div class="form-group has-feedback">
+					<label for="password">Contraseña</label>
+					<input type="password" name="password" ng-model="user.password" class="form-control"/>
+				</div>
+				<button type="button" class="btn btn-lg  btn-block btn-success" ng-click="login()" ng-disabled="user.username.length == 0 && user.password.length == 0">Iniciar sesión</button>
+				<p class="text-center text-muted">
+				<small>No tienes una cuenta? <a ng-href="#" ui-sref="auth.register">Registrarse</a></small>
+				</p>				
+			</form>
+
+		</div>
+	</div>
+</div>
+
+<div class="row" ng-if="isAuthenticated">
+	<div class="center-form panel">
+		<div class="panel-body">
+			<h2 class="text-center">Usuario logueado</h2>
+		</div>
+	</div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+	<div class="container-fluid text-center">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">Login Tests</a>
+		</div>
+		<div id="navbar" class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li><a ng-href="" ng-click="loginTest(UsuariosTest.ADMINISTRADOR)">Administrador</a></li>
+				<li><a ng-href="" ng-click="loginTest(UsuariosTest.ENCARGADO)">Encargado</a></li>
+				<li><a ng-href="" ng-click="loginTest(UsuariosTest.EMPLEADO)">Empleado</a></li>
+				<li><a ng-href="" ng-click="loginTest(UsuariosTest.CLIENTE)">Cliente</a></li>
+			</ul>
+		</div><!--/.nav-collapse -->
+	</div>
+</nav>

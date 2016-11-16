@@ -1,12 +1,37 @@
-angular.module('app', ['ui.router', 'ngMap'])
-.config(function ($stateProvider, $urlRouterProvider) {
+angular.module('app', ['ui.router', 'ngMap', 'satellizer'])
+.config(function ($stateProvider, $urlRouterProvider, $authProvider) {
+
+	$authProvider.loginUrl = '/lab4/TPlaboratorioIV2016/php/auth.php';
+	$authProvider.tokenName = 'token_lab4';
+	$authProvider.tokenPrefix = 'App';
+	$authProvider.authHeader = 'data';
 
 	$stateProvider
-	.state('login', {
-		url: '/login',
-		templateUrl: 'modules/login/login.html',
-		controller:'LoginCtrl'
+	.state('auth', {
+		url: '/auth',
+		abstract: true,
+		templateUrl: 'modules/auth/auth.html',
+		controller:'AuthCtrl'
 	})
+	.state('auth.login', {
+		url: '/login',
+		views: {
+			'contenido': {
+				templateUrl: 'modules/auth/login.html',
+				controller:'AuthLoginCtrl'	
+			} 
+		}
+	})
+	.state('auth.register', {
+		url: '/register',
+		views: {
+			'contenido': {
+				templateUrl: 'modules/auth/register.html',
+				controller:'AuthRegisterCtrl'	
+			} 
+		}
+	})
+
 	.state('usuarios', {
 		url: '/usuarios',
 		abstract: true,
@@ -41,7 +66,7 @@ angular.module('app', ['ui.router', 'ngMap'])
 		}
 	})
 
-	$urlRouterProvider.otherwise('login');
+	$urlRouterProvider.otherwise('auth/login');
 
 })
 .run(function ($rootScope) {

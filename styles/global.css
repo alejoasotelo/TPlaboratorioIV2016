@@ -1,7 +1,42 @@
+.navbar {
+  border: 0;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); }
+  .navbar:not(.navbar-fixed-bottom) .navbar-brand {
+    background-color: #168cff;
+    color: white; }
+  .navbar a[ng-href=""]:hover {
+    cursor: pointer; }
+
+.panel {
+  border-color: #cfd9D7;
+  border-radius: 2px;
+  box-shadow: 0 8px 17px rgba(0, 0, 0, 0.2); }
+
+.panel-default > .panel-heading {
+  font-size: 85%;
+  font-weight: bold;
+  color: #444;
+  text-transform: uppercase;
+  background-color: #f6f6f6;
+  border-color: #cfd9db; }
+
+.btn {
+  border-radius: 0px; }
+
+body {
+  background: #e4e7ec; }
+
 #mainbody {
-	padding-top: 50px;
-}
+  padding-top: 50px; }
 
 #login {
-	margin-top: 96px;
-}
+  margin-top: 0px; }
+
+.form-control {
+  border-radius: 0; }
+
+.center-form {
+  width: 330px;
+  margin: 2% auto; }
+
+/*# sourceMappingURL=global.css.map */

@@ -1,0 +1,24 @@
+@import 'navbar.scss';
+@import 'panel.scss';
+@import 'buttons.scss';
+
+body{
+	background: #e4e7ec;
+}
+
+#mainbody {
+	padding-top: 50px;
+}
+
+#login {
+	margin-top: 0px;
+}
+
+.form-control {
+	border-radius: 0;
+}
+
+.center-form {
+	width: 330px;
+	margin: 2% auto;
+}

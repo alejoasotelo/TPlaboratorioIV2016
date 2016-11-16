@@ -1,0 +1,13 @@
+.navbar {
+	border: 0;
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+
+	&:not(.navbar-fixed-bottom) &-brand{
+		background-color: #168cff;
+		color: white;
+	}
+
+	a[ng-href=""]:hover{
+		cursor: pointer;
+	}
+}
