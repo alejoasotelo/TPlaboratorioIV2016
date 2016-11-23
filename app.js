@@ -10,14 +10,14 @@ angular.module('app', ['ui.router', 'ngMap', 'satellizer'])
 	.state('auth', {
 		url: '/auth',
 		abstract: true,
-		templateUrl: 'modules/auth/auth.html',
+		templateUrl: 'scripts/modules/auth/auth.html',
 		controller:'AuthCtrl'
 	})
 	.state('auth.login', {
 		url: '/login',
 		views: {
 			'contenido': {
-				templateUrl: 'modules/auth/login.html',
+				templateUrl: 'scripts/modules/auth/login.html',
 				controller:'AuthLoginCtrl'	
 			} 
 		}
@@ -26,23 +26,24 @@ angular.module('app', ['ui.router', 'ngMap', 'satellizer'])
 		url: '/register',
 		views: {
 			'contenido': {
-				templateUrl: 'modules/auth/register.html',
+				templateUrl: 'scripts/modules/auth/register.html',
 				controller:'AuthRegisterCtrl'	
 			} 
 		}
 	})
 
+	// Usuarios
 	.state('usuarios', {
 		url: '/usuarios',
 		abstract: true,
-		templateUrl: 'modules/usuarios/usuarios.html',
+		templateUrl: 'scripts/modules/usuarios/usuarios.html',
 		controller:'UsuariosCtrl'
 	})
 	.state('usuarios.listar', {
 		url: '/listar',
 		views: {
 			'contenido': {
-				templateUrl: 'modules/usuarios/listar.html',
+				templateUrl: 'scripts/modules/usuarios/listar.html',
 				controller: 'UsuariosListarCtrl'
 			} 
 		}
@@ -51,7 +52,7 @@ angular.module('app', ['ui.router', 'ngMap', 'satellizer'])
 		url: '/nuevo',
 		views: {
 			'contenido': {
-				templateUrl: 'modules/usuarios/nuevo.html',
+				templateUrl: 'scripts/modules/usuarios/nuevo.html',
 				controller: 'UsuariosNuevoCtrl'
 			} 
 		}
@@ -60,8 +61,43 @@ angular.module('app', ['ui.router', 'ngMap', 'satellizer'])
 		url: '/modificar/:id',
 		views: {
 			'contenido': {
-				templateUrl: 'modules/usuarios/modificar.html',
+				templateUrl: 'scripts/modules/usuarios/modificar.html',
 				controller: 'UsuariosModificarCtrl'
+			} 
+		}
+	})
+
+	// Locales
+	.state('locales', {
+		url: '/locales',
+		abstract: true,
+		templateUrl: 'scripts/modules/locales/locales.html',
+		controller: 'LocalesCtrl'
+	})
+	.state('locales.listar', {
+		url: '/listar',
+		views: {
+			'contenido': {
+				templateUrl: 'scripts/modules/locales/listar.html',
+				controller: 'LocalesListarCtrl'
+			} 
+		}
+	})
+	.state('locales.nuevo', {
+		url: '/nuevo',
+		views: {
+			'contenido': {
+				templateUrl: 'scripts/modules/locales/nuevo.html',
+				controller: 'LocalesNuevoCtrl'
+			} 
+		}
+	})
+	.state('locales.modificar', {
+		url: '/modificar/:id',
+		views: {
+			'contenido': {
+				templateUrl: 'scripts/modules/locales/modificar.html',
+				controller: 'LocalesModificarCtrl'
 			} 
 		}
 	})

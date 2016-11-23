@@ -1,12 +1,12 @@
 angular.module('app')
 .service('UsuariosSvc', function($http, $q) {
 
-	var base_url = './';
+	var base_url = './php/api.php';
 
 	var self = this;
 
 	this.list = function () {
-		return $http.get(base_url + 'data.json').then(function(r){
+		return $http.post(base_url, {datos: {task: 'listarUsuarios'}}).then(function(r){
 			return r.data;
 		});
 	}

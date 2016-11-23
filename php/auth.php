@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__.'/vendor/autoload.php';
-require_once __DIR__.'/autoload.php';
+require_once __DIR__.'/clases/autoload.php';
 
 use Firebase\JWT\JWT;
 use AlejoASotelo\Usuario;
@@ -9,8 +9,8 @@ $request_body = file_get_contents('php://input');
 $request = json_decode($request_body);
 
 $ret = array();
-if (Usuario::esValido($request->username, $request->password) && 
-	(($usuario = Usuario::getUsuario($request->username, $request->password)) != false)) {
+if (Usuario::existe($request->username, $request->password) && 
+	(($usuario = Usuario::traerPorUsername($request->username)) != false)) {
 
 	// Create a JSON Web Token and send it back to the client.
 	$key = "1234";
