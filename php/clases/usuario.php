@@ -72,19 +72,19 @@ class Usuario
         return $consulta->execute();
     }
 
-    public static function insertarUsuario($usuario)
+    public static function insertar($usuario)
     {
         $sql = 'INSERT INTO usuarios (`id`, `username`, `email`, `nombre`, `apellido`, `password`, `tipo`) 
                     VALUES (NULL, :username, :email, :nombre, :apellido, :password, :tipo)';
 
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->retornarConsulta($sql);
-        $consulta->bindValue(':username', $usuario->email, PDO::PARAM_STR);
-        $consulta->bindValue(':email', $usuario->email, PDO::PARAM_STR);
-        $consulta->bindValue(':nombre', $usuario->nombre, PDO::PARAM_STR);
-        $consulta->bindValue(':apellido', $usuario->nombre, PDO::PARAM_STR);
-        $consulta->bindValue(':password', md5($usuario->password), PDO::PARAM_STR);
-        $consulta->bindValue(':tipo', $usuario->tipo, PDO::PARAM_STR);
+        $consulta->bindValue(':username', $usuario->username, \PDO::PARAM_STR);
+        $consulta->bindValue(':email', $usuario->email, \PDO::PARAM_STR);
+        $consulta->bindValue(':nombre', $usuario->nombre, \PDO::PARAM_STR);
+        $consulta->bindValue(':apellido', $usuario->nombre, \PDO::PARAM_STR);
+        $consulta->bindValue(':password', md5($usuario->password), \PDO::PARAM_STR);
+        $consulta->bindValue(':tipo', $usuario->tipo, \PDO::PARAM_STR);
         $consulta->execute();
 
         return $objetoAccesoDato->retornarUltimoIdInsertado();

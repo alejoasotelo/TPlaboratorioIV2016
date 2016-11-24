@@ -1,27 +1,7 @@
 angular.module('app')
-.controller('AuthRegisterCtrl', function($scope, $auth) {
+.controller('AuthRegisterCtrl', function($scope, $auth, UsuariosSvc, $timeout, $state) {
 	
-	$scope.user = {};
-
-	$scope.UsuariosTest = {
-
-		ADMINISTRADOR: {
-			username: 'administrador', 
-			password: 'administrador'
-		},
-		ENCARGADO: {
-			username: 'encargado', 
-			password: 'encargado'
-		},
-		EMPLEADO: {
-			username: 'empleado', 
-			password: 'empleado'
-		},
-		CLIENTE: {
-			username: 'cliente', 
-			password: 'cliente'
-		}
-	};
+	$scope.usuario = {};
 
 	$scope.isAuthenticated = $auth.isAuthenticated();
 
@@ -33,7 +13,21 @@ angular.module('app')
 		
 		$scope.mensajes = '';
 
-		
+		$scope.usuario.tipo = 'cliente';
+
+		UsuariosSvc.insert($scope.usuario).then(function(r) {
+
+			if (r.success) {
+				$scope.mensajes = 'Se ha creado tu usuario correctamente. Seras redirigido al login en unos segundos.';
+
+				$timeout(function(){
+					$state.go('auth.login');
+				}, 2000);
+			} else {
+				$scope.mensajes = r.msg;
+			}
+
+		});		
 
 	}
 });

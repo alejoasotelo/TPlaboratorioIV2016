@@ -16,6 +16,9 @@
 			<li>
 				<a ui-sref="usuarios.listar">Usuarios</a>
 			</li>
+			<li ng-if="isAdmin">
+				<a ui-sref="usuarios.listar">Estadisticas</a>
+			</li>
 		</ul>
 		<ul class="nav navbar-nav pull-right">
 			<li class="pull-right">

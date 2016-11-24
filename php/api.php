@@ -17,10 +17,22 @@ switch ($request->datos->task) {
 		break;
 
 	case 'agregarUsuario':
-		
-		$r = Usuario::insertar($request->datos->usuario);
 
-		echo json_encode(array('success' => $r > 0));
+		$ret = array('success' => false);
+
+		$usuario = Usuario::traerPorUsername($request->datos->usuario->username);
+
+		if ($usuario != false) {
+			$ret['success'] = false;
+			$ret['msg'] = 'El nombre de usuario ya existe.';
+
+		} else {
+			$r = Usuario::insertar($request->datos->usuario);
+			$ret['success'] = $r > 0;
+		}
+		
+
+		echo json_encode($ret);
 
 		break;
 

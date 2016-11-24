@@ -2,7 +2,7 @@ angular.module('app')
 .controller('UsuariosListarCtrl', function($scope, $auth, $state, UsuariosSvc) {
 
 	if (!$auth.isAuthenticated()){
-		$state.go('usuarios.login');
+		$state.go('auth.login');
 	}
 
 	$scope.usuarios = new Array();

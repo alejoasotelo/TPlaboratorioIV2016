@@ -50,4 +50,14 @@ angular.module('app')
 		});
 
 	}
+
+	this.insert = function(usuario) {
+
+		return $http.post(base_url, {datos: {task: 'agregarUsuario', usuario: usuario}}).then(function(r) {
+
+			return r.data;
+
+		});
+		
+	}
 });
