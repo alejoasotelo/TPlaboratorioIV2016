@@ -28,6 +28,10 @@ angular.module('app')
 
 			}
 
+			$scope.current_url = function() {
+				return $state.$current.url;
+			};
+
 		}
 	}
 	

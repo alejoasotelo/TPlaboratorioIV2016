@@ -10,14 +10,14 @@
 	</div>
 	<div id="navbar" class="collapse navbar-collapse"  ng-if="isAuthenticated()">
 		<ul class="nav navbar-nav">
-			<li>
+			<li ng-class="{active: current_url() == '/locales/listar'}">
 				<a ui-sref="locales.listar">Locales</a>
 			</li>
-			<li>
+			<li ng-class="{active: current_url() == '/usuarios/listar'}">
 				<a ui-sref="usuarios.listar">Usuarios</a>
 			</li>
-			<li ng-if="isAdmin">
-				<a ui-sref="usuarios.listar">Estadisticas</a>
+			<li ng-class="{active: current_url() == '/informes/listar'}" ng-if="isAdmin">
+				<a ui-sref="informes.listar">Estadisticas</a>
 			</li>
 		</ul>
 		<ul class="nav navbar-nav pull-right">
