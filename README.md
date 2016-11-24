@@ -31,6 +31,9 @@ TP LaboratorioIV 2016
 <h5>Objetivo:Lograr una aplicacion funcional sin errores.</h5>
 -------------------------------------------------------------------------------------
 
+#Esquema Base de datos
+![Squema](https://github.com/alejoasotelo/TPlaboratorioIV2016/blob/master/sql/squema.png)
+
 
 
 
