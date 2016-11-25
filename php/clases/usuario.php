@@ -5,7 +5,7 @@ use AlejoASotelo\AccessoDatos;
 
 class Usuario
 {
-    public $id;
+    public $id_usuario;
     public $username;
     public $nombre;
     public $apellido;
@@ -13,12 +13,12 @@ class Usuario
     public $password;
     public $tipo;
 
-    public function __construct($id = null)
+    public function __construct($id_usuario = null)
     {
-        if ($id != null) {
-            $obj = Usuario::traerPorId($id);
+        if ($id_usuario != null) {
+            $obj = Usuario::traerPorId($id_usuario);
 
-            $this->id = $id;
+            $this->id_usuario = $id_usuario;
             $this->username = $obj->username;
             $this->nombre = $obj->nombre;
             $this->apellido = $obj->apellido;
@@ -31,8 +31,8 @@ class Usuario
     public static function traerPorId($idParametro)
     {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta =$objetoAccesoDato->retornarConsulta("SELECT * FROM usuarios WHERE id =:id");
-        $consulta->bindValue(':id', $idParametro, PDO::PARAM_INT);
+        $consulta =$objetoAccesoDato->retornarConsulta("SELECT * FROM usuarios WHERE id_usuario =:id_usuario");
+        $consulta->bindValue(':id_usuario', $idParametro, PDO::PARAM_INT);
         $consulta->execute();
         $usuarioBuscada = $consulta->fetchObject(self::class);
         return $usuarioBuscada;
@@ -50,19 +50,19 @@ class Usuario
     public static function borrar($idParametro)
     {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta =$objetoAccesoDato->retornarConsulta("DELETE FROM usuarios WHERE id=:id");
-        $consulta->bindValue(':id', $idParametro, PDO::PARAM_INT);
+        $consulta =$objetoAccesoDato->retornarConsulta("DELETE FROM usuarios WHERE id_usuario=:id_usuario");
+        $consulta->bindValue(':id_usuario', $idParametro, PDO::PARAM_INT);
         $consulta->execute();
         return $consulta->rowCount();
     }
 
     public static function modificar($usuario)
     {
-        $sql = 'UPDATE usuarios SET username = :username, nombre = :nombre, apellido = :apellido, email = :email, tipo = :tipo, password = :password WHERE id = :id';
+        $sql = 'UPDATE usuarios SET username = :username, nombre = :nombre, apellido = :apellido, email = :email, tipo = :tipo, password = :password WHERE id_usuario = :id_usuario';
 
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->retornarConsulta($sql);
-        $consulta->bindValue(':id', $usuario->id, PDO::PARAM_INT);
+        $consulta->bindValue(':id_usuario', $usuario->id, PDO::PARAM_INT);
         $consulta->bindValue(':username', $usuario->email, PDO::PARAM_STR);
         $consulta->bindValue(':email', $usuario->email, PDO::PARAM_STR);
         $consulta->bindValue(':nombre', $usuario->nombre, PDO::PARAM_STR);
@@ -74,7 +74,7 @@ class Usuario
 
     public static function insertar($usuario)
     {
-        $sql = 'INSERT INTO usuarios (`id`, `username`, `email`, `nombre`, `apellido`, `password`, `tipo`) 
+        $sql = 'INSERT INTO usuarios (`id_usuario`, `username`, `email`, `nombre`, `apellido`, `password`, `tipo`) 
                     VALUES (NULL, :username, :email, :nombre, :apellido, :password, :tipo)';
 
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
@@ -101,7 +101,7 @@ class Usuario
         $consulta->execute();
 
         $user = $consulta->fetchObject(self::class);
-        return isset($user->id) && $user->id > 0;
+        return isset($user->id_usuario) && $user->id_usuario > 0;
     }
 
     public static function traerPorUsername($username)

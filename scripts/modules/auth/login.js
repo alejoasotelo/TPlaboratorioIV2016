@@ -28,6 +28,7 @@ angular.module('app')
 	if ($scope.isAuthenticated) {
 		$scope.user = $auth.getPayload();
 		$state.go('usuarios.listar');
+		return false;
 	}
 
 	$scope.login = function () {

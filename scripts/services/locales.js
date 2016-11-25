@@ -1,14 +1,14 @@
 angular.module('app')
 
-.service('LocalesSvc', function($http, $q) {
+.service('LocalesSvc', function($http, $q, api) {
 
 	var base_url = './';
 
 	var self = this;
 
 	this.list = function () {
-		return $http.get(base_url + 'data.json').then(function(r){
-			return r.data;
+		return api.list('locales').then(function(r) {
+			return r;
 		});
 	}
 
@@ -51,4 +51,15 @@ angular.module('app')
 		});
 
 	}
+
+	this.insert = function(usuario) {
+
+		return $http.post(base_url, {datos: {task: 'agregarUsuario', usuario: usuario}}).then(function(r) {
+
+			return r.data;
+
+		});
+		
+	}
+
 });

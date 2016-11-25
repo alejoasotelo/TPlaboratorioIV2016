@@ -2,17 +2,31 @@
 require_once __DIR__.'/clases/autoload.php';
 
 use AlejoASotelo\Usuario;
+use AlejoASotelo\Local;
 
 $request_body = file_get_contents('php://input');
 $request = json_decode($request_body);
 
 switch ($request->datos->task) {
 	
-	case 'listarUsuarios':
-		
-		$usuarios = Usuario::traerTodos();
+	case 'listar':
 
-		echo json_encode($usuarios);
+		$rows = array();
+
+		switch ($request->datos->endpoint) {
+			case 'usuarios':
+				$rows = Usuario::traerTodos();
+				break;
+			case 'locales':
+				$rows = Local::traerTodos();
+				break;
+			
+			default:
+				# code...
+				break;
+		}		
+
+		echo json_encode($rows);
 
 		break;
 

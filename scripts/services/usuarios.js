@@ -1,13 +1,13 @@
 angular.module('app')
-.service('UsuariosSvc', function($http, $q) {
+.service('UsuariosSvc', function($http, $q, api) {
 
 	var base_url = './php/api.php';
 
 	var self = this;
 
 	this.list = function () {
-		return $http.post(base_url, {datos: {task: 'listarUsuarios'}}).then(function(r){
-			return r.data;
+		return api.list('usuarios').then(function(r) {
+			return r;
 		});
 	}
 

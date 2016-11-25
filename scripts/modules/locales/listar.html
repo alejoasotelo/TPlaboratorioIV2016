@@ -1,25 +1,27 @@
 <h2>Listar</h2>
-<table class="table">
-	<thead>
-		<tr>
-			<th width="60">ID</th>
-			<th class="text-left">Nombre completo</th>
-			<th width="100" class="text-center">Tipo</th>
-			<th width="80" class="text-center">Modificar</th>
-			<th width="80" class="text-center">Eliminar</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr ng-repeat="u in usuarios">
-			<td class="text-center">{{u.id}}</td>
-			<td class="text-left">{{u.nombre_completo}}</td>
-			<td class="text-center">{{u.tipo}}</td>
-			<td class="text-center">
-				<a ui-sref="usuarios.modificar({id: {{u.id}}})"><i class="glyphicon glyphicon-edit"></i></a>
-			</td>
-			<td class="text-center">
-				<a ng-href="" ng-click="eliminar(u.id)"><i class="glyphicon glyphicon-remove"></i></a>
-			</td>
-		</tr>
-	</tbody>
-</table>
+<div class="table-responsive">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th width="60">ID</th>
+				<th class="text-left">Nombre</th>
+				<th width="100" class="text-center">Dirección</th>
+				<th width="80" class="text-center">Modificar</th>
+				<th width="80" class="text-center">Eliminar</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="l in locales">
+				<td class="text-center">{{l.id_local}}</td>
+				<td class="text-left">{{l.nombre}}</td>
+				<td class="text-center">{{l.direccion}}</td>
+				<td class="text-center">
+					<a ui-sref="usuarios.modificar({id: {{l.id_local}}})"><i class="glyphicon glyphicon-edit"></i></a>
+				</td>
+				<td class="text-center">
+					<a ng-href="" ng-click="eliminar(l.id_local)"><i class="glyphicon glyphicon-remove"></i></a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

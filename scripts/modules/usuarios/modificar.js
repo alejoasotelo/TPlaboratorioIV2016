@@ -1,8 +1,8 @@
 angular.module('app')
 .controller('UsuariosModificarCtrl', function($scope, $stateParams) {
 
-	var user_id = $stateParams.id;
+	var id_usuario = $stateParams.id;
 
-	alert(user_id);
+	alert(id_usuario);
 
 });
