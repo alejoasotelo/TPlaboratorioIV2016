@@ -31,8 +31,8 @@ class Usuario
     public static function traerPorId($idParametro)
     {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta =$objetoAccesoDato->retornarConsulta("SELECT * FROM usuarios WHERE id_usuario =:id_usuario");
-        $consulta->bindValue(':id_usuario', $idParametro, PDO::PARAM_INT);
+        $consulta =$objetoAccesoDato->retornarConsulta('SELECT * FROM usuarios WHERE id_usuario =:id_usuario');
+        $consulta->bindValue(':id_usuario', $idParametro, \PDO::PARAM_INT);
         $consulta->execute();
         $usuarioBuscada = $consulta->fetchObject(self::class);
         return $usuarioBuscada;
@@ -41,48 +41,61 @@ class Usuario
     public static function traerTodos()
     {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta =$objetoAccesoDato->retornarConsulta("SELECT * FROM usuarios");
+        $consulta =$objetoAccesoDato->retornarConsulta('SELECT * FROM usuarios');
         $consulta->execute();
         $arrUsuarios= $consulta->fetchAll(\PDO::FETCH_CLASS, self::class);
         return $arrUsuarios;
     }
 
-    public static function borrar($idParametro)
+    public static function borrar($id_usuario)
     {
+        if (is_numeric($id_usuario)) {
+            $id_usuario = array($id_usuario);
+        }
+
+        $sql = 'DELETE FROM usuarios WHERE id_usuario IN ('.implode(',', $id_usuario).')';
+
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta =$objetoAccesoDato->retornarConsulta("DELETE FROM usuarios WHERE id_usuario=:id_usuario");
-        $consulta->bindValue(':id_usuario', $idParametro, PDO::PARAM_INT);
+        $consulta = $objetoAccesoDato->retornarConsulta($sql);
         $consulta->execute();
         return $consulta->rowCount();
     }
 
     public static function modificar($usuario)
     {
-        $sql = 'UPDATE usuarios SET username = :username, nombre = :nombre, apellido = :apellido, email = :email, tipo = :tipo, password = :password WHERE id_usuario = :id_usuario';
+        if (!empty($usuario->password)) {
+            $sql = 'UPDATE usuarios SET username = :username, nombre = :nombre, apellido = :apellido, email = :email, tipo = :tipo, password = :password WHERE id_usuario = :id_usuario';
+        } else {
+            $sql = 'UPDATE usuarios SET username = :username, nombre = :nombre, apellido = :apellido, email = :email, tipo = :tipo WHERE id_usuario = :id_usuario';
+        }
 
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->retornarConsulta($sql);
-        $consulta->bindValue(':id_usuario', $usuario->id, PDO::PARAM_INT);
-        $consulta->bindValue(':username', $usuario->email, PDO::PARAM_STR);
-        $consulta->bindValue(':email', $usuario->email, PDO::PARAM_STR);
-        $consulta->bindValue(':nombre', $usuario->nombre, PDO::PARAM_STR);
-        $consulta->bindValue(':apellido', $usuario->nombre, PDO::PARAM_STR);
-        $consulta->bindValue(':password', md5($usuario->password), PDO::PARAM_STR);
-        $consulta->bindValue(':tipo', $usuario->tipo, PDO::PARAM_STR);
+        $consulta->bindValue(':id_usuario', $usuario->id_usuario, \PDO::PARAM_INT);
+        $consulta->bindValue(':username', $usuario->username, \PDO::PARAM_STR);
+        $consulta->bindValue(':email', $usuario->email, \PDO::PARAM_STR);
+        $consulta->bindValue(':nombre', $usuario->nombre, \PDO::PARAM_STR);
+        $consulta->bindValue(':apellido', $usuario->apellido, \PDO::PARAM_STR);
+        $consulta->bindValue(':tipo', $usuario->tipo, \PDO::PARAM_STR);
+
+        if (!empty($usuario->password)) {
+            $consulta->bindValue(':password', md5($usuario->password), \PDO::PARAM_STR);
+        }
+
         return $consulta->execute();
     }
 
     public static function insertar($usuario)
     {
         $sql = 'INSERT INTO usuarios (`id_usuario`, `username`, `email`, `nombre`, `apellido`, `password`, `tipo`) 
-                    VALUES (NULL, :username, :email, :nombre, :apellido, :password, :tipo)';
+        VALUES (NULL, :username, :email, :nombre, :apellido, :password, :tipo)';
 
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->retornarConsulta($sql);
         $consulta->bindValue(':username', $usuario->username, \PDO::PARAM_STR);
         $consulta->bindValue(':email', $usuario->email, \PDO::PARAM_STR);
         $consulta->bindValue(':nombre', $usuario->nombre, \PDO::PARAM_STR);
-        $consulta->bindValue(':apellido', $usuario->nombre, \PDO::PARAM_STR);
+        $consulta->bindValue(':apellido', $usuario->apellido, \PDO::PARAM_STR);
         $consulta->bindValue(':password', md5($usuario->password), \PDO::PARAM_STR);
         $consulta->bindValue(':tipo', $usuario->tipo, \PDO::PARAM_STR);
         $consulta->execute();

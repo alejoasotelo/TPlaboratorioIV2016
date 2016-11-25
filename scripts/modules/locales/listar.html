@@ -1,21 +1,21 @@
-<tools-menu para="locales">
+<tools-menu modulo="locales" vista="listar">
 </tools-menu>
 
 <div class="table-responsive">
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th class="text-left"><input type="checkbox" ng-model="tools.selectAll" ng-change="selectAllChange()" title="Marcar todo"/></th>
+				<th class="text-left" width="40"><input type="checkbox" ng-model="tools.selectAll" ng-change="selectAllChange()" title="Marcar todo"/></th>
 				<th class="text-left">Nombre</th>
-				<th width="100" class="text-center">Dirección</th>
+				<th width="200" class="text-left">Dirección</th>
 				<th width="40" class="text-center">ID</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr ng-repeat="l in locales">
 				<td class="text-left"><input type="checkbox" ng-model="l.selected"/></td>
-				<td class="text-left">{{l.nombre}}</td>
-				<td class="text-center">{{l.direccion}}</td>
+				<td class="text-left"><a ui-sref="locales.modificar({id: l.id_local})">{{l.nombre}}</a></td>
+				<td class="text-left">{{l.direccion}}</td>
 				<td class="text-center">{{l.id_local}}</td>
 			</tr>
 		</tbody>

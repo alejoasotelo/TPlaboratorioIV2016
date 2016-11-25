@@ -13,13 +13,9 @@ angular.module('app')
 
 	this.get = function(id) {
 		
-		return self.list().then(function(usuarios) {
+		return api.get('usuarios', id).then(function(usuario) {
 
-			return usuarios.find(function(obj) {
-
-				return obj.id == id;
-
-			});
+			return usuario;
 
 		});
 
@@ -41,23 +37,30 @@ angular.module('app')
 
 	this.delete = function(id) {
 
-		return $q(function(resolve, reject) {
-
-			setTimeout(function() {
-				resolve(true);
-			}, 100);
-
+		return api.delete('usuarios', id).then(function(r) {
+			return r;
 		});
 
 	}
 
 	this.insert = function(usuario) {
 
-		return $http.post(base_url, {datos: {task: 'agregarUsuario', usuario: usuario}}).then(function(r) {
+		return api.insert('usuarios', usuario).then(function(id) {
 
-			return r.data;
+			return id;
 
 		});
 		
 	}
+
+	this.update = function(usuario) {
+
+		return api.update('usuarios', usuario).then(function(response) {
+
+			return response;
+
+		});
+
+	}
+
 });

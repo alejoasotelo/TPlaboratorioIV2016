@@ -1,29 +1,25 @@
-<h2>Listar</h2>
-<table class="table table-hover">
-	<thead>
-		<tr>
-			<th class="text-left"><input type="checkbox" ng-model="tools.selectAll" title="Marcar todo"/></th>
-			<th class="text-left">Nombre completo</th>
-			<th class="text-left">Email</th>
-			<th width="100" class="text-center">Tipo</th>
-			<th width="80" class="text-center">Modificar</th>
-			<th width="80" class="text-center">Eliminar</th>
-			<th width="40" class="text-center">ID</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr ng-repeat="u in usuarios">
-			<td class="text-left"><input type="checkbox" ng-model="u.selected" ng-checked="tools.selectAll"/></td>
-			<td class="text-left">{{u.nombre + ' ' + u.apellido}} </td>
-			<td class="text-left">{{u.email}} </td>
-			<td class="text-center">{{u.tipo}}</td>
-			<td class="text-center">
-				<a ui-sref="usuarios.modificar({id: {{u.id_usuario}}})"><i class="glyphicon glyphicon-edit"></i></a>
-			</td>
-			<td class="text-center">
-				<a ng-href="" ng-click="eliminar(u.id_usuario)"><i class="glyphicon glyphicon-remove"></i></a>
-			</td>
-			<td class="text-center">{{u.id_usuario}}</td>
-		</tr>
-	</tbody>
-</table>
+<tools-menu modulo="usuarios" vista="listar">
+</tools-menu>
+
+<div class="table-responsive">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th class="text-left"><input type="checkbox" ng-model="tools.selectAll" ng-change="selectAllChange()" title="Marcar todo"/></th>
+				<th class="text-left">Nombre completo</th>
+				<th class="text-left">Email</th>
+				<th width="100" class="text-center">Tipo</th>
+				<th width="40" class="text-center">ID</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="u in usuarios">
+				<td class="text-left"><input type="checkbox" ng-model="u.selected" ng-checked="tools.selectAll"/></td>
+				<td class="text-left"><a ui-sref="usuarios.modificar({id: u.id_usuario})">{{u.nombre + ' ' + u.apellido}}</a></td>
+				<td class="text-left">{{u.email}} </td>
+				<td class="text-center">{{u.tipo}}</td>
+				<td class="text-center">{{u.id_usuario}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

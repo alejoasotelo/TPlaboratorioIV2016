@@ -33,7 +33,7 @@ angular.module('app')
 					task: 'get',
 					id: id
 				}
-			}).then(function(r){
+			}).then(function(r) {
 
 				return r.data;
 
@@ -56,7 +56,7 @@ angular.module('app')
 			});
 		},
 
-		update: function (endpoit, obj) {
+		update: function (endpoint, obj) {
 
 			return $http.post(base_url, {
 				datos: {
@@ -64,7 +64,7 @@ angular.module('app')
 					task: 'update',
 					object: obj
 				}
-			}).then(function(r){
+			}).then(function(r) {
 
 				return r.data;
 
@@ -82,7 +82,7 @@ angular.module('app')
 				}
 			}).then(function(r){
 
-				return r.data == 0;
+				return r.data;
 
 			});
 

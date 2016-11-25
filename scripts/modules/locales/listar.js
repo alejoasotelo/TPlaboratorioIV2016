@@ -32,11 +32,12 @@ angular.module('app')
 
 	$scope.eliminar = function(id) {
 		
-		LocalesSvc.delete(id).then(function(deleted){
+		LocalesSvc.delete(id).then(function(data){
 
-			if (deleted) {
+			if (data.success) {
 
-				deleteFromArray($scope.locales, id);
+				cargar();
+				//deleteFromArray($scope.locales, id);
 				
 			}
 

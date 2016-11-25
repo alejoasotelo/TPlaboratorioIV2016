@@ -1,8 +1,46 @@
 angular.module('app')
-.controller('UsuariosModificarCtrl', function($scope, $stateParams) {
+.controller('UsuariosModificarCtrl', function($scope, $window, $state, $stateParams, UsuariosSvc) {
 
 	var id_usuario = $stateParams.id;
 
-	alert(id_usuario);
+	$scope.usuario = {};
+
+	UsuariosSvc.get(id_usuario).then(function(usuario) {
+
+		$scope.usuario = usuario;
+
+	});
+
+	$scope.guardar = function () {
+
+		UsuariosSvc.update($scope.usuario).then(function(r) {
+
+			if (r.success) {
+				$state.go('usuarios.listar');
+			} else {
+				$window.alert(r.msg);
+			}
+
+		});
+
+	}
+
+	$scope.cancelar = function () {
+
+		$state.go('usuarios.listar');
+
+	}
+
+	$scope.$on('guardar', function(v) {
+
+		$scope.guardar();
+
+	});
+
+	$scope.$on('cancelar', function(v) {
+
+		$scope.cancelar();
+
+	});
 
 });

@@ -1,1 +1,19 @@
-modificar
+<form name="form" class="form" novalidate>
+
+	<div class="form-group col-xs-12 col-md-6">
+		<label for="nombre">Nombre</label>
+		<input type="text" ng-model="local.nombre" name="nombre" class="form-control" />
+	</div>
+
+	<div class="form-group col-xs-12 col-md-6">
+		<label for="direccion">Dirección</label>
+		<input type="text" ng-model="local.direccion" name="direccion" class="form-control" />
+	</div>
+	
+	<hr>	
+
+	<div class="form-group col-xs-12">
+		<button type="button" ng-disabled="form.$invalid" ng-click="guardar()" class="btn btn-success"><i class="glyphicon glyphicon-save"></i> Guardar</button>
+		<a ng-click="cancelar()" class="btn btn-default"><i class="glyphicon glyphicon-cancel"></i> Cancelar</a>
+	</div>
+</form>

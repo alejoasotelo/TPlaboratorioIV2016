@@ -1,1 +1,49 @@
-nuevo
+<form name="form" class="form" novalidate>
+	<div class="form-group col-xs-12 col-md-6">
+		<label for="username">Nombre de usuario</label>
+		<input type="text" ng-model="usuario.username" name="username" class="form-control" required />
+	</div>
+	<div class="form-group col-xs-12 col-md-6">
+		<label for="email">email</label>
+		<input type="email" ng-model="usuario.email" name="email" class="form-control" required />
+	</div>
+
+	<div class="form-group col-xs-12 col-md-6">
+		<label for="password">Clave</label>
+		<input type="password" ng-model="usuario.password" name="password" class="form-control" required />
+	</div>
+
+	<div class="form-group col-xs-12 col-md-6">
+		<label for="repeat_password">Repetir clave</label>
+		<input type="password" ng-model="usuario.repeat_password" name="repeat_password" class="form-control" required />
+	</div>
+
+	<div class="form-group col-xs-12 col-md-6">
+		<label for="nombre">Nombre</label>
+		<input type="text" ng-model="usuario.nombre" name="nombre" class="form-control" />
+	</div>
+	<div class="form-group col-xs-12 col-md-6">
+		<label for="apellido">Apellido</label>
+		<input type="text" ng-model="usuario.apellido" name="apellido" class="form-control" />
+	</div>
+
+	<div class="form-group col-xs-12 col-md-6">
+	<label for="tipo">Tipo de usuario</label>
+		<select name="tipo" ng-model="usuario.tipo" class="form-control col-xs-12 col-md-6" required >
+			<option value="">Seleccione un tipo</option>
+			<option value="administrador">Administrador</option>
+			<option value="cliente">Cliente</option>
+			<option value="empleado">Empleado</option>
+			<option value="encargado">Encargado</option>
+		</select>
+	</div>
+
+	<div class="col-xs-12">
+		<hr>
+	</div>
+
+	<div class="form-group col-xs-12">
+		<button type="button" ng-disabled="form.$invalid" ng-click="guardar()" class="btn btn-success"><i class="glyphicon glyphicon-save"></i> Guardar</button>
+		<a ng-click="cancelar()" class="btn btn-default"><i class="glyphicon glyphicon-cancel"></i> Cancelar</a>
+	</div>
+</form>

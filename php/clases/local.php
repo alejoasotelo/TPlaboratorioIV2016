@@ -41,38 +41,6 @@ class Local
         }
     }
 
-    /*public function __get($name) {
-
-        if (isset($this->data[$name]) && $this->data[$name] != null) {
-            return $this->data[$name];
-        }
-
-        switch ($name) {
-            case 'imagenes':
-                
-                $this->data[$name] = $this->getImagenes();
-                $this->{$name} = $this->data[$name];
-
-                return $this->data[$name];
-
-                break;
-
-            case 'encargado':
-                
-                $this->data[$name] = $this->getEncargado();
-                $this->{$name} = $this->data[$name];
-
-                return $this->data[$name];
-
-                break;
-            
-            default:
-                # code...
-                break;
-        }
-
-    }*/
-
     public static function traerPorId($id_local, $type = 'object')
     {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
@@ -95,11 +63,6 @@ class Local
         $consulta =$objetoAccesoDato->retornarConsulta("SELECT * FROM locales");
         $consulta->execute();
         $arrLocals = $consulta->fetchAll(\PDO::FETCH_CLASS, self::class);
-
-        /*foreach ($arrLocals as &$r) {
-            $r->imagenes = $r->getImagenes();
-            $r->encargado = $r->getEncargado();
-        }*/
 
         return $arrLocals;
     }

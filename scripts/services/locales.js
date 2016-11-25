@@ -13,14 +13,10 @@ angular.module('app')
 	}
 
 	this.get = function(id) {
+		
+		return api.get('locales', id).then(function(local) {
 
-		return self.list().then(function(usuarios) {
-
-			return usuarios.find(function(obj) {
-
-				return obj.id == id;
-
-			});
+			return local;
 
 		});
 
@@ -49,14 +45,24 @@ angular.module('app')
 
 	}
 
-	this.insert = function(usuario) {
+	this.insert = function(local) {
 
-		return $http.post(base_url, {datos: {task: 'agregarUsuario', usuario: usuario}}).then(function(r) {
+		return api.insert('locales', local).then(function(id) {
 
-			return r.data;
+			return id;
 
 		});
 		
+	}
+
+	this.update = function(local) {
+
+		return api.update('locales', local).then(function(response) {
+
+			return response;
+
+		});
+
 	}
 
 });

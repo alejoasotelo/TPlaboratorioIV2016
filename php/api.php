@@ -30,6 +30,88 @@ switch ($request->datos->task) {
 
 		break;
 
+	case 'get':
+
+		$row = array();
+
+		switch ($request->datos->endpoint) {
+			case 'usuarios':
+				$row = Usuario::traerPorId($request->datos->id);
+
+				// Oculto el hash del password.
+				$row->password = '';
+				break;
+			case 'locales':
+				$row = Local::traerPorId($request->datos->id);
+				break;
+			
+			default:
+				# code...
+				break;
+		}		
+
+		echo json_encode($row);
+
+		break;
+
+	case 'insert':
+
+		$success = false;
+		$msg = '';
+
+		switch ($request->datos->endpoint) {
+			case 'usuarios':
+				$id = Usuario::insertar($request->datos->object);
+
+				$success = $id > 0;
+				$msg = $success ? '' : 'No se pudo actualizar.';
+
+				break;
+			case 'locales':
+				$id = Local::insertar($request->datos->object);
+
+				$success = $id > 0;
+				$msg = $success ? '' : 'No se pudo actualizar.';
+				break;
+			
+			default:
+				# code...
+				break;
+		}		
+
+		echo json_encode(array('success' => $success != false, 'msg' => $msg));
+
+		break;
+
+	case 'update':
+
+		$success = false;
+		$msg = '';
+
+		switch ($request->datos->endpoint) {
+			case 'usuarios':
+				$row = Usuario::modificar($request->datos->object);
+
+				$success = $row != false;
+				$msg = $success ? '' : 'No se pudo actualizar.';
+
+				break;
+			case 'locales':
+				$row = Local::modificar($request->datos->object);
+
+				$success = $row != false;
+				$msg = $success ? '' : 'No se pudo actualizar.';
+				break;
+			
+			default:
+				# code...
+				break;
+		}		
+
+		echo json_encode(array('success' => $success != false, 'msg' => $msg));
+
+		break;
+
 	case 'delete':
 
 		$rows = array();
@@ -47,7 +129,7 @@ switch ($request->datos->task) {
 				break;
 		}		
 
-		echo json_encode(array('success' => $rows));
+		echo json_encode(array('success' => true));
 		break;
 
 	case 'agregarUsuario':

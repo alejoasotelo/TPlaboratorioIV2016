@@ -6,7 +6,8 @@ angular.module('app')
 		restrict: 'E',
 		templateUrl: 'scripts/directives/tools-menu.html',
 		scope: {
-			para: '@para'
+			modulo: '@modulo',
+			vista: '@vista'
 		},
 		controller: function ($scope) {
 
@@ -16,6 +17,14 @@ angular.module('app')
 
 			$scope.eliminar = function () {
 				$scope.$emit('eliminar', '');
+			}
+
+			$scope.cancelar = function () {
+				$scope.$emit('cancelar', '');
+			}
+
+			$scope.guardar = function () {
+				$scope.$emit('guardar', '');
 			}
 
 		}
