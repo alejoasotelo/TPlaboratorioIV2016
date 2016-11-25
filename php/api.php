@@ -30,6 +30,26 @@ switch ($request->datos->task) {
 
 		break;
 
+	case 'delete':
+
+		$rows = array();
+
+		switch ($request->datos->endpoint) {
+			case 'usuarios':
+				$rows = Usuario::borrar($request->datos->id);
+				break;
+			case 'locales':
+				$rows = Local::borrar($request->datos->id);
+				break;
+			
+			default:
+				# code...
+				break;
+		}		
+
+		echo json_encode(array('success' => $rows));
+		break;
+
 	case 'agregarUsuario':
 
 		$ret = array('success' => false);

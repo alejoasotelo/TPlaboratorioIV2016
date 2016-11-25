@@ -26,6 +26,9 @@
 .btn {
   border-radius: 0px; }
 
+tools-menu > div {
+  top: 50px; }
+
 body {
   background: #e4e7ec; }
 

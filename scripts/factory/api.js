@@ -72,7 +72,7 @@ angular.module('app')
 
 		},
 
-		delete: function (endpoit, id) {
+		delete: function (endpoint, id) {
 
 			return $http.post(base_url, {
 				datos: {
@@ -82,7 +82,7 @@ angular.module('app')
 				}
 			}).then(function(r){
 
-				return r.data;
+				return r.data == 0;
 
 			});
 

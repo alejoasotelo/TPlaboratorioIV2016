@@ -106,9 +106,14 @@ class Local
 
     public static function borrar($id_local)
     {
+        if (is_numeric($id_local)) {
+            $id_local = array($id_local);
+        }
+
+        $sql = 'DELETE FROM locales WHERE id_local IN ('.implode(',', $id_local).')';
+
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta =$objetoAccesoDato->retornarConsulta("DELETE FROM locales WHERE id_local=:id_local");
-        $consulta->bindValue(':id_local', $id_local, \PDO::PARAM_INT);
+        $consulta =$objetoAccesoDato->retornarConsulta($sql);
         $consulta->execute();
         return $consulta->rowCount();
     }
@@ -145,8 +150,8 @@ class Local
         }
 
         $sql = 'SELECT i.* FROM imagenes i
-                LEFT JOIN locales_has_imagenes li ON (li.id_imagen = i.id_imagen)
-                WHERE li.id_local = :id_local';
+        LEFT JOIN locales_has_imagenes li ON (li.id_imagen = i.id_imagen)
+        WHERE li.id_local = :id_local';
 
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->retornarConsulta($sql);
@@ -166,8 +171,8 @@ class Local
         }
 
         $sql = 'SELECT u.* FROM `usuarios` u
-                LEFT JOIN locales_has_empleados le ON (u.id_usuario = le.id_usuario)
-                WHERE le.id_local = :id_local';
+        LEFT JOIN locales_has_empleados le ON (u.id_usuario = le.id_usuario)
+        WHERE le.id_local = :id_local';
 
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->retornarConsulta($sql);

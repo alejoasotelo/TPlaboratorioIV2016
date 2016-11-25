@@ -42,12 +42,9 @@ angular.module('app')
 
 	this.delete = function(id) {
 
-		return $q(function(resolve, reject) {
-
-			setTimeout(function() {
-				resolve(true);
-			}, 100);
-
+		return api.delete('locales', id).then(function(r) {
+			console.log(r);
+			return r;
 		});
 
 	}

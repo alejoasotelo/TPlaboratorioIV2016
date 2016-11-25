@@ -1,26 +1,22 @@
-<h2>Listar</h2>
+<tools-menu para="locales">
+</tools-menu>
+
 <div class="table-responsive">
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th width="60">ID</th>
+				<th class="text-left"><input type="checkbox" ng-model="tools.selectAll" ng-change="selectAllChange()" title="Marcar todo"/></th>
 				<th class="text-left">Nombre</th>
 				<th width="100" class="text-center">Dirección</th>
-				<th width="80" class="text-center">Modificar</th>
-				<th width="80" class="text-center">Eliminar</th>
+				<th width="40" class="text-center">ID</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr ng-repeat="l in locales">
-				<td class="text-center">{{l.id_local}}</td>
+				<td class="text-left"><input type="checkbox" ng-model="l.selected"/></td>
 				<td class="text-left">{{l.nombre}}</td>
 				<td class="text-center">{{l.direccion}}</td>
-				<td class="text-center">
-					<a ui-sref="usuarios.modificar({id: {{l.id_local}}})"><i class="glyphicon glyphicon-edit"></i></a>
-				</td>
-				<td class="text-center">
-					<a ng-href="" ng-click="eliminar(l.id_local)"><i class="glyphicon glyphicon-remove"></i></a>
-				</td>
+				<td class="text-center">{{l.id_local}}</td>
 			</tr>
 		</tbody>
 	</table>
