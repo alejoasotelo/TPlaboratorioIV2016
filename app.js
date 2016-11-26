@@ -20,7 +20,7 @@ function configureTemplateFactory($provide) {
 }
 
 
-angular.module('app', ['ui.router', 'ngMap', 'satellizer'])
+angular.module('app', ['ui.router', 'ngMap', 'satellizer', 'angularFileUpload'])
 .config(function ($provide, $stateProvider, $urlRouterProvider, $authProvider) {
 
 	configureTemplateFactory($provide);
