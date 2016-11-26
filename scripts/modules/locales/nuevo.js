@@ -1,7 +1,8 @@
 angular.module('app')
-.controller('LocalesNuevoCtrl', function($scope, $state, $window, LocalesSvc) {
+.controller('LocalesNuevoCtrl', function($scope, $state, $window, LocalesSvc, FileUploader) {
 
 	$scope.local = {};
+	$scope.uploader = new FileUploader();
 
 	$scope.guardar = function () {
 
