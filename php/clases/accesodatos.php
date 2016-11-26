@@ -6,11 +6,21 @@ class AccesoDatos
     private static $objetoAccesoDatos;
     private $objetoPDO;
 
+    private $whitelist = array(
+        '127.0.0.1', 
+        "::1",
+        'localhost');
+
     private function __construct()
     {
         try {
-            $this->objetoPDO = new \PDO('mysql:host=localhost;dbname=alejo_lab4;charset=utf8', 'root', '', array(\PDO::ATTR_EMULATE_PREPARES => false, \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION));
-            // $this->objetoPDO = new \PDO('mysql:host=localhost;dbname=alejo_lab4;charset=utf8', 'alejo_lab4', 'Labo2016', array(\PDO::ATTR_EMULATE_PREPARES => false, \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION));
+
+            if ($this->isLocalhost()) {
+                $this->objetoPDO = new \PDO('mysql:host=localhost;dbname=alejo_lab4;charset=utf8', 'root', '', array(\PDO::ATTR_EMULATE_PREPARES => false, \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION));                
+            } else {
+                $this->objetoPDO = new \PDO('mysql:host=localhost;dbname=alejo_lab4;charset=utf8', 'alejo_lab4', 'Labo2016', array(\PDO::ATTR_EMULATE_PREPARES => false, \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION));
+            }
+
             $this->objetoPDO->exec("SET CHARACTER SET utf8");
         } catch (PDOException $e) {
             print "Error!: " . $e->getMessage();
@@ -18,11 +28,17 @@ class AccesoDatos
         }
     }
 
+    protected function isLocalhost() {
+
+        return in_array($_SERVER['REMOTE_ADDR'], $this->whitelist);
+
+    }
+
     public function retornarConsulta($sql)
     {
         return $this->objetoPDO->prepare($sql);
     }
-    
+
     public function retornarUltimoIdInsertado()
     {
         return $this->objetoPDO->lastInsertId();
