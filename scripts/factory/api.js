@@ -2,7 +2,7 @@ angular.module('app')
 
 .factory('api', function($http) {
 
-	var base_url = '/lab4/TPlaboratorioIV2016/php/api.php';
+	var base_url = '/lab4/tp/php/api.php';
 
 	return {
 
