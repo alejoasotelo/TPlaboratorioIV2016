@@ -2,28 +2,51 @@
 
 	<div class="form-group col-xs-12 col-md-6">
 		<label for="nombre">Nombre</label>
-		<input type="text" ng-model="local.nombre" name="nombre" class="form-control" />
+		<input type="text" ng-model="local.nombre" name="nombre" class="form-control" required />
 	</div>
 
 	<div class="form-group col-xs-12 col-md-6">
 		<label for="direccion">Dirección</label>
-		<input type="text" ng-model="local.direccion" name="direccion" class="form-control" />
+		<input type="text" ng-model="local.direccion" name="direccion" class="form-control" required />
 	</div>
 
-	<h3 class="col-xs-12">Fotos</h3>
-
-	<div class="form-group col-xs-12 col-md-6">
-		<input type="file" nv-file-select uploader="uploader"/><br/>
-		<ul>
-			<li ng-repeat="item in uploader.queue">
-				Name: <span ng-bind="item.file.name"></span><br/>
-				<!--<button ng-click="item.upload()">upload</button>-->
-			</li>
-		</ul>
+	<div class="col-xs-12">
+		<h3>Fotos</h3>
+		<p>Suba al menos 3 fotos.</p>
+		<div class="form-group">
+			<input type="file" nv-file-select multiple uploader="uploader"/><br/>
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<th width="40">#</th>
+							<th>Imagen</th>
+							<th width="60">Borrar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="item in uploader.queue">
+							<td></td>
+							<td>
+								<div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 60 }"></div>
+							</td>
+							<td>
+								<span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+								<button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+								<span class="glyphicon glyphicon-trash"></span> Eliminar
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
 	</div>
+	
+	<hr>
 
 	<div class="form-group col-xs-12">
-		<button type="button" ng-disabled="form.$invalid" ng-click="guardar()" class="btn btn-success"><i class="glyphicon glyphicon-save"></i> Guardar</button>
+		<button type="button" ng-disabled="form.$invalid || (uploader.queue.length + local.imagenes.length) < 3" ng-click="guardar()" class="btn btn-success"><i class="glyphicon glyphicon-save"></i> Guardar</button>
 		<a ng-click="cancelar()" class="btn btn-default"><i class="glyphicon glyphicon-cancel"></i> Cancelar</a>
 	</div>
 </form>

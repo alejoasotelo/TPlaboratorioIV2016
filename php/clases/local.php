@@ -44,7 +44,7 @@ class Local
     public static function traerPorId($id_local, $type = 'object')
     {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta =$objetoAccesoDato->retornarConsulta("SELECT * FROM locales WHERE id_local =:id_local");
+        $consulta = $objetoAccesoDato->retornarConsulta("SELECT * FROM locales WHERE id_local =:id_local");
         $consulta->bindValue(':id_local', $id_local, \PDO::PARAM_INT);
         $consulta->execute();
 

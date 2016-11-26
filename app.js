@@ -21,11 +21,14 @@ function configureTemplateFactory($provide) {
 
 
 angular.module('app', ['ui.router', 'ngMap', 'satellizer', 'angularFileUpload'])
-.config(function ($provide, $stateProvider, $urlRouterProvider, $authProvider) {
+
+.constant('BASE_URL', '/lab4/tp/php')
+
+.config(function (BASE_URL, $provide, $stateProvider, $urlRouterProvider, $authProvider) {
 
 	configureTemplateFactory($provide);
 
-	$authProvider.loginUrl = '/lab4/TPlaboratorioIV2016/php/auth.php';
+	$authProvider.loginUrl = BASE_URL + '/auth.php';
 	$authProvider.tokenName = 'token_lab4';
 	$authProvider.tokenPrefix = 'App';
 	$authProvider.authHeader = 'data';

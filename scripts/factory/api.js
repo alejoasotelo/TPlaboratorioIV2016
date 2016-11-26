@@ -1,8 +1,8 @@
 angular.module('app')
 
-.factory('api', function($http) {
+.factory('api', function(BASE_URL, $http) {
 
-	var base_url = '/lab4/tp/php/api.php';
+	var base_url = BASE_URL + '/api.php';
 
 	return {
 

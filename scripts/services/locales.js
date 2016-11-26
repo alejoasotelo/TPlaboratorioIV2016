@@ -45,6 +45,14 @@ angular.module('app')
 
 	}
 
+	this.deleteImage = function (id) {
+
+		return api.delete('imagenes', id).then(function(r) {
+			return r;
+		});
+
+	}
+
 	this.insert = function(local) {
 
 		return api.insert('locales', local).then(function(id) {
