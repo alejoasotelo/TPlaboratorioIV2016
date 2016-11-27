@@ -2,7 +2,9 @@ angular.module('app')
 .controller('LocalesNuevoCtrl', function($scope, $state, $window, LocalesSvc, EncargadosSvc, EmpleadosSvc, FileUploader, $q) {
 
 	$scope.ready = false;
-	$scope.local = {};
+	$scope.local = {
+		empleados: []
+	};
 	$scope.uploader = new FileUploader({ 
 		url: '/lab4/tp/php/upload.php'
 	});

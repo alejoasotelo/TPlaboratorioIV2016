@@ -12,7 +12,7 @@
 
 	<div class="form-group col-xs-12 col-md-6">
 		<label for="encargado">Encargado</label>
-		<p>Seleccione al menos 1.</p>
+		<p>Seleccione uno.</p>
 		<select class="form-control" ng-model="local.encargado.id_usuario" required>
 			<option value="">Seleccione un encargado</option>
 			<option ng-repeat="option in encargados" value="{{option.id_usuario}}" ng-selected="{{option.id_usuario == local.encargado.id_usuario}}">{{'#'+option.id_usuario + ' ' + option.nombre + ' ' + option.apellido}}</option>
@@ -20,7 +20,7 @@
 	</div>
 
 	<div class="form-group col-xs-12 col-md-6">
-	
+
 		<label for="empleados">Empleados</label>
 		<p>Seleccione al menos 2.</p>
 
@@ -50,50 +50,98 @@
 		</table>
 	</div>
 
-	<div class="col-xs-12">
-		<h3>Fotos</h3>
-		<p>Suba al menos 3 fotos.</p>
-		<div class="form-group">
-			<input type="file" nv-file-select multiple uploader="uploader"/><br/>
-			<div class="table-responsive">
-				<table class="table">
-					<thead>
-						<tr>
-							<th width="40">#</th>
-							<th>Imagen</th>
-							<th width="60">Borrar</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr ng-repeat="img in local.imagenes" ng-if="!img.deleted">
-							<td></td>
-							<td>
-								<img ng-src="{{img.imagen}}" alt="{{img.id_imagen}}" class="img-responsive" style="max-height: 60px;"/>
-							</td>
-							<td>
-								<button type="button" class="btn btn-danger btn-xs" ng-click="removeImagen(img)">
-									<span class="glyphicon glyphicon-trash"></span> Eliminar
-								</button>
-							</td>
-						</tr>
-						<tr ng-repeat="item in uploader.queue">
-							<td></td>
-							<td>
-								<div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 60 }"></div>
-							</td>
-							<td>
-								<span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
-								<button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
-									<span class="glyphicon glyphicon-trash"></span> Eliminar
-								</button>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" class="active">
+			<a ng-href="" ng-click="tab_active = 'imagenes'" aria-controls="imagenes" role="tab" data-toggle="tab">Imágenes</a>
+		</li>
+		<li role="presentation">
+			<a ng-href="" ng-click="tab_active = 'ofertas'" aria-controls="ofertas" role="tab" data-toggle="tab">Ofertas</a>
+		</li>
+	</ul>
+
+	<!-- Tab panes -->
+	<div class="tab-content">
+		<div role="tabpanel" class="tab-pane" ng-class="{active: tab_active == 'imagenes'}" id="imagenes">
+			<div class="col-xs-12">
+				<h3>Fotos</h3>
+				<p>Suba al menos 3 fotos.</p>
+				<div class="form-group">
+					<input type="file" nv-file-select multiple uploader="uploader"/><br/>
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th width="40">#</th>
+									<th>Imagen</th>
+									<th width="60">Borrar</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="img in local.imagenes" ng-if="!img.deleted">
+									<td></td>
+									<td>
+										<img ng-src="{{img.imagen}}" alt="{{img.id_imagen}}" class="img-responsive" style="max-height: 60px;"/>
+									</td>
+									<td>
+										<button type="button" class="btn btn-danger btn-xs" ng-click="removeImagen(img)">
+											<span class="glyphicon glyphicon-trash"></span> Eliminar
+										</button>
+									</td>
+								</tr>
+								<tr ng-repeat="item in uploader.queue">
+									<td></td>
+									<td>
+										<div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 60 }"></div>
+									</td>
+									<td>
+										<span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+										<button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+											<span class="glyphicon glyphicon-trash"></span> Eliminar
+										</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</div>
+
+		</div>
+
+		<div role="tabpanel" class="tab-pane" ng-class="{active: tab_active == 'ofertas'}" id="ofertas">
+
+			<div class="col-xs-12">
+				<h3>Ofertas</h3>
+
+				<div class="form-group">
+					<p  ng-if="local.ofertas.length == 0">
+						No hay ofertas disponibles.
+					</p>
+					<div class="table-responsive" ng-if="local.ofertas.length > 0">
+						<table class="table">
+							<thead>
+								<tr>
+									<th width="40">#</th>
+									<th>Nombre</th>
+									<th>Precio</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="o in local.ofertas">
+									<td>{{o.id_oferta}}</td>
+									<td>{{o.nombre}}</td>
+									<td>{{o.precio}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</div>
-	
+
 	<hr>	
 
 	<div class="form-group col-xs-12">

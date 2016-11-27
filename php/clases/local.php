@@ -4,6 +4,7 @@ namespace AlejoASotelo;
 use AlejoASotelo\AccessoDatos;
 use AlejoASotelo\Imagen;
 use AlejoASotelo\Usuario;
+use AlejoASotelo\Oferta;
 
 class Local
 {
@@ -14,6 +15,7 @@ class Local
     public $imagenes;
     public $encargado;
     public $empleados;
+    public $ofertas;
 
     protected $data;
 
@@ -31,6 +33,7 @@ class Local
             $this->imagenes = $this->getImagenes();
             $this->encargado = $this->getEncargado();
             $this->empleados = $this->getEmpleados();
+            $this->ofertas = $this->getOfertas();
 
         } else if ($this->id_local > 0) {
 
@@ -41,7 +44,7 @@ class Local
             $this->imagenes = $this->getImagenes();
             $this->encargado = $this->getEncargado();
             $this->empleados = $this->getEmpleados();
-
+            $this->ofertas = $this->getOfertas();
         }
     }
 
@@ -77,10 +80,25 @@ class Local
             $id_local = array($id_local);
         }
 
+        foreach ($id_local as $id) {
+            $local = new Local($id);
+            $imagenes = $local->getImagenes();
+
+            LocalHasImagen::borrarPorIdLocal($id);
+            LocalHasEncargado::borrarPorIdLocal($id);
+            LocalHasEmpleados::borrarPorIdLocal($id);
+
+            foreach ($imagenes as $imagen) {
+                Imagen::borrar($imagen->id_imagen);
+            }
+
+            unlink(__DIR__.'/../../imagens'.$id);
+        }
+
         $sql = 'DELETE FROM locales WHERE id_local IN ('.implode(',', $id_local).')';
 
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta =$objetoAccesoDato->retornarConsulta($sql);
+        $consulta = $objetoAccesoDato->retornarConsulta($sql);
         $consulta->execute();
         return $consulta->rowCount();
     }
@@ -142,7 +160,7 @@ class Local
             foreach ($obj->empleados as $e) {
                 $local_has_empleado = new LocalHasEmpleados();
                 $local_has_empleado->id_local = $id_local;
-                $local_has_empleado->id_usuario = $e;
+                $local_has_empleado->id_usuario = isset($e->id_usuario) ? $e->id_usuario : $e;
                 LocalHasEmpleados::insertar($local_has_empleado);                
             }
             
@@ -209,6 +227,27 @@ class Local
         $consulta->bindValue(':id_local', $this->id_local, \PDO::PARAM_STR);
         $consulta->execute();
         $empleados = $consulta->fetchAll(\PDO::FETCH_CLASS, Usuario::class);
+
+        return count($empleados) > 0 ? $empleados : array();
+
+    }
+
+    public function getOfertas() {
+
+        if ($this->id_local == null)
+        {
+            return false;
+        }
+
+        $sql = 'SELECT o.* FROM `ofertas` o
+        LEFT JOIN locales_has_ofertas lo ON (lo.id_local = o.id_local)
+        WHERE lo.id_local = :id_local';
+
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->retornarConsulta($sql);
+        $consulta->bindValue(':id_local', $this->id_local, \PDO::PARAM_STR);
+        $consulta->execute();
+        $empleados = $consulta->fetchAll(\PDO::FETCH_CLASS, Oferta::class);
 
         return count($empleados) > 0 ? $empleados : array();
 

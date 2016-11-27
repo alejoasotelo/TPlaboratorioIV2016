@@ -5,7 +5,11 @@ angular.module('app')
 	var id_local = $stateParams.id;
 
 	$scope.ready = false;
-	$scope.local = {};
+	$scope.local = {
+		ofertas: [],
+		empleados: [],
+		encargado: {}
+	};
 	$scope.uploader = new FileUploader({ 
 		url: '/lab4/tp/php/upload.php'
 	});
@@ -21,6 +25,7 @@ angular.module('app')
 	$scope.encargados = [];
 	$scope.empleados = [];
 	$scope.selectedEmpleado = null;
+	$scope.tab_active = 'imagenes';
 
 	// Cargo la info del local.
 	LocalesSvc.get(id_local).then(function(local) {
