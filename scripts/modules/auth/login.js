@@ -27,7 +27,7 @@ angular.module('app')
 
 	if ($scope.isAuthenticated) {
 		$scope.user = $auth.getPayload();
-		$state.go('usuarios.listar');
+		$state.go('locales.listar');
 		return false;
 	}
 
@@ -45,7 +45,7 @@ angular.module('app')
     			// Redirect user here after a successful log in.
     			$scope.isAuthenticated = $auth.isAuthenticated();
 				$scope.user = $auth.getPayload();
-				$state.go('usuarios.listar');
+				$state.go('locales.listar');
 				console.log($scope.user);
 
 			} else {

@@ -3,6 +3,7 @@ namespace AlejoASotelo;
 
 use AlejoASotelo\AccessoDatos;
 use AlejoASotelo\Imagen;
+use AlejoASotelo\Usuario;
 
 class Local
 {
@@ -12,6 +13,7 @@ class Local
 
     public $imagenes;
     public $encargado;
+    public $empleados;
 
     protected $data;
 
@@ -28,6 +30,7 @@ class Local
             $this->direccion = $obj->direccion;
             $this->imagenes = $this->getImagenes();
             $this->encargado = $this->getEncargado();
+            $this->empleados = $this->getEmpleados();
 
         } else if ($this->id_local > 0) {
 
@@ -37,6 +40,7 @@ class Local
             $this->direccion = $obj['direccion'];
             $this->imagenes = $this->getImagenes();
             $this->encargado = $this->getEncargado();
+            $this->empleados = $this->getEmpleados();
 
         }
     }
@@ -60,7 +64,7 @@ class Local
     public static function traerTodos()
     {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta =$objetoAccesoDato->retornarConsulta("SELECT * FROM locales");
+        $consulta = $objetoAccesoDato->retornarConsulta("SELECT * FROM locales");
         $consulta->execute();
         $arrLocals = $consulta->fetchAll(\PDO::FETCH_CLASS, self::class);
 
@@ -90,7 +94,29 @@ class Local
         $consulta->bindValue(':id_local', $obj->id_local, \PDO::PARAM_INT);
         $consulta->bindValue(':nombre', $obj->nombre, \PDO::PARAM_STR);
         $consulta->bindValue(':direccion', $obj->direccion, \PDO::PARAM_STR);
-        return $consulta->execute();
+        $consulta->execute();        
+
+        if ($obj->encargado->id_usuario > 0) {
+            $local_has_encargado = new LocalHasEncargado();
+            $local_has_encargado->id_local = $obj->id_local;
+            $local_has_encargado->id_usuario = $obj->encargado->id_usuario;
+
+            LocalHasEncargado::borrarPorIdLocal($obj->id_local);
+            LocalHasEncargado::insertar($local_has_encargado);
+        }
+
+        if (count($obj->empleados) > 0) {
+            LocalHasEmpleados::borrarPorIdLocal($obj->id_local);  
+
+            foreach ($obj->empleados as $e) {
+                $local_has_empleado = new LocalHasEmpleados();
+                $local_has_empleado->id_local = $obj->id_local;
+                $local_has_empleado->id_usuario = isset($e->id_usuario) ? $e->id_usuario : $e;
+
+                LocalHasEmpleados::insertar($local_has_empleado);
+            }
+
+        }
     }
 
     public static function insertar($obj)
@@ -102,7 +128,27 @@ class Local
         $consulta->bindValue(':nombre', $obj->nombre, \PDO::PARAM_STR);
         $consulta->bindValue(':direccion', $obj->direccion, \PDO::PARAM_STR);
         $consulta->execute();
-        return $objetoAccesoDato->retornarUltimoIdInsertado();
+        $id_local = $objetoAccesoDato->retornarUltimoIdInsertado();
+
+        if ($obj->encargado->id_usuario > 0) {
+            $local_has_encargado = new LocalHasEncargado();
+            $local_has_encargado->id_local = $id_local;
+            $local_has_encargado->id_usuario = $obj->encargado->id_usuario;
+            LocalHasEncargado::insertar($local_has_encargado);
+        }
+
+        if (count($obj->empleados) > 0) {
+
+            foreach ($obj->empleados as $e) {
+                $local_has_empleado = new LocalHasEmpleados();
+                $local_has_empleado->id_local = $id_local;
+                $local_has_empleado->id_usuario = $e;
+                LocalHasEmpleados::insertar($local_has_empleado);                
+            }
+            
+        }
+
+        return $id_local;
     }
 
     public function getImagenes() {
@@ -134,7 +180,7 @@ class Local
         }
 
         $sql = 'SELECT u.* FROM `usuarios` u
-        LEFT JOIN locales_has_empleados le ON (u.id_usuario = le.id_usuario)
+        LEFT JOIN locales_has_encargado le ON (u.id_usuario = le.id_usuario)
         WHERE le.id_local = :id_local';
 
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
@@ -143,7 +189,28 @@ class Local
         $consulta->execute();
         $encargado = $consulta->fetchObject(Usuario::class);
 
-        return $encargado;
+        return $encargado ?: new \stdClass();
+
+    }
+
+    public function getEmpleados() {
+
+        if ($this->id_local == null)
+        {
+            return false;
+        }
+
+        $sql = 'SELECT u.* FROM `usuarios` u
+        LEFT JOIN locales_has_empleados le ON (u.id_usuario = le.id_usuario)
+        WHERE le.id_local = :id_local';
+
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->retornarConsulta($sql);
+        $consulta->bindValue(':id_local', $this->id_local, \PDO::PARAM_STR);
+        $consulta->execute();
+        $empleados = $consulta->fetchAll(\PDO::FETCH_CLASS, Usuario::class);
+
+        return count($empleados) > 0 ? $empleados : array();
 
     }
 }

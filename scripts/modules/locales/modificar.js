@@ -1,8 +1,10 @@
 angular.module('app')
-.controller('LocalesModificarCtrl', function($scope, $window, $state, $stateParams, LocalesSvc, FileUploader) {
+.controller('LocalesModificarCtrl', function($scope, $window, $state, $stateParams, 
+	LocalesSvc, EncargadosSvc, EmpleadosSvc, FileUploader, $q) {
 
 	var id_local = $stateParams.id;
 
+	$scope.ready = false;
 	$scope.local = {};
 	$scope.uploader = new FileUploader({ 
 		url: '/lab4/tp/php/upload.php'
@@ -16,9 +18,27 @@ angular.module('app')
 		}
 	});
 
+	$scope.encargados = [];
+	$scope.empleados = [];
+	$scope.selectedEmpleado = null;
+
+	// Cargo la info del local.
 	LocalesSvc.get(id_local).then(function(local) {
 
 		$scope.local = local;
+
+		// Cargo el listado de encargados para el select.
+		var p1 = EncargadosSvc.list();
+
+		// Cargo el listado de encargados para el select.
+		var p2 = EmpleadosSvc.list();
+
+		$q.all([p1, p2]).then(function(data){ 
+			$scope.encargados = data[0];
+			$scope.empleados = data[1];
+
+			$scope.ready = true;
+		});
 
 	});
 
@@ -29,15 +49,17 @@ angular.module('app')
 		LocalesSvc.update($scope.local).then(function(r) {
 
 			// Si se inserto bien en la tabla entro.
-					console.log('success');
+			console.log('success');
 			if (r.success) {
 				id = r.id;
 
-				//if ($scope.uploader.queue.length > 0) {
+				if ($scope.uploader.queue.length > 0) {
 					console.log('uploading');
 					// Subo las imagenes.
 					$scope.uploader.uploadAll();					
-				//}
+				} else {
+					$state.go('locales.listar');
+				}
 				
 			} else {
 				$window.alert(r.msg);
@@ -51,7 +73,6 @@ angular.module('app')
 		};
 
 		$scope.uploader.onCompleteAll = function() {
-					console.log($scope.uploader.queue);
 			$state.go('locales.listar');
 		}
 
@@ -73,6 +94,60 @@ angular.module('app')
 			console.log(r);
 
 		});
+
+	}
+
+	$scope.agregarEmpleado = function (id_empleado) {
+
+		var empleado = null
+
+		for(var i = 0; i < $scope.empleados.length; i++) {
+
+			if ($scope.empleados[i].id_usuario == id_empleado) {
+				empleado = $scope.empleados[i];
+				break;
+			}
+
+		}
+
+		if (empleado != null) {
+
+			var existe = false;
+			var len = $scope.local.empleados.length;
+			for(var i = 0; i < len; i++) {
+
+				if ($scope.local.empleados[i].id_usuario == empleado.id_usuario) {
+					existe = true;
+					break;
+				}
+
+			}
+
+			if (!existe) {
+				console.log(empleado);
+				$scope.local.empleados.push(empleado);
+			}
+		}
+	}
+
+	$scope.removeEmpleado = function (empleado) {
+
+		var index = -1;
+		var len = $scope.local.empleados.length;
+
+		for(var i = 0; i < len; i++) {
+
+			if ($scope.local.empleados[i].id_usuario == empleado.id_usuario) {
+				index = i;
+				break;
+			}
+
+		}
+
+
+		if (index >= 0) {
+			$scope.local.empleados.splice(index, 1);
+		}
 
 	}
 

@@ -2,6 +2,8 @@
 require_once __DIR__.'/clases/autoload.php';
 
 use AlejoASotelo\Usuario;
+use AlejoASotelo\Empleado;
+use AlejoASotelo\Encargado;
 use AlejoASotelo\Local;
 use AlejoASotelo\Imagen;
 use AlejoASotelo\LocalHasImagen;
@@ -16,9 +18,19 @@ switch ($request->datos->task) {
 		$rows = array();
 
 		switch ($request->datos->endpoint) {
+
 			case 'usuarios':
 				$rows = Usuario::traerTodos();
 				break;
+
+			case 'encargados':
+				$rows = Encargado::traerTodos();
+				break;
+
+			case 'empleados':
+				$rows = Empleado::traerTodos();
+				break;
+
 			case 'locales':
 				$rows = Local::traerTodos();
 				break;
@@ -43,6 +55,21 @@ switch ($request->datos->task) {
 				// Oculto el hash del password.
 				$row->password = '';
 				break;
+
+			case 'encargados':
+				$row = Encargado::traerPorId($request->datos->id);
+
+				// Oculto el hash del password.
+				$row->password = '';
+				break;
+
+			case 'empleados':
+				$row = Empleado::traerPorId($request->datos->id);
+
+				// Oculto el hash del password.
+				$row->password = '';
+				break;
+
 			case 'locales':
 				$row = new Local($request->datos->id);
 				break;

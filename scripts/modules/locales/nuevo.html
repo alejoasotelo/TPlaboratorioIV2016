@@ -1,4 +1,4 @@
-<form name="form" class="form" novalidate>
+<form name="form" class="form" novalidate ng-if="ready">
 
 	<div class="form-group col-xs-12 col-md-6">
 		<label for="nombre">Nombre</label>
@@ -8,6 +8,46 @@
 	<div class="form-group col-xs-12 col-md-6">
 		<label for="direccion">Dirección</label>
 		<input type="text" ng-model="local.direccion" name="direccion" class="form-control" required />
+	</div>
+
+	<div class="form-group col-xs-12 col-md-6">
+		<label for="encargado">Encargado</label>
+		<p>Seleccione al menos 1.</p>
+		<select class="form-control" ng-model="local.encargado.id_usuario" required>
+			<option value="">Seleccione un encargado</option>
+			<option ng-repeat="option in encargados" value="{{option.id_usuario}}" ng-selected="{{option.id_usuario == local.encargado.id_usuario}}">{{'#'+option.id_usuario + ' ' + option.nombre + ' ' + option.apellido}}</option>
+		</select>
+	</div>
+
+	<div class="form-group col-xs-12 col-md-6">
+	
+		<label for="empleados">Empleados</label>
+		<p>Seleccione al menos 2.</p>
+
+		<select class="form-control" ng-change="agregarEmpleado(selectedEmpleado)" ng-model="selectedEmpleado" ng-options="item.id_usuario as ('#'+item.id_usuario+' '+item.nombre+' '+item.apellido) for item in empleados track by item.id_usuario">
+			<option value="">Seleccione uno para agregar</option>
+		</select>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Nombre</th>
+					<th>Eliminar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="e in local.empleados">
+					<td>{{e.id_usuario}}</td>
+					<td>{{e.nombre + ' ' + e.apellido}}</td>
+					<td>
+						<button type="button" class="btn btn-danger btn-xs" ng-click="removeEmpleado(e)">
+							<span class="glyphicon glyphicon-trash"></span> Eliminar
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 
 	<div class="col-xs-12">
@@ -46,7 +86,7 @@
 	<hr>
 
 	<div class="form-group col-xs-12">
-		<button type="button" ng-disabled="form.$invalid || (uploader.queue.length + local.imagenes.length) < 3" ng-click="guardar()" class="btn btn-success"><i class="glyphicon glyphicon-save"></i> Guardar</button>
+		<button type="button" ng-disabled="form.$invalid || (uploader.queue.length + local.imagenes.length) < 3 || local.empleados.length < 2" ng-click="guardar()" class="btn btn-success"><i class="glyphicon glyphicon-save"></i> Guardar</button>
 		<a ng-click="cancelar()" class="btn btn-default"><i class="glyphicon glyphicon-cancel"></i> Cancelar</a>
 	</div>
 </form>

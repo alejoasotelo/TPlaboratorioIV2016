@@ -1,4 +1,3 @@
-
 <div class="row" ng-if="!isAuthenticated">
 	<div class="center-form panel">
 		<div class="panel-body">
@@ -19,7 +18,7 @@
 				</div>
 				<button type="button" class="btn btn-lg  btn-block btn-success" ng-click="login()" ng-disabled="user.username.length == 0 && user.password.length == 0">Iniciar sesión</button>
 				<p class="text-center text-muted">
-				<small>No tienes una cuenta? <a ng-href="#" ui-sref="auth.register">Registrarse</a></small>
+					<small>No tienes una cuenta? <a ng-href="#" ui-sref="auth.register">Registrarse</a></small>
 				</p>				
 			</form>
 
@@ -36,11 +35,20 @@
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
+
 	<div class="container-fluid text-center">
+
 		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-footer" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar top"></span>
+				<span class="icon-bar center"></span>
+				<span class="icon-bar bottom"></span>
+			</button>
 			<a class="navbar-brand" href="#">Login Tests</a>
 		</div>
-		<div id="navbar" class="collapse navbar-collapse">
+
+		<div id="navbar-footer" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<li><a ng-href="" ng-click="loginTest(UsuariosTest.ADMINISTRADOR)">Administrador</a></li>
 				<li><a ng-href="" ng-click="loginTest(UsuariosTest.ENCARGADO)">Encargado</a></li>
@@ -48,5 +56,7 @@
 				<li><a ng-href="" ng-click="loginTest(UsuariosTest.CLIENTE)">Cliente</a></li>
 			</ul>
 		</div><!--/.nav-collapse -->
+
 	</div>
+
 </nav>
