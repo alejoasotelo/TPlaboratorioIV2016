@@ -35,7 +35,7 @@ angular.module('app')
 		// Cargo el listado de encargados para el select.
 		var p1 = EncargadosSvc.list();
 
-		// Cargo el listado de encargados para el select.
+		// Cargo el listado de empleados para el select.
 		var p2 = EmpleadosSvc.list();
 
 		$q.all([p1, p2]).then(function(data){ 

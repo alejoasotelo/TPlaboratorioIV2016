@@ -13,10 +13,10 @@
 	<div class="form-group col-xs-12 col-md-6">
 		<label for="encargado">Encargado</label>
 		<p>Seleccione uno.</p>
-		<select class="form-control" ng-model="local.encargado.id_usuario" required>
+		<select class="form-control" ng-options="e.id_usuario as e.nombre+' '+e.apellido for e in encargados" ng-model="local.encargado.id_usuario" required>
 			<option value="">Seleccione un encargado</option>
-			<option ng-repeat="option in encargados" value="{{option.id_usuario}}" ng-selected="{{option.id_usuario == local.encargado.id_usuario}}">{{'#'+option.id_usuario + ' ' + option.nombre + ' ' + option.apellido}}</option>
 		</select>
+		</p>
 	</div>
 
 	<div class="form-group col-xs-12 col-md-6">
