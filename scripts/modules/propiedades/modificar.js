@@ -1,22 +1,31 @@
 angular.module('app')
-.controller('UsuariosModificarCtrl', function($scope, $window, $state, $stateParams, UsuariosSvc) {
+.controller('PropiedadesModificarCtrl', function($scope, $window, $state, $stateParams, PropiedadesSvc, LocalesSvc, $q) {
 
-	var id_usuario = $stateParams.id;
+	$scope.ready = false;
 
-	$scope.usuario = {};
+	var id_propiedad = $stateParams.id;
 
-	UsuariosSvc.get(id_usuario).then(function(usuario) {
+	$scope.propiedad = {};
+	$scope.locales = [];
 
-		$scope.usuario = usuario;
+	var p1 = PropiedadesSvc.get(id_propiedad);
+	var p2 = LocalesSvc.list();
+
+	$q.all([p1, p2]).then(function(data) {
+
+		$scope.propiedad = data[0];
+		$scope.locales = data[1];
+
+		$scope.ready = true;
 
 	});
 
 	$scope.guardar = function () {
 
-		UsuariosSvc.update($scope.usuario).then(function(r) {
+		PropiedadesSvc.update($scope.propiedad).then(function(r) {
 
 			if (r.success) {
-				$state.go('usuarios.listar');
+				$state.go('propiedades.listar');
 			} else {
 				$window.alert(r.msg);
 			}
@@ -27,7 +36,7 @@ angular.module('app')
 
 	$scope.cancelar = function () {
 
-		$state.go('usuarios.listar');
+		$state.go('propiedades.listar');
 
 	}
 

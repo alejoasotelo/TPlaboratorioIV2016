@@ -81,7 +81,7 @@ class Oferta{
         $consulta->bindValue(':id_propiedad', $propiedad->id_propiedad, \PDO::PARAM_STR);
         $consulta->bindValue(':id_local', $propiedad->id_local, \PDO::PARAM_STR);
         $consulta->bindValue(':nombre', $obj->nombre, \PDO::PARAM_STR);
-        $consulta->bindValue(':descripcion', $obj->descripcion, \PDO::PARAM_STR);
+        $consulta->bindValue(':descripcion', !empty($obj->descripcion) ? $obj->descripcion : '', \PDO::PARAM_STR);
         $consulta->bindValue(':precio', $precio, \PDO::PARAM_STR);
         $consulta->bindValue(':descuento', (float)$obj->descuento, \PDO::PARAM_STR);
         $consulta->execute();
@@ -101,7 +101,7 @@ class Oferta{
         $consulta->bindValue(':id_propiedad', $propiedad->id_propiedad, \PDO::PARAM_STR);
         $consulta->bindValue(':id_local', $propiedad->id_local, \PDO::PARAM_STR);
         $consulta->bindValue(':nombre', $obj->nombre, \PDO::PARAM_STR);
-        $consulta->bindValue(':descripcion', $obj->descripcion, \PDO::PARAM_STR);
+        $consulta->bindValue(':descripcion', !empty($obj->descripcion) ? $obj->descripcion : '', \PDO::PARAM_STR);
         $consulta->bindValue(':precio', $precio, \PDO::PARAM_STR);
         $consulta->bindValue(':descuento', $obj->descuento, \PDO::PARAM_STR);
         $consulta->bindValue(':id_oferta', $obj->id_oferta, \PDO::PARAM_STR);

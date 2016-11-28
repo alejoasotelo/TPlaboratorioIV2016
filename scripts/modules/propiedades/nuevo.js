@@ -1,14 +1,25 @@
 angular.module('app')
-.controller('UsuariosNuevoCtrl', function($scope, $state, $window, UsuariosSvc) {
+.controller('PropiedadesNuevoCtrl', function($scope, $state, $window, PropiedadesSvc, LocalesSvc, $q) {
 
-	$scope.usuario = {};
+	$scope.ready = false;
+
+	$scope.propiedad = {};
+	$scope.locales = [];
+
+	LocalesSvc.list().then(function(locales) {
+
+		$scope.locales = locales;
+
+		$scope.ready = true;
+
+	});
 
 	$scope.guardar = function () {
 
-		UsuariosSvc.insert($scope.usuario).then(function(r) {
+		PropiedadesSvc.insert($scope.propiedad).then(function(r) {
 
 			if (r.success) {
-				$state.go('usuarios.listar');
+				$state.go('propiedades.listar');
 			} else {
 				$window.alert(r.msg);
 			}
@@ -19,7 +30,7 @@ angular.module('app')
 
 	$scope.cancelar = function () {
 
-		$state.go('usuarios.listar');
+		$state.go('propiedades.listar');
 
 	}
 

@@ -31,18 +31,20 @@ angular.module('app')
 	}	
 
 	$scope.eliminar = function(id) {
-		
-		OfertasSvc.delete(id).then(function(data){
 
-			console.log(data);
+		if ($window.confirm('Esta seguro que desea eliminar?')) {
 
-			if (data.successs) {
+			OfertasSvc.delete(id).then(function(data){
 
-				cargar();
-				
-			}
+				if (data.success) {
 
-		});
+					cargar();
+
+				}
+
+			});
+
+		}
 
 	}
 
@@ -68,7 +70,7 @@ angular.module('app')
 
 		angular.forEach($scope.ofertas, function(value, index) {
 			if (value.selected) {
-				ofertas.push(value.id_usuario);
+				ofertas.push(value.id_oferta);
 			}
 		});
 

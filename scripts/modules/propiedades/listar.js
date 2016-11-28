@@ -1,17 +1,17 @@
 angular.module('app')
-.controller('UsuariosListarCtrl', function($scope, $window, $auth, $state, UsuariosSvc) {
+.controller('PropiedadesListarCtrl', function($scope, $window, $auth, $state, $window, PropiedadesSvc) {
 
 	if (!$auth.isAuthenticated()){
 		$state.go('auth.login');
 	}
 
-	$scope.usuarios = new Array();
+	$scope.propiedades = new Array();
 
 	function cargar() {
 
-		UsuariosSvc.list().then(function(usuarios){
+		PropiedadesSvc.list().then(function(propiedades) {
 
-			$scope.usuarios = usuarios;
+			$scope.propiedades = propiedades;
 
 		});
 
@@ -31,32 +31,33 @@ angular.module('app')
 	}	
 
 	$scope.eliminar = function(id) {
-		
-		UsuariosSvc.delete(id).then(function(data){
 
-			console.log(data);
+		if ($window.confirm('Esta seguro que desea eliminar?')) {
 
-			if (data.successs) {
+			PropiedadesSvc.delete(id).then(function(data) {
 
-				cargar();
-				//deleteFromArray($scope.usuarios, id);
-				
-			}
+				if (data.success) {
 
-		});
+					cargar();
+
+				}
+
+			});
+
+		}
 
 	}
 
 	$scope.$on('modificar', function(v) {
 
-		var usuario = $scope.usuarios.find(function(element, index, arr) {
+		var propiedad = $scope.propiedades.find(function(element, index, arr) {
 
 			return element.selected;
 
 		});
 
-		if (typeof usuario != 'undefined') {
-			$state.go('usuarios.modificar', {id: usuario.id_usuario});
+		if (typeof propiedad != 'undefined') {
+			$state.go('propiedades.modificar', {id: propiedad.id_propiedad});
 		} else {
 			$window.alert('Tienes que elegir un item para modificar.');
 		}
@@ -65,16 +66,16 @@ angular.module('app')
 
 	$scope.$on('eliminar', function(v) {
 
-		var usuarios = new Array();
+		var propiedades = new Array();
 
-		angular.forEach($scope.usuarios, function(value, index) {
+		angular.forEach($scope.propiedades, function(value, index) {
 			if (value.selected) {
-				usuarios.push(value.id_usuario);
+				propiedades.push(value.id_propiedad);
 			}
 		});
 
-		if (usuarios.length > 0) {
-			$scope.eliminar(usuarios);
+		if (propiedades.length > 0) {
+			$scope.eliminar(propiedades);
 		} else {
 			$window.alert('Tienes que elegir un item para eliminar.');
 		}
@@ -84,12 +85,12 @@ angular.module('app')
 	$scope.selectAllChange = function () {
 
 		if ($scope.tools.selectAll) {
-			angular.forEach($scope.usuarios, function(value, index) {
+			angular.forEach($scope.propiedades, function(value, index) {
 				value.selected = true;
 			});
 		} else {
 
-			angular.forEach($scope.usuarios, function(value, index) {
+			angular.forEach($scope.propiedades, function(value, index) {
 				value.selected = false;
 			});
 		}

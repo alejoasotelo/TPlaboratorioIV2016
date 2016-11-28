@@ -36,7 +36,7 @@ angular.module('app')
 
 			console.log(data);
 
-			if (data.successs) {
+			if (data.success) {
 
 				cargar();
 				//deleteFromArray($scope.usuarios, id);

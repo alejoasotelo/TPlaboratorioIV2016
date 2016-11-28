@@ -25,7 +25,7 @@ angular.module('app')
 	$scope.encargados = [];
 	$scope.empleados = [];
 	$scope.selectedEmpleado = null;
-	$scope.tab_active = 'imagenes';
+	$scope.tab_active = 'encargado';
 
 	// Cargo la info del local.
 	LocalesSvc.get(id_local).then(function(local) {

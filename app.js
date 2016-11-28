@@ -164,6 +164,41 @@ angular.module('app', ['ui.router', 'ngMap', 'satellizer', 'angularFileUpload'])
 		}
 	})
 
+	// Propiedades
+	.state('propiedades', {
+		url: '/propiedades',
+		abstract: true,
+		templateUrl: 'scripts/modules/propiedades/propiedades.html',
+		controller: 'PropiedadesCtrl'
+	})
+	.state('propiedades.listar', {
+		url: '/listar',
+		views: {
+			'contenido': {
+				templateUrl: 'scripts/modules/propiedades/listar.html',
+				controller: 'PropiedadesListarCtrl'
+			} 
+		}
+	})
+	.state('propiedades.nuevo', {
+		url: '/nuevo',
+		views: {
+			'contenido': {
+				templateUrl: 'scripts/modules/propiedades/nuevo.html',
+				controller: 'PropiedadesNuevoCtrl'
+			} 
+		}
+	})
+	.state('propiedades.modificar', {
+		url: '/modificar/:id',
+		views: {
+			'contenido': {
+				templateUrl: 'scripts/modules/propiedades/modificar.html',
+				controller: 'PropiedadesModificarCtrl'
+			} 
+		}
+	})
+
 	$urlRouterProvider.otherwise('auth/login');
 
 })

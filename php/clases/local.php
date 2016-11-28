@@ -238,17 +238,15 @@ class Local
             return false;
         }
 
-        $sql = 'SELECT o.* FROM `ofertas` o
-        LEFT JOIN locales_has_ofertas lo ON (lo.id_local = o.id_local)
-        WHERE lo.id_local = :id_local';
+        $sql = 'SELECT o.* FROM `ofertas` o WHERE o.id_local = :id_local';
 
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->retornarConsulta($sql);
         $consulta->bindValue(':id_local', $this->id_local, \PDO::PARAM_STR);
         $consulta->execute();
-        $empleados = $consulta->fetchAll(\PDO::FETCH_CLASS, Oferta::class);
+        $ofertas = $consulta->fetchAll(\PDO::FETCH_CLASS, Oferta::class);
 
-        return count($empleados) > 0 ? $empleados : array();
+        return count($ofertas) > 0 ? $ofertas : array();
 
     }
 }

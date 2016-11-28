@@ -17,6 +17,10 @@ angular.module('app')
 				$scope.user = isAuthenticated ? $auth.getPayload() : {};
 				$scope.isAdmin = angular.equals($scope.user, {}) ? false : $scope.user.tipo == 'administrador';
 
+				if (!isAuthenticated){
+					$state.go('auth.login');
+				}
+
 				return isAuthenticated;
 			};
 

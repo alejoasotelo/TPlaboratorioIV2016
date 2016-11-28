@@ -1,24 +1,26 @@
-<tools-menu modulo="usuarios" vista="listar">
+<tools-menu modulo="propiedades" vista="listar">
 </tools-menu>
 
 <div class="table-responsive">
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th class="text-left"><input type="checkbox" ng-model="tools.selectAll" ng-change="selectAllChange()" title="Marcar todo"/></th>
-				<th class="text-left">Nombre completo</th>
-				<th class="text-left">Email</th>
-				<th width="100" class="text-center">Tipo</th>
+				<th width="40" class="text-center"><input type="checkbox" ng-model="tools.selectAll" ng-change="selectAllChange()" title="Marcar todo"/></th>
+				<th class="text-left">Nombre</th>
+				<th class="text-left">Dirección</th>
+				<th class="text-left" width="200">Local</th>
+				<th width="100" class="text-center">Precio</th>
 				<th width="40" class="text-center">ID</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="u in usuarios">
-				<td class="text-left"><input type="checkbox" ng-model="u.selected" ng-checked="tools.selectAll"/></td>
-				<td class="text-left"><a ui-sref="usuarios.modificar({id: u.id_usuario})">{{u.nombre + ' ' + u.apellido}}</a></td>
-				<td class="text-left">{{u.email}} </td>
-				<td class="text-center">{{u.tipo}}</td>
-				<td class="text-center">{{u.id_usuario}}</td>
+			<tr ng-repeat="p in propiedades">
+				<td class="text-center"><input type="checkbox" ng-model="p.selected" ng-checked="tools.selectAll"/></td>
+				<td class="text-left"><a ui-sref="propiedades.modificar({id: p.id_propiedad})">{{p.nombre}}</a></td>
+				<td class="text-left">{{p.direccion}} </td>
+				<td class="text-left">{{p.local.nombre}} </td>
+				<td class="text-center">${{p.precio}}</td>
+				<td class="text-center">{{p.id_propiedad}}</td>
 			</tr>
 		</tbody>
 	</table>

@@ -1,40 +1,24 @@
-<form name="form" class="form" novalidate>
-	<div class="form-group col-xs-12 col-md-6">
-		<label for="username">Nombre de usuario</label>
-		<input type="text" ng-model="usuario.username" name="username" class="form-control" required />
-	</div>
-	<div class="form-group col-xs-12 col-md-6">
-		<label for="email">email</label>
-		<input type="email" ng-model="usuario.email" name="email" class="form-control" required />
-	</div>
-
-	<div class="form-group col-xs-12 col-md-6">
-		<label for="password">Clave</label>
-		<input type="password" ng-model="usuario.password" name="password" class="form-control" required />
-	</div>
-
-	<div class="form-group col-xs-12 col-md-6">
-		<label for="repeat_password">Repetir clave</label>
-		<input type="password" ng-model="usuario.repeat_password" name="repeat_password" class="form-control" required />
-	</div>
+<form name="form" class="form" ng-if="ready" novalidate>
 
 	<div class="form-group col-xs-12 col-md-6">
 		<label for="nombre">Nombre</label>
-		<input type="text" ng-model="usuario.nombre" name="nombre" class="form-control" />
-	</div>
-	<div class="form-group col-xs-12 col-md-6">
-		<label for="apellido">Apellido</label>
-		<input type="text" ng-model="usuario.apellido" name="apellido" class="form-control" />
+		<input type="text" ng-model="propiedad.nombre" name="nombre" class="form-control" required/>
 	</div>
 
 	<div class="form-group col-xs-12 col-md-6">
-	<label for="tipo">Tipo de usuario</label>
-		<select name="tipo" ng-model="usuario.tipo" class="form-control col-xs-12 col-md-6" required >
-			<option value="">Seleccione un tipo</option>
-			<option value="administrador">Administrador</option>
-			<option value="cliente">Cliente</option>
-			<option value="empleado">Empleado</option>
-			<option value="encargado">Encargado</option>
+		<label for="direccion">Dirección</label>
+		<input type="text" ng-model="propiedad.direccion" name="direccion" class="form-control" required/>
+	</div>
+
+	<div class="form-group col-xs-12 col-md-6">
+		<label for="precio">Precio</label>
+		<input type="number" ng-model="propiedad.precio" name="precio" class="form-control" required/>
+	</div>
+
+	<div class="form-group col-xs-12 col-md-6">
+		<label for="local">Local</label>
+		<select name="local" class="form-control" ng-model="propiedad.local.id_local" ng-options="l.id_local as l.nombre for l in locales" required>
+			<option value="">Seleccione un local.</option>
 		</select>
 	</div>
 
