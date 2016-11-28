@@ -10,3 +10,4 @@ require_once __DIR__.'/localhasempleados.php';
 require_once __DIR__.'/localhasofertas.php';
 require_once __DIR__.'/imagen.php';
 require_once __DIR__.'/oferta.php';
+require_once __DIR__.'/propiedad.php';

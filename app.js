@@ -129,6 +129,41 @@ angular.module('app', ['ui.router', 'ngMap', 'satellizer', 'angularFileUpload'])
 		}
 	})
 
+	// Ofertas
+	.state('ofertas', {
+		url: '/ofertas',
+		abstract: true,
+		templateUrl: 'scripts/modules/ofertas/ofertas.html',
+		controller: 'OfertasCtrl'
+	})
+	.state('ofertas.listar', {
+		url: '/listar',
+		views: {
+			'contenido': {
+				templateUrl: 'scripts/modules/ofertas/listar.html',
+				controller: 'OfertasListarCtrl'
+			} 
+		}
+	})
+	.state('ofertas.nuevo', {
+		url: '/nuevo',
+		views: {
+			'contenido': {
+				templateUrl: 'scripts/modules/ofertas/nuevo.html',
+				controller: 'OfertasNuevoCtrl'
+			} 
+		}
+	})
+	.state('ofertas.modificar', {
+		url: '/modificar/:id',
+		views: {
+			'contenido': {
+				templateUrl: 'scripts/modules/ofertas/modificar.html',
+				controller: 'OfertasModificarCtrl'
+			} 
+		}
+	})
+
 	$urlRouterProvider.otherwise('auth/login');
 
 })

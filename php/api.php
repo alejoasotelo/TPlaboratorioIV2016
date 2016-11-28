@@ -5,8 +5,10 @@ use AlejoASotelo\Usuario;
 use AlejoASotelo\Empleado;
 use AlejoASotelo\Encargado;
 use AlejoASotelo\Local;
-use AlejoASotelo\Imagen;
 use AlejoASotelo\LocalHasImagen;
+use AlejoASotelo\Oferta;
+use AlejoASotelo\Imagen;
+use AlejoASotelo\Propiedad;
 
 $request_body = file_get_contents('php://input');
 $request = json_decode($request_body);
@@ -33,6 +35,14 @@ switch ($request->datos->task) {
 
 			case 'locales':
 				$rows = Local::traerTodos();
+				break;
+
+			case 'ofertas':
+				$rows = Oferta::traerTodos();
+				break;
+
+			case 'propiedades':
+				$rows = Propiedad::traerTodos();
 				break;
 			
 			default:
@@ -73,6 +83,14 @@ switch ($request->datos->task) {
 			case 'locales':
 				$row = new Local($request->datos->id);
 				break;
+
+			case 'ofertas':
+				$row = new Oferta($request->datos->id);
+				break;
+
+			case 'propiedades':
+				$row = Propiedad::traerPorId($request->datos->id);
+				break;
 			
 			default:
 				# code...
@@ -96,6 +114,14 @@ switch ($request->datos->task) {
 			case 'locales':
 				$id = Local::insertar($request->datos->object);
 				break;
+				
+			case 'ofertas':
+				$id = Oferta::insertar($request->datos->object);
+				break;
+				
+			case 'propiedades':
+				$id = Propiedad::insertar($request->datos->object);
+				break;
 			
 			default:
 				# code...
@@ -107,7 +133,7 @@ switch ($request->datos->task) {
 		if ($id > 0) {
 			$ret['id'] = $id;
 		} else {
-			$ret['msg'] = 'No se pudo actualizar.';
+			$ret['msg'] = 'No se pudo insertar.';
 		}
 
 		echo json_encode($ret);
@@ -123,11 +149,21 @@ switch ($request->datos->task) {
 			case 'usuarios':
 				Usuario::modificar($request->datos->object);
 				$id = $request->datos->object->id_usuario;
-
 				break;
+
 			case 'locales':
 				Local::modificar($request->datos->object);
 				$id = $request->datos->object->id_local;
+				break;
+
+			case 'ofertas':
+				Oferta::modificar($request->datos->object);
+				$id = $request->datos->object->id_oferta;
+				break;
+
+			case 'propiedades':
+				Propiedad::modificar($request->datos->object);
+				$id = $request->datos->object->id_propiedad;
 				break;
 			
 			default:
@@ -163,6 +199,14 @@ switch ($request->datos->task) {
 			case 'imagenes':
 				Imagen::borrar($request->datos->id);
 				LocalHasImagen::borrarPorIdImagen($request->datos->id);
+				break;
+
+			case 'ofertas':
+				$rows = Oferta::borrar($request->datos->id);
+				break;
+
+			case 'propiedades':
+				$rows = Propiedad::borrar($request->datos->id);
 				break;
 			
 			default:

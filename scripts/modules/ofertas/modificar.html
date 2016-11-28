@@ -1,0 +1,42 @@
+<form name="form" class="form" ng-if="ready" novalidate>
+
+	<div class="form-group col-xs-12 col-md-6">
+
+		<div class="form-group">
+			<label for="nombre">Nombre</label>
+			<input type="text" ng-model="oferta.nombre" name="nombre" class="form-control" required/>
+		</div>
+
+		<div class="form-group">
+			<label for="descripcion">Descripcion</label>
+			<textarea ng-model="oferta.descripcion" name="descripcion" class="form-control" rows="5">
+			</textarea>
+		</div>
+
+		<div class="form-group">
+			<label for="tipo">Descuento</label>
+			<p>Ingrese el porcentaje de descuento de la oferta.</p>
+			<div class="input-group">
+				<input type="number" ng-model="oferta.descuento" class="form-control" required/>
+				<span class="input-group-addon">%</span>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="form-group col-xs-12 col-md-6">
+		<label for="propiedad">Propiedad</label>
+		<select name="propiedad" class="form-control" ng-model="oferta.propiedad.id_propiedad" ng-options="p.id_propiedad as (p.nombre+' ('+p.direccion+')') for p in propiedades" required>
+			<option value="">Seleccione una propiedad.</option>
+		</select>
+	</div>
+
+	<div class="col-xs-12">
+		<hr>
+	</div>
+
+	<div class="form-group col-xs-12">
+		<button type="button" ng-disabled="form.$invalid" ng-click="guardar()" class="btn btn-success"><i class="glyphicon glyphicon-save"></i> Guardar</button>
+		<a ng-click="cancelar()" class="btn btn-default"><i class="glyphicon glyphicon-cancel"></i> Cancelar</a>
+	</div>
+</form>

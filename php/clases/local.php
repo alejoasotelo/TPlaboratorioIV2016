@@ -17,12 +17,8 @@ class Local
     public $empleados;
     public $ofertas;
 
-    protected $data;
-
     public function __construct($id_local = null)
     {
-        $this->data = array();
-
         if ($id_local != null) {
 
             $obj = Local::traerPorId($id_local);
@@ -92,7 +88,10 @@ class Local
                 Imagen::borrar($imagen->id_imagen);
             }
 
-            unlink(__DIR__.'/../../imagens'.$id);
+            $path_imagenes = __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.$id;
+            if (is_dir($path_imagenes)) {
+                @unlink($path_imagenes);
+            }
         }
 
         $sql = 'DELETE FROM locales WHERE id_local IN ('.implode(',', $id_local).')';
