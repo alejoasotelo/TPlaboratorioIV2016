@@ -4,6 +4,7 @@ angular.module('app')
 	var Roles = {
 
 		ADMINISTRADOR: {
+			page_default: 'locales.listar',
 			ofertas: {
 				listar: true,
 				nuevo: true,
@@ -27,29 +28,99 @@ angular.module('app')
 				nuevo: true,
 				modificar: true,
 				eliminar: true
+			},
+			pedidos: {
+				listar: true,
+				nuevo: true,
+				modificar: true,
+				eliminar: true
+			},
+			estadisticas: {
+				listar: true,
+				nuevo: true,
+				modificar: true,
+				eliminar: true
 			}
 		},
 		ENCARGADO: {
-			username: 'encargado', 
-			password: 'encargado'
+			page_default: 'propiedades.listar',
+			usuarios: {
+				tipo: {
+					empleados: true,
+					clientes: true
+				},
+				listar: true,
+				nuevo: true,
+				modificar: true,
+				eliminar: true
+			},
+			ofertas: {
+				listar: true,
+				nuevo: true,
+				modificar: true,
+				eliminar: true
+			},
+			propiedades: {
+				listar: true,
+				nuevo: true,
+				modificar: true,
+				eliminar: true
+			},
+			pedidos: {
+				listar: true,
+				nuevo: true,
+				modificar: true,
+				eliminar: true
+			}
 		},
 		EMPLEADO: {
-			username: 'empleado', 
-			password: 'empleado'
+			page_default: 'ofertas.listar',
+			usuarios: {
+				tipo: {
+					clientes: true
+				},
+				listar: true,
+				nuevo: true,
+				modificar: true,
+				eliminar: true
+			},
+			ofertas: {
+				listar: true,
+				nuevo: true,
+				modificar: true,
+				eliminar: true
+			},
+			pedidos: {
+				listar: true
+			}
 		},
 		CLIENTE: {
+			page_default: 'ofertas.listar',
 			ofertas: {
 				listar: true
 			},
-			locales: {
-				listar: true
+			encuestas: {
+				nuevo: true
 			}
 		}
 	};
 
 	function getUser() {
 
-		return $auth.getPayload();
+		return $auth.isAuthenticated() ? $auth.getPayload() : 'undefined';
+
+	}
+
+	this.getUserPageDefault = function() {
+
+		var user = getUser();
+
+		if (typeof user == 'undefined') {
+			return 'auth.login';
+		} else {
+			var tipo = user.tipo.toUpperCase();
+			return Roles[tipo].page_default;
+		}
 
 	}
 	

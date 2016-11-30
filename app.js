@@ -178,8 +178,45 @@ angular.module('app', ['ui.router', 'ngMap', 'satellizer', 'angularFileUpload'])
 	$urlRouterProvider.otherwise('auth/login');
 
 })
-.run(function ($rootScope) {
+.run(function ($rootScope, $location, $state, $auth, PermisosSvc) {
 
-	$rootScope.APP_NAME = 'Inmobiliaria SRL';
+	$rootScope.APP_NAME = 'Inmobiliaria SRL';	
+
+	$rootScope.page = $state.current.name;
+
+	$rootScope.$on('$locationChangeStart', function (event, next, current) {
+
+		var nextPath = $location.path();
+		var parts = nextPath.substr(1, nextPath.length-1).split('/');
+		var module = parts[0];
+		var view = parts.length > 1 ? parts[1] : null;
+		var id = parts.length > 2 ? parts[2] : null;
+
+		if ($auth.isAuthenticated()) {
+
+			//$rootScope.isAuthenticated = true;
+			$rootScope.user = $auth.getPayload();
+
+			if (!PermisosSvc.puede(module+'.'+view+'.'+id)) {
+				event.preventDefault();
+
+				var page_default = PermisosSvc.getUserPageDefault();
+				$state.go(page_default);
+			}
+
+		} else {
+
+			//$rootScope.isAuthenticated = false;
+			$rootScope.user = 'undefined';
+
+			console.log(module + '.' + view);
+			var state = module + '.' + view;
+			if (state != 'auth.login' && state != 'auth.register') {
+				$state.go('auth.login');
+			}
+
+		}
+
+	});
 
 });

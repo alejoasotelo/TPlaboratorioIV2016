@@ -11,11 +11,14 @@ class Propiedad{
 
     public $id_propiedad;
     public $id_local;
+    public $id_usuario;
     public $nombre;
     public $direccion;
     public $precio;
     public $local;
+    public $usuario;
     public $tipo;
+    public $imagenes;
 
     public function __construct($id_propiedad = null)
     {
@@ -25,10 +28,13 @@ class Propiedad{
 
             $this->id_propiedad = $obj->id_propiedad;
             $this->id_local = $obj->id_local;
+            $this->id_usuario = $obj->id_usuario;
             $this->nombre = $obj->nombre;
             $this->direccion = $obj->direccion;
             $this->precio = $obj->precio;
             $this->local = $this->getLocal();
+            $this->usuario = $this->getUsuario();
+            $this->imagenes = $this->getImagenes();
 
         } else if ($this->id_local > 0) {
 
@@ -36,10 +42,13 @@ class Propiedad{
 
             $this->id_propiedad = $obj['id_propiedad'];
             $this->id_local = $obj['id_local'];
+            $this->id_usuario = $obj['id_usuario'];
             $this->nombre = $obj['nombre'];
             $this->direccion = $obj['direccion'];
             $this->precio = $obj['precio'];
             $this->local = $this->getLocal();
+            $this->usuario = $this->getUsuario();
+            $this->imagenes = $this->getImagenes();
         }
     }
 
@@ -71,11 +80,12 @@ class Propiedad{
 
     public static function insertar($obj)
     {
-        $sql = 'INSERT INTO propiedades (`id_propiedad`, `id_local`, `nombre`, `direccion`, `precio`, `tipo`) VALUES (NULL, :id_local, :nombre, :direccion, :precio, :tipo)';
+        $sql = 'INSERT INTO propiedades (`id_propiedad`, `id_local`, `id_usuario`, `nombre`, `direccion`, `precio`, `tipo`) VALUES (NULL, :id_local, :id_usuario :nombre, :direccion, :precio, :tipo)';
 
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->retornarConsulta($sql);
         $consulta->bindValue(':id_local', $obj->local->id_local, \PDO::PARAM_STR);
+        $consulta->bindValue(':id_usuario', $obj->usuario->id_usuario, \PDO::PARAM_STR);
         $consulta->bindValue(':nombre', $obj->nombre, \PDO::PARAM_STR);
         $consulta->bindValue(':direccion', $obj->direccion, \PDO::PARAM_STR);
         $consulta->bindValue(':precio', $obj->precio, \PDO::PARAM_STR);
@@ -86,11 +96,12 @@ class Propiedad{
 
     public static function modificar($obj)
     {
-        $sql = 'UPDATE propiedades SET id_local = :id_local, nombre = :nombre, direccion = :direccion, precio = :precio, tipo = :tipo WHERE id_propiedad = :id_propiedad';
+        $sql = 'UPDATE propiedades SET id_local = :id_local, `id_usuario` = :id_usuario, nombre = :nombre, direccion = :direccion, precio = :precio, tipo = :tipo WHERE id_propiedad = :id_propiedad';
 
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->retornarConsulta($sql);
         $consulta->bindValue(':id_local', $obj->local->id_local, \PDO::PARAM_STR);
+        $consulta->bindValue(':id_usuario', $obj->usuario->id_usuario, \PDO::PARAM_STR);
         $consulta->bindValue(':nombre', $obj->nombre, \PDO::PARAM_STR);
         $consulta->bindValue(':direccion', $obj->direccion, \PDO::PARAM_STR);
         $consulta->bindValue(':precio', $obj->precio, \PDO::PARAM_STR);
@@ -130,6 +141,46 @@ class Propiedad{
         $local = $consulta->fetch(\PDO::FETCH_ASSOC);
 
         return $local ?: new \stdClass();
+
+    }
+
+    public function getUsuario() {
+
+        if ($this->id_usuario == null)
+        {
+            return false;
+        }
+
+        $sql = 'SELECT u.* FROM `usuarios` u WHERE u.id_usuario = :id_usuario';
+
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->retornarConsulta($sql);
+        $consulta->bindValue(':id_usuario', $this->id_usuario, \PDO::PARAM_STR);
+        $consulta->execute();
+        $usuario = $consulta->fetch(\PDO::FETCH_ASSOC);
+
+        return $usuario ?: new \stdClass();
+
+    }
+
+    public function getImagenes() {
+
+        if ($this->id_propiedad == null)
+        {
+            return false;
+        }
+
+        $sql = 'SELECT i.* FROM imagenes i
+        LEFT JOIN propiedades_has_imagenes pi ON (pi.id_imagen = i.id_imagen)
+        WHERE pi.id_propiedad = :id_propiedad';
+
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->retornarConsulta($sql);
+        $consulta->bindValue(':id_propiedad', $this->id_propiedad, \PDO::PARAM_STR);
+        $consulta->execute();
+        $imagenes = $consulta->fetchAll(\PDO::FETCH_CLASS, Imagen::class);
+
+        return $imagenes;
 
     }
 

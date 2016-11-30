@@ -53,7 +53,7 @@ angular.module('app')
 
 		// Antes de subir la imagenes les cambio el nombre.
 		$scope.uploader.onBeforeUploadItem = function(item) {
-			item.alias = id;
+			item.alias = 'locales_' + id;
 		};
 
 		$scope.uploader.onCompleteAll = function() {

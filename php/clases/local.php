@@ -88,7 +88,7 @@ class Local
                 Imagen::borrar($imagen->id_imagen);
             }
 
-            $path_imagenes = __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.$id;
+            $path_imagenes = __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'locales'.DIRECTORY_SEPARATOR.$id;
             if (is_dir($path_imagenes)) {
                 @unlink($path_imagenes);
             }

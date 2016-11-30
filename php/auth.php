@@ -16,6 +16,7 @@ if (Usuario::existe($request->username, $request->password) &&
 	$key = "1234";
 	$token["iat"] = time() ;
 	$token["exp"] = time() + 3600;
+	$token["id_usuario"] = $usuario->id_usuario;
 	$token["username"] = $usuario->username;
 	$token["nombre"] = $usuario->nombre;
 	$token["apellido"] = $usuario->apellido;

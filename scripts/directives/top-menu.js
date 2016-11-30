@@ -15,12 +15,15 @@ angular.module('app')
 			$scope.isAuthenticated = function() {
 				var isAuthenticated = $auth.isAuthenticated();
 
-				$scope.user = isAuthenticated ? $auth.getPayload() : {};
+				$scope.user = isAuthenticated ? $auth.getPayload() : 'undefined';
 				$scope.isAdmin = angular.equals($scope.user, {}) ? false : $scope.user.tipo == 'administrador';
 
-				if (!isAuthenticated){
+				console.log('isAuthenticated');
+				console.log($scope.user);
+
+				/*if (!isAuthenticated){
 					$state.go('auth.login');
-				}
+				}*/
 
 				return isAuthenticated;
 			};

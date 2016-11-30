@@ -1,5 +1,5 @@
 angular.module('app')
-.controller('AuthLoginCtrl', function($scope, $state, $auth) {
+.controller('AuthLoginCtrl', function($scope, $state, $auth, PermisosSvc) {
 	
 	$scope.user = {};
 
@@ -27,7 +27,7 @@ angular.module('app')
 
 	if ($scope.isAuthenticated) {
 		$scope.user = $auth.getPayload();
-		$state.go('locales.listar');
+		$state.go(PermisosSvc.getUserPageDefault());
 		return false;
 	}
 
@@ -45,8 +45,7 @@ angular.module('app')
     			// Redirect user here after a successful log in.
     			$scope.isAuthenticated = $auth.isAuthenticated();
 				$scope.user = $auth.getPayload();
-				$state.go('locales.listar');
-				console.log($scope.user);
+				$state.go(PermisosSvc.getUserPageDefault());
 
 			} else {
 				$scope.mensajes = 'No se pudo iniciar sesión.';

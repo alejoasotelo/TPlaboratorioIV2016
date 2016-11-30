@@ -23,6 +23,7 @@ angular.module('app')
 				$timeout(function(){
 					$state.go('auth.login');
 				}, 2000);
+				
 			} else {
 				$scope.mensajes = r.msg;
 			}
