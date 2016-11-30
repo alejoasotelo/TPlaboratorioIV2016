@@ -15,6 +15,15 @@ angular.module('app')
 
 	}
 
+	this.listWithoutAssign = function (id) {
+
+		return api.listWithoutAssign('empleados', id).then(function(r) {
+
+			return r;
+			
+		});
+	}
+
 	this.get = function(id) {
 		
 		return api.get('empleados', id).then(function(usuario) {

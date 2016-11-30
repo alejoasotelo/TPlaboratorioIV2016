@@ -40,4 +40,16 @@ class Empleado extends Usuario
         $arrUsuarios= $consulta->fetchAll(\PDO::FETCH_CLASS, self::class);
         return $arrUsuarios;
     }
+
+    public static function traerTodosSinAsignar($id_local = 0) {
+
+        $sql = 'SELECT * FROM usuarios WHERE id_usuario NOT IN (SELECT id_usuario FROM locales_has_empleados WHERE id_local != '.$id_local.') and tipo = \'empleado\'';
+
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->retornarConsulta($sql);
+        $consulta->execute();
+        $arrUsuarios= $consulta->fetchAll(\PDO::FETCH_CLASS, self::class);
+        return $arrUsuarios;
+
+    }
 }

@@ -54,6 +54,31 @@ switch ($request->datos->task) {
 
 		break;
 
+	case 'listarSinAsignar':
+
+		$rows = array();
+
+		$id = isset($request->datos->id) ? $request->datos->id : 0;
+
+		switch ($request->datos->endpoint) {			
+
+			case 'encargados':
+				$rows = Encargado::traerTodosSinAsignar($id);
+				break;
+
+			case 'empleados':
+				$rows = Empleado::traerTodosSinAsignar($id);
+				break;
+			
+			default:
+				# code...
+				break;
+		}		
+
+		echo json_encode($rows);
+
+		break;
+
 	case 'get':
 
 		$row = array();

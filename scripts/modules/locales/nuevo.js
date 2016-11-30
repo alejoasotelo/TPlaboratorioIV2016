@@ -22,10 +22,10 @@ angular.module('app')
 	$scope.selectedEmpleado = null;
 
 	// Cargo el listado de encargados para el select.
-	var p1 = EncargadosSvc.list();
+	var p1 = EncargadosSvc.listWithoutAssign();
 
 	// Cargo el listado de encargados para el select.
-	var p2 = EmpleadosSvc.list();
+	var p2 = EmpleadosSvc.listWithoutAssign();
 
 	$q.all([p1, p2]).then(function(data){ 
 		$scope.encargados = data[0];

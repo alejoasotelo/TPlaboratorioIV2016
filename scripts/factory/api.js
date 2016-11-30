@@ -25,6 +25,22 @@ angular.module('app')
 
 		},
 
+		listWithoutAssign: function (endpoint, id) {
+
+			return $http.post(base_url, {
+				datos: {
+					endpoint: endpoint,
+					task: 'listarSinAsignar',
+					id: id
+				}
+			}).then(function(r){
+
+				return r.data;
+
+			});
+
+		},
+
 		get: function(endpoint, id) {
 
 			return $http.post(base_url, {
