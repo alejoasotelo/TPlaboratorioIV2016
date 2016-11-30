@@ -1,12 +1,12 @@
 <div ng-if="vista == 'listar'">
-	<a ui-sref="{{modulo + '.nuevo'}}" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i> Nuevo</a>
-	<a ng-click="modificar()" class="btn btn-default"><i class="glyphicon glyphicon-edit"></i> Modificar</a>
-	<a ng-click="eliminar()" class="btn btn-default"><i class="glyphicon glyphicon-trash"></i> Eliminar</a>
+	<a ui-sref="{{modulo + '.nuevo'}}" ng-if="Permisos.puede(modulo+'.nuevo')" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i> Nuevo</a>
+	<a ng-click="modificar()" ng-if="Permisos.puede(modulo+'.modificar')" class="btn btn-default"><i class="glyphicon glyphicon-edit"></i> Modificar</a>
+	<a ng-click="eliminar()" ng-if="Permisos.puede(modulo+'.eliminar')" class="btn btn-default"><i class="glyphicon glyphicon-trash"></i> Eliminar</a>
 </div>
 
 <div ng-if="vista == 'modificar' || vista == 'nuevo'">
-	<a ng-click="guardar()" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Guardar</a>
-	<a ng-click="cancelar()" class="btn btn-default"><i class="glyphicon glyphicon-remove-circle"></i> Cancelar</a>
+	<a ng-click="guardar()" ng-if="Permisos.puede(modulo+'.modificar')" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Guardar</a>
+	<a ng-click="cancelar()" ng-if="Permisos.puede(modulo+'.modificar')" class="btn btn-default"><i class="glyphicon glyphicon-remove-circle"></i> Cancelar</a>
 </div>
 
 <hr>

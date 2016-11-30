@@ -5,11 +5,12 @@ angular.module('app')
 	return {
 		restrict: 'E',
 		templateUrl: 'scripts/directives/top-menu.html',
-		controller: function ($scope, $auth, $state) {
+		controller: function ($scope, $auth, $state, PermisosSvc) {
 
 			$scope.user = {};
 
 			$scope.isAdmin = false;
+			$scope.Permisos = PermisosSvc;
 
 			$scope.isAuthenticated = function() {
 				var isAuthenticated = $auth.isAuthenticated();

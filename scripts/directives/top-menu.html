@@ -8,18 +8,18 @@
 		</button>
 		<a class="navbar-brand" href="#"><i class="glyphicon glyphicon-home"></i> {{APP_NAME}}</a>
 	</div>
-	<div id="navbar" class="collapse navbar-collapse"  ng-if="isAuthenticated()">
+	<div id="navbar" class="collapse navbar-collapse" ng-if="isAuthenticated()">
 		<ul class="nav navbar-nav">
-			<li ng-class="{active: current_url() == '/locales/listar'}">
+			<li ng-class="{active: current_url() == '/locales/listar'}" ng-if="Permisos.puede('locales.listar')">
 				<a ui-sref="locales.listar">Locales</a>
 			</li>
-			<li ng-class="{active: current_url() == '/propiedades/listar'}">
+			<li ng-class="{active: current_url() == '/propiedades/listar'}" ng-if="Permisos.puede('propiedades.listar')">
 				<a ui-sref="propiedades.listar">Propiedades</a>
 			</li>
-			<li ng-class="{active: current_url() == '/ofertas/listar'}">
+			<li ng-class="{active: current_url() == '/ofertas/listar'}" ng-if="Permisos.puede('ofertas.listar')">
 				<a ui-sref="ofertas.listar">Ofertas</a>
 			</li>
-			<li ng-class="{active: current_url() == '/usuarios/listar'}">
+			<li ng-class="{active: current_url() == '/usuarios/listar'}" ng-if="Permisos.puede('usuarios.listar')">
 				<a ui-sref="usuarios.listar">Usuarios</a>
 			</li>
 			<li ng-class="{active: current_url() == '/informes/listar'}" ng-if="isAdmin">

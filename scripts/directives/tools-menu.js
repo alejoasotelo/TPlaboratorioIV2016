@@ -9,7 +9,8 @@ angular.module('app')
 			modulo: '@modulo',
 			vista: '@vista'
 		},
-		controller: function ($scope) {
+		controller: function ($scope, PermisosSvc) {
+			$scope.Permisos = PermisosSvc;
 
 			$scope.modificar = function () {
 				$scope.$emit('modificar', '');

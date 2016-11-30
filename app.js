@@ -1,32 +1,8 @@
-function configureTemplateFactory($provide) {
-    // Set a suffix outside the decorator function 
-    var cacheBuster = Date.now().toString();
-
-    function templateFactoryDecorator($delegate) {
-        var fromUrl = angular.bind($delegate, $delegate.fromUrl);
-        $delegate.fromUrl = function (url, params) {
-            if (url !== null && angular.isDefined(url) && angular.isString(url)) {
-                url += (url.indexOf("?") === -1 ? "?" : "&");
-                url += "v=" + cacheBuster;
-            }
-
-            return fromUrl(url, params);
-        };
-
-        return $delegate;
-    }
-
-    $provide.decorator('$templateFactory', ['$delegate', templateFactoryDecorator]);
-}
-
-
 angular.module('app', ['ui.router', 'ngMap', 'satellizer', 'angularFileUpload'])
 
 .constant('BASE_URL', '/lab4/tp/php')
 
-.config(function (BASE_URL, $provide, $stateProvider, $urlRouterProvider, $authProvider) {
-
-	configureTemplateFactory($provide);
+.config(function (BASE_URL, $stateProvider, $urlRouterProvider, $authProvider) {
 
 	$authProvider.loginUrl = BASE_URL + '/auth.php';
 	$authProvider.tokenName = 'token_lab4';
