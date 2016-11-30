@@ -6,12 +6,16 @@ use AlejoASotelo\Local;
 
 class Propiedad{
     
+    const TIPO_VENTA = 1;
+    const TIPO_ALQUILER = 2;
+
     public $id_propiedad;
     public $id_local;
     public $nombre;
     public $direccion;
     public $precio;
     public $local;
+    public $tipo;
 
     public function __construct($id_propiedad = null)
     {
@@ -67,7 +71,7 @@ class Propiedad{
 
     public static function insertar($obj)
     {
-        $sql = 'INSERT INTO propiedades (`id_propiedad`, `id_local`, `nombre`, `direccion`, `precio`) VALUES (NULL, :id_local, :nombre, :direccion, :precio)';
+        $sql = 'INSERT INTO propiedades (`id_propiedad`, `id_local`, `nombre`, `direccion`, `precio`, `tipo`) VALUES (NULL, :id_local, :nombre, :direccion, :precio, :tipo)';
 
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->retornarConsulta($sql);
@@ -75,13 +79,14 @@ class Propiedad{
         $consulta->bindValue(':nombre', $obj->nombre, \PDO::PARAM_STR);
         $consulta->bindValue(':direccion', $obj->direccion, \PDO::PARAM_STR);
         $consulta->bindValue(':precio', $obj->precio, \PDO::PARAM_STR);
+        $consulta->bindValue(':tipo', $obj->tipo, \PDO::PARAM_STR);
         $consulta->execute();
         return $objetoAccesoDato->retornarUltimoIdInsertado();
     }
 
     public static function modificar($obj)
     {
-        $sql = 'UPDATE propiedades SET id_local = :id_local, nombre = :nombre, direccion = :direccion, precio = :precio WHERE id_propiedad = :id_propiedad';
+        $sql = 'UPDATE propiedades SET id_local = :id_local, nombre = :nombre, direccion = :direccion, precio = :precio, tipo = :tipo WHERE id_propiedad = :id_propiedad';
 
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->retornarConsulta($sql);
@@ -89,6 +94,7 @@ class Propiedad{
         $consulta->bindValue(':nombre', $obj->nombre, \PDO::PARAM_STR);
         $consulta->bindValue(':direccion', $obj->direccion, \PDO::PARAM_STR);
         $consulta->bindValue(':precio', $obj->precio, \PDO::PARAM_STR);
+        $consulta->bindValue(':tipo', $obj->tipo, \PDO::PARAM_STR);
         $consulta->bindValue(':id_propiedad', $obj->id_propiedad, \PDO::PARAM_STR);
         $consulta->execute();
         return $objetoAccesoDato->retornarUltimoIdInsertado();
