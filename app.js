@@ -69,6 +69,15 @@ angular.module('app', ['ui.router', 'ngMap', 'satellizer', 'angularFileUpload'])
 			} 
 		}
 	})
+	.state('usuarios.local', {
+		url: '/local/:id',
+		views: {
+			'contenido': {
+				templateUrl: 'scripts/modules/usuarios/local.html',
+				controller: 'UsuariosLocalCtrl'
+			} 
+		}
+	})
 
 	// Locales
 	.state('locales', {
@@ -174,6 +183,32 @@ angular.module('app', ['ui.router', 'ngMap', 'satellizer', 'angularFileUpload'])
 			} 
 		}
 	})
+	.state('propiedades.ver', {
+		url: '/ver/:id',
+		views: {
+			'contenido': {
+				templateUrl: 'scripts/modules/propiedades/ver.html',
+				controller: 'PropiedadesVerCtrl'
+			} 
+		}
+	})
+
+	// Ventas & Alquileres
+	.state('ventas_alquileres', {
+		url: '/ventas_alquileres',
+		abstract: true,
+		templateUrl: 'scripts/modules/ventas_alquileres/ventas_alquileres.html',
+		controller: 'VentasAlquileresCtrl'
+	})
+	.state('ventas_alquileres.listar', {
+		url: '/listar',
+		views: {
+			'contenido': {
+				templateUrl: 'scripts/modules/ventas_alquileres/listar.html',
+				controller: 'VentasAlquileresListarCtrl'
+			} 
+		}
+	})	
 
 	$urlRouterProvider.otherwise('auth/login');
 

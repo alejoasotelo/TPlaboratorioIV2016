@@ -1,0 +1,25 @@
+<tools-menu modulo="ofertas" vista="listar">
+</tools-menu>
+
+<div class="table-responsive">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th class="text-left">Propiedad</th>
+				<th class="text-left" width="200">Tipo</th>
+				<th width="120" class="text-center">Fecha desde</th>
+				<th width="120" class="text-center">Fecha hasta</th>
+				<th width="40" class="text-center">ID</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="va in ventas_alquileres">
+				<td class="text-left">{{va.propiedad}}</td>
+				<td class="text-left">{{va.tipo == '1' ? Venta : 'Alquiler'}}</td>
+				<td class="text-center">{{va.tipo == '1' ? ' - ' : va.fecha_desde}}</td>
+				<td class="text-center">{{va.tipo == '1' ? ' - ' : va.fecha_hasta}}</td>
+				<td class="text-center">{{va.id_venta_alquiler}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

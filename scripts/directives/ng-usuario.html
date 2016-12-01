@@ -1,0 +1,11 @@
+<td ng-if="mostrar" class="text-left"><input type="checkbox" ng-model="usuario.selected" ng-checked="tools.selectAll"/></td>
+<td ng-if="mostrar" class="text-left"><a ui-sref="usuarios.modificar({id: usuario.id_usuario})">{{usuario.nombre + ' ' + usuario.apellido}}</a></td>
+<td ng-if="mostrar" class="text-left">{{usuario.email}} </td>
+<td ng-if="mostrar" class="text-center">{{usuario.tipo}}</td>
+<td ng-if="mostrar" class="text-center">
+	<a class="cursor-pointer" ng-href="" ng-click="usuario.estado == 0 ? cambiarEstado(usuario, 1) : cambiarEstado(usuario, 0);">
+		<i ng-if="usuario.estado == 1" class="glyphicon glyphicon-ok color-green"></i>
+		<i ng-if="usuario.estado == 0" class="glyphicon glyphicon-remove color-red"></i>
+	</a>
+</td>
+<td ng-if="mostrar" class="text-center">{{usuario.id_usuario}}</td>

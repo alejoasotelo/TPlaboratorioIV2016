@@ -18,9 +18,6 @@ angular.module('app')
 				$scope.user = isAuthenticated ? $auth.getPayload() : 'undefined';
 				$scope.isAdmin = angular.equals($scope.user, {}) ? false : $scope.user.tipo == 'administrador';
 
-				console.log('isAuthenticated');
-				console.log($scope.user);
-
 				/*if (!isAuthenticated){
 					$state.go('auth.login');
 				}*/
@@ -39,6 +36,14 @@ angular.module('app')
 			$scope.current_url = function() {
 				return $state.$current.url;
 			};
+
+			$scope.modificarLocal = function() {
+
+				if ($scope.user.local != false) {
+					$state.go('usuarios.locales.modificar', {id: $scope.user.local.id_local});
+				}
+
+			}
 
 		}
 	}

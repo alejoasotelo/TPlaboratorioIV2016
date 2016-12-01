@@ -63,4 +63,14 @@ angular.module('app')
 
 	}
 
+	this.changeState = function(id_usuario, estado) {
+
+		return api.changeState('usuarios', id_usuario, estado).then(function(response) {
+
+			return response;
+
+		});
+
+	}
+
 });

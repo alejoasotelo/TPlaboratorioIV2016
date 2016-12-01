@@ -1,9 +1,10 @@
 angular.module('app')
-.controller('UsuariosModificarCtrl', function($scope, $window, $state, $stateParams, UsuariosSvc) {
+.controller('UsuariosModificarCtrl', function($scope, $window, $state, $stateParams, UsuariosSvc, PermisosSvc) {
 
 	var id_usuario = $stateParams.id;
 
 	$scope.usuario = {};
+	$scope.Permisos = PermisosSvc;
 
 	UsuariosSvc.get(id_usuario).then(function(usuario) {
 

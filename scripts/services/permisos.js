@@ -5,6 +5,7 @@ angular.module('app')
 
 		ADMINISTRADOR: {
 			page_default: 'locales.listar',
+			ver_usuarios_tipo: 'todos',
 			ofertas: {
 				listar: true,
 				nuevo: true,
@@ -24,6 +25,7 @@ angular.module('app')
 				eliminar: true
 			},
 			usuarios: {
+				cambiar_estado: true,
 				listar: true,
 				nuevo: true,
 				modificar: true,
@@ -44,15 +46,18 @@ angular.module('app')
 		},
 		ENCARGADO: {
 			page_default: 'propiedades.listar',
+			ver_usuarios_tipo: 'empleado,cliente',
 			usuarios: {
 				tipo: {
 					empleados: true,
 					clientes: true
 				},
+				cambiar_estado: true,
 				listar: true,
 				nuevo: true,
 				modificar: true,
-				eliminar: true
+				eliminar: true,
+				local: true
 			},
 			ofertas: {
 				listar: true,
@@ -75,10 +80,12 @@ angular.module('app')
 		},
 		EMPLEADO: {
 			page_default: 'ofertas.listar',
+			ver_usuarios_tipo: 'cliente',
 			usuarios: {
 				tipo: {
 					clientes: true
 				},
+				cambiar_estado: false,
 				listar: true,
 				nuevo: true,
 				modificar: true,
@@ -96,18 +103,26 @@ angular.module('app')
 		},
 		CLIENTE: {
 			page_default: 'ofertas.listar',
+			ver_usuarios_tipo: 'ninguno',
 			ofertas: {
 				listar: true
 			},
 			encuestas: {
 				nuevo: true
+			},
+			propiedades: {
+				listar: true,
+				ver: true
+			},
+			ventas_alquileres: {
+				listar: true
 			}
 		}
 	};
 
 	function getUser() {
 
-		return $auth.isAuthenticated() ? $auth.getPayload() : 'undefined';
+		return $auth.isAuthenticated() ? $auth.getPayload() : undefined;
 
 	}
 
@@ -147,6 +162,51 @@ angular.module('app')
 		} else {
 			return false;
 		}
+	}
+
+
+	// Devuelve los tipos de usuarios que puede ver el usuario logueado.
+	this.getTiposDeUsuariosAVer = function() {
+
+		var user = getUser();
+
+		if (typeof user != 'undefined') {
+
+			return Roles[user.tipo.toUpperCase()].ver_usuarios_tipo;
+
+		} else {
+			return '';
+		}
+
+	}
+
+	// Devuelve true o false si el usuario puede ver el "tipo" de usuario.
+	this.puedeVerTiposDeUsuario = function(tipo) {
+
+		var user = getUser();
+
+		if (typeof user != 'undefined') {
+
+			return Roles[user.tipo.toUpperCase()].ver_usuarios_tipo.indexOf(tipo) >= 0;
+
+		} else {
+			return false
+		}
+
+	}
+
+	this.puedeCambiarEstado = function() {
+
+		var user = getUser();
+
+		if (typeof user != 'undefined') {
+
+			return Roles[user.tipo.toUpperCase()].usuarios.cambiar_estado;
+
+		} else {
+			return false
+		}
+
 	}
 
 });

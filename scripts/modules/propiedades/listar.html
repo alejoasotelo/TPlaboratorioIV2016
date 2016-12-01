@@ -17,7 +17,11 @@
 		<tbody>
 			<tr ng-repeat="p in propiedades">
 				<td class="text-center"><input type="checkbox" ng-model="p.selected" ng-checked="tools.selectAll"/></td>
-				<td class="text-left"><a ui-sref="propiedades.modificar({id: p.id_propiedad})">{{p.nombre}}</a></td>
+				<td class="text-left">
+					<a ui-sref="propiedades.modificar({id: p.id_propiedad})" ng-if="Permisos.puede('propiedades.modificar')">{{p.nombre}}</a>
+					<a ui-sref="propiedades.ver({id: p.id_propiedad})" ng-if="!Permisos.puede('propiedades.modificar') && Permisos.puede('propiedades.ver')">{{p.nombre}}</a>
+					<a ng-href="" ng-if="!Permisos.puede('propiedades.modificar') && !Permisos.puede('propiedades.ver')">{{p.nombre}}</a>
+				</td>
 				<td class="text-left">{{p.direccion}} </td>
 				<td class="text-left">{{p.local.nombre}} </td>
 				<td class="text-center">${{p.precio}}</td>

@@ -1,7 +1,8 @@
 angular.module('app')
-.controller('UsuariosNuevoCtrl', function($scope, $state, $window, UsuariosSvc) {
+.controller('UsuariosNuevoCtrl', function($scope, $state, $window, UsuariosSvc, PermisosSvc) {
 
 	$scope.usuario = {};
+	$scope.Permisos = PermisosSvc;
 
 	$scope.guardar = function () {
 

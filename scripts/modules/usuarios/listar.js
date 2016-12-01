@@ -1,11 +1,12 @@
 angular.module('app')
-.controller('UsuariosListarCtrl', function($scope, $window, $auth, $state, UsuariosSvc) {
+.controller('UsuariosListarCtrl', function($scope, $window, $auth, $state, UsuariosSvc, PermisosSvc) {
 
 	if (!$auth.isAuthenticated()){
 		$state.go('auth.login');
 	}
 
 	$scope.usuarios = new Array();
+	$scope.Permisos = PermisosSvc;
 
 	function cargar() {
 

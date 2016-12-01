@@ -9,16 +9,12 @@
 				<th class="text-left">Nombre completo</th>
 				<th class="text-left">Email</th>
 				<th width="100" class="text-center">Tipo</th>
+				<th width="80" class="text-center">Estado</th>
 				<th width="40" class="text-center">ID</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="u in usuarios">
-				<td class="text-left"><input type="checkbox" ng-model="u.selected" ng-checked="tools.selectAll"/></td>
-				<td class="text-left"><a ui-sref="usuarios.modificar({id: u.id_usuario})">{{u.nombre + ' ' + u.apellido}}</a></td>
-				<td class="text-left">{{u.email}} </td>
-				<td class="text-center">{{u.tipo}}</td>
-				<td class="text-center">{{u.id_usuario}}</td>
+			<tr ng-usuario ng-repeat="usuario in usuarios" usuario="usuario" mostrar-tipo="Permisos.getTiposDeUsuariosAVer()">
 			</tr>
 		</tbody>
 	</table>

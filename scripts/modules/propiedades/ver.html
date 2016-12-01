@@ -1,0 +1,102 @@
+
+
+<div class="form-group col-xs-12 col-md-6">
+    <label for="nombre">Nombre</label>
+    <input type="text" ng-model="propiedad.nombre" name="nombre" class="form-control" disabled/>
+</div>
+
+<div class="form-group col-xs-12 col-md-6">
+    <label for="direccion">Dirección</label>
+    <input type="text" ng-model="propiedad.direccion" name="direccion" class="form-control" disabled/>
+</div>
+
+<div class="form-group col-xs-12 col-md-6">
+    <label for="precio">Precio</label>
+    <input type="number" ng-model="propiedad.precio" name="precio" class="form-control" disabled/>
+</div>
+
+<div class="form-group col-xs-12 col-md-6">
+    <label for="local">Local</label>
+    <select name="local" class="form-control" ng-model="propiedad.local.id_local" ng-options="l.id_local as l.nombre for l in locales" disabled>
+        <option value="">Seleccione un local.</option>
+    </select>
+</div>
+
+<div class="form-group col-xs-12 col-md-6">
+    <label for="tipo">Tipo</label>
+    <select name="tipo" class="form-control" ng-model="propiedad.tipo" disabled>
+        <option value="">Seleccione un tipo.</option>
+        <option value="1" ng-selected="propiedad.tipo == 1">Venta</option>
+        <option value="2" ng-selected="propiedad.tipo == 2">Alquiler</option>
+    </select>
+</div>
+
+<input type="hidden" ng-model="propiedad.usuario.id_usuario"/>
+
+<div class="col-xs-12">
+    <h3>Fotos</h3>
+
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" ng-repeat="img in propiedad.imagenes" data-slide-to="{{$index}}" ng-class="{active: $first}"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item" ng-repeat="img in propiedad.imagenes" ng-class="{active: $first}">
+                <img ng-src="{{img.imagen}}" alt="Slide {{$index}}" />
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" onclick="jQuery('.carousel').carousel('prev'); return false;" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Anterior</span>
+        </a>
+
+        <a class="right carousel-control" onclick="jQuery('.carousel').carousel('next'); return false;" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Siguiente</span>
+        </a>
+    </div>
+</div>
+
+<div class="col-xs-12">
+    <hr>
+</div>
+
+<form name="form" class="form" ng-if="ready" novalidate>
+
+    <div ng-if="propiedad.tipo == 1">
+        <div class="col-xs-12">
+            <h3>Formulario para comprar</h3>
+        </div>
+    </div>
+
+    <div ng-if="propiedad.tipo == 2">
+        <div class="col-xs-12">
+            <h3>Formulario para alquilar</h3>
+        </div>
+
+        <div class="form-group col-xs-12 col-md-6">
+            <label for="fecha_desde">Fecha desde</label>
+            <input type="date" ng-model="venta_alquiler.fecha_desde" name="fecha_desde" class="form-control" required/>
+        </div>
+
+        <div class="form-group col-xs-12 col-md-6">
+            <label for="fecha_hasta">Fecha hasta</label>
+            <input type="date" ng-model="venta_alquiler.fecha_hasta" name="fecha_hasta" class="form-control" required/>
+        </div>
+    </div>
+
+    <div class="col-xs-12">
+        <hr>
+    </div>
+
+    <div class="form-group col-xs-12">
+        <button ng-if="propiedad.tipo == 1" type="button" ng-disabled="form.$invalid" ng-click="comprar_alquilar()" class="btn btn-success"><i class="glyphicon glyphicon-shopping-cart"></i> Comprar</button>
+        <button ng-if="propiedad.tipo == 2" type="button" ng-disabled="form.$invalid" ng-click="comprar_alquilar()" class="btn btn-success"><i class="glyphicon glyphicon-shopping-cart"></i> Alquilar</button>
+        <a ng-click="volver()" class="btn btn-default"><i class="glyphicon glyphicon-cancel"></i> Volver</a>
+    </div>
+</form>

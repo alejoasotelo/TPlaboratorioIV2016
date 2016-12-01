@@ -9,6 +9,7 @@ use AlejoASotelo\LocalHasImagen;
 use AlejoASotelo\Oferta;
 use AlejoASotelo\Imagen;
 use AlejoASotelo\Propiedad;
+use AlejoASotelo\VentaAlquiler;
 
 $request_body = file_get_contents('php://input');
 $request = json_decode($request_body);
@@ -43,6 +44,27 @@ switch ($request->datos->task) {
 
 			case 'propiedades':
 				$rows = Propiedad::traerTodos();
+				break;
+			
+			default:
+				# code...
+				break;
+		}		
+
+		echo json_encode($rows);
+
+		break;
+
+	case 'listarPorIdUsuario':
+
+		$rows = array();
+
+		$id = isset($request->datos->id) ? $request->datos->id : 0;
+
+		switch ($request->datos->endpoint) {			
+
+			case 'ventas_alquileres':
+				$rows = VentaAlquiler::traerTodosPorIdUsuario($id);
 				break;
 			
 			default:
@@ -147,6 +169,10 @@ switch ($request->datos->task) {
 			case 'propiedades':
 				$id = Propiedad::insertar($request->datos->object);
 				break;
+
+			case 'ventas_alquileres':
+				$id = VentaAlquiler::insertar($request->datos->object);
+				break;
 			
 			default:
 				# code...
@@ -232,6 +258,21 @@ switch ($request->datos->task) {
 
 			case 'propiedades':
 				$rows = Propiedad::borrar($request->datos->id);
+				break;
+			
+			default:
+				# code...
+				break;
+		}		
+
+		echo json_encode(array('success' => true));
+		break;
+
+	case 'changeState':
+
+		switch ($request->datos->endpoint) {
+			case 'usuarios':
+				Usuario::cambiarEstado($request->datos->id, $request->datos->state);
 				break;
 			
 			default:

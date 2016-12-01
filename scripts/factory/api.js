@@ -25,6 +25,22 @@ angular.module('app')
 
 		},
 
+		listByUser: function (endpoint, id) {
+
+			return $http.post(base_url, {
+				datos: {
+					endpoint: endpoint,
+					task: 'listarPorIdUsuario',
+					id: id
+				}
+			}).then(function(r){
+
+				return r.data;
+
+			});
+
+		},
+
 		listWithoutAssign: function (endpoint, id) {
 
 			return $http.post(base_url, {
@@ -95,6 +111,23 @@ angular.module('app')
 					endpoint: endpoint,
 					task: 'delete',
 					id: id
+				}
+			}).then(function(r){
+
+				return r.data;
+
+			});
+
+		},
+
+		changeState: function (endpoint, id, state) {
+
+			return $http.post(base_url, {
+				datos: {
+					endpoint: endpoint,
+					task: 'changeState',
+					id: id,
+					state: state
 				}
 			}).then(function(r){
 

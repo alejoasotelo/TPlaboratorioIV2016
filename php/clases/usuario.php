@@ -2,6 +2,7 @@
 namespace AlejoASotelo;
 
 use AlejoASotelo\AccessoDatos;
+use AlejoASotelo\Local;
 
 class Usuario
 {
@@ -12,6 +13,7 @@ class Usuario
     public $email;
     public $password;
     public $tipo;
+    public $estado;
 
     public function __construct($id_usuario = null)
     {
@@ -25,6 +27,8 @@ class Usuario
             $this->email = $obj->email;
             $this->password = $obj->password;
             $this->tipo = $obj->tipo;
+            $this->estado = $obj->estado;
+            $this->local = $this->getLocal();
         }
     }
 
@@ -61,12 +65,23 @@ class Usuario
         return $consulta->rowCount();
     }
 
+    public static function cambiarEstado($id, $nuevo_estado) {
+        
+        $sql = 'UPDATE usuarios SET estado = :estado WHERE id_usuario = :id_usuario';
+
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->retornarConsulta($sql);
+        $consulta->bindValue(':estado', $nuevo_estado, \PDO::PARAM_STR);
+        $consulta->bindValue(':id_usuario', $id, \PDO::PARAM_INT);
+        return $consulta->execute();
+    }
+
     public static function modificar($usuario)
     {
         if (!empty($usuario->password)) {
-            $sql = 'UPDATE usuarios SET username = :username, nombre = :nombre, apellido = :apellido, email = :email, tipo = :tipo, password = :password WHERE id_usuario = :id_usuario';
+            $sql = 'UPDATE usuarios SET username = :username, nombre = :nombre, apellido = :apellido, email = :email, tipo = :tipo, estado = :estado, password = :password WHERE id_usuario = :id_usuario';
         } else {
-            $sql = 'UPDATE usuarios SET username = :username, nombre = :nombre, apellido = :apellido, email = :email, tipo = :tipo WHERE id_usuario = :id_usuario';
+            $sql = 'UPDATE usuarios SET username = :username, nombre = :nombre, apellido = :apellido, email = :email, tipo = :tipo, estado = :estado WHERE id_usuario = :id_usuario';
         }
 
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
@@ -77,6 +92,7 @@ class Usuario
         $consulta->bindValue(':nombre', $usuario->nombre, \PDO::PARAM_STR);
         $consulta->bindValue(':apellido', $usuario->apellido, \PDO::PARAM_STR);
         $consulta->bindValue(':tipo', $usuario->tipo, \PDO::PARAM_STR);
+        $consulta->bindValue(':estado', $usuario->estado, \PDO::PARAM_STR);
 
         if (!empty($usuario->password)) {
             $consulta->bindValue(':password', md5($usuario->password), \PDO::PARAM_STR);
@@ -87,8 +103,8 @@ class Usuario
 
     public static function insertar($usuario)
     {
-        $sql = 'INSERT INTO usuarios (`id_usuario`, `username`, `email`, `nombre`, `apellido`, `password`, `tipo`) 
-        VALUES (NULL, :username, :email, :nombre, :apellido, :password, :tipo)';
+        $sql = 'INSERT INTO usuarios (`id_usuario`, `username`, `email`, `nombre`, `apellido`, `password`, `tipo`, `estado`) 
+        VALUES (NULL, :username, :email, :nombre, :apellido, :password, :tipo, :estado)';
 
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->retornarConsulta($sql);
@@ -98,6 +114,7 @@ class Usuario
         $consulta->bindValue(':apellido', $usuario->apellido, \PDO::PARAM_STR);
         $consulta->bindValue(':password', md5($usuario->password), \PDO::PARAM_STR);
         $consulta->bindValue(':tipo', $usuario->tipo, \PDO::PARAM_STR);
+        $consulta->bindValue(':estado', $usuario->tipo, \PDO::PARAM_STR);
         $consulta->execute();
 
         return $objetoAccesoDato->retornarUltimoIdInsertado();
@@ -127,5 +144,39 @@ class Usuario
 
         $user = $consulta->fetchObject(self::class);
         return $user;
+    }
+
+    public function getLocal() {
+
+        if ($this->id_usuario == null)
+        {
+            return false;
+        }
+
+        $sql = '';
+
+        if ($this->tipo == 'encargado') {
+
+            $sql = 'SELECT l.* FROM `locales` l
+            LEFT JOIN locales_has_encargado le ON (le.id_local = l.id_local)
+            WHERE le.id_usuario = :id_usuario';
+
+        } else if($this->tipo == 'empleado') {
+
+            $sql = 'SELECT l.* FROM `locales` l
+            LEFT JOIN locales_has_empleados le ON (le.id_local = l.id_local)
+            WHERE le.id_usuario = :id_usuario';
+
+        } else {
+            return new \stdClass();
+        }
+
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->retornarConsulta($sql);
+        $consulta->bindValue(':id_usuario', $this->id_usuario, \PDO::PARAM_STR);
+        $consulta->execute();
+        $local = $consulta->fetchObject(Local::class);
+
+        return $local ? (object)$local : new \stdClass();
     }
 }

@@ -12,3 +12,4 @@ require_once __DIR__.'/imagen.php';
 require_once __DIR__.'/oferta.php';
 require_once __DIR__.'/propiedad.php';
 require_once __DIR__.'/propiedadhasimagen.php';
+require_once __DIR__.'/ventaalquiler.php';

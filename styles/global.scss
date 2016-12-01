@@ -23,3 +23,17 @@ body{
 	width: 330px;
 	margin: 2% auto;
 }
+
+.color{
+	&-red{
+		color: red;
+	}
+
+	&-green{
+		color: green;
+	}
+}
+
+.cursor-pointer{
+	cursor: pointer;
+}
