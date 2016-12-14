@@ -4,7 +4,7 @@ angular.module('app')
 
 	return {
 		restrict: 'E',
-		templateUrl: 'scripts/directives/top-menu.html',
+		templateUrl: 'scripts/directives/top-menu.html' + nocache,
 		controller: function ($scope, $auth, $state, PermisosSvc) {
 
 			$scope.user = {};

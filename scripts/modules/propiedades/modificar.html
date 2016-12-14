@@ -26,8 +26,8 @@
 		<label for="tipo">Tipo</label>
 		<select name="tipo" class="form-control" ng-model="propiedad.tipo" required>
 			<option value="">Seleccione un tipo.</option>
-			<option value="1" ng-selected="propiedad.tipo == 1">Venta</option>
-			<option value="2" ng-selected="propiedad.tipo == 2">Alquiler</option>
+			<option ng-value="1" ng-selected="propiedad.tipo == 1">Venta</option>
+			<option ng-value="2" ng-selected="propiedad.tipo == 2">Alquiler</option>
 		</select>
 	</div>
 

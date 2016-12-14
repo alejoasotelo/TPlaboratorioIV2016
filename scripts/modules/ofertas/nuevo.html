@@ -25,9 +25,16 @@
 	</div>
 
 	<div class="form-group col-xs-12 col-md-6">
+		<label for="local">Local</label>
+		<select name="local" class="form-control" ng-model="oferta.propiedad.id_local" ng-options="l.id_local as (l.nombre+' ('+l.direccion+')') for l in locales" ng-change="cargarPropiedades()" ng-disabled="permisos.getTipoUsuario() != 'administrador'" required>
+			<option value="">Seleccione un local</option>
+		</select>
+	</div>
+
+	<div class="form-group col-xs-12 col-md-6">
 		<label for="propiedad">Propiedad</label>
 		<select name="propiedad" class="form-control" ng-model="oferta.propiedad.id_propiedad" ng-options="p.id_propiedad as (p.nombre+' ('+p.direccion+')') for p in propiedades" required>
-			<option value="">Seleccione una propiedad.</option>
+			<option value="">{{cargandoPropiedades ? 'Cargando propiedades...' : 'Seleccione una propiedad'}}</option>
 		</select>
 	</div>
 

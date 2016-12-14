@@ -4,6 +4,9 @@ namespace AlejoASotelo;
 use AlejoASotelo\AccessoDatos;
 
 class VentaAlquiler{
+
+    const TIPO_VENTA = 1;
+    const TIPO_ALQUILER = 2;
 	
     public $id_propiedad;
     public $id_usuario;
@@ -24,7 +27,7 @@ class VentaAlquiler{
         $consulta->bindValue(':precio', 0, \PDO::PARAM_STR);
         $consulta->bindValue(':tipo', $obj->tipo, \PDO::PARAM_STR);
 
-        if ($obj->tipo == 2) {
+        if ($obj->tipo == self::TIPO_ALQUILER) {
             $consulta->bindValue(':fecha_desde', $obj->fecha_desde, \PDO::PARAM_STR);
             $consulta->bindValue(':fecha_hasta', $obj->fecha_hasta, \PDO::PARAM_STR);
         } else {

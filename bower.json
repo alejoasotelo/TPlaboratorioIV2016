@@ -24,9 +24,12 @@
     "angular-ui-router": "^0.3.1",
     "bootstrap": "^3.3.7",
     "ngmap": "^1.17.8",
-    "pdfmake": "^0.1.20",
+    "pdfmake": "bpampuch/pdfmake#3b44129d599424cd0e306fc5014ba3a129220c64",
     "jquery": "^3.1.1",
     "satellizer": "^0.15.5",
-    "angular-file-upload": "^2.3.4"
+    "angular-file-upload": "^2.3.4",
+    "angular-sanitize": "^1.6.0",
+    "table-export": "*",
+    "dom-to-image": "^2.5.2"
   }
 }

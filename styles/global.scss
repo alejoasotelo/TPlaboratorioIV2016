@@ -13,9 +13,42 @@ body{
 
 	.page{
 
-		&-login{
-			background: url('../images/login.jpg');
+		@mixin auth() {
+			background: #17568c; //url('../images/login.jpg');
 			height: calc(100vh - #{$mainbody-padding-top});
+
+			& > div{
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				margin-top: -173px;
+				margin-left: -145px;
+
+				@media (min-width: 320px) and (max-width: 767px) {
+					width: 320px;
+					left: 50%;
+					margin-left: -160px;
+
+					.center-form{
+						width: 100%;
+						max-width: 320px;
+					}
+				}
+			}
+		}
+
+		&-login{
+			@include auth();
+
+		}
+
+		&-register{
+			@include auth();
+
+			& > div {
+				margin-top: -263px;
+			}
+
 		}
 
 	}

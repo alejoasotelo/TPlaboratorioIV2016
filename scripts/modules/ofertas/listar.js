@@ -5,11 +5,15 @@ angular.module('app')
 		$state.go('auth.login');
 	}
 
-	$scope.ofertas = new Array();
+	$scope.ofertas = [];
 
 	function cargar() {
 
-		OfertasSvc.list().then(function(ofertas){
+		var user = $auth.getPayload();
+
+		console.log(user);
+
+		OfertasSvc.listByIdLocal(user.local.id_local).then(function(ofertas){
 
 			$scope.ofertas = ofertas;
 

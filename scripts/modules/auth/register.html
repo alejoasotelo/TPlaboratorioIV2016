@@ -2,33 +2,35 @@
 	<div class="center-form panel">
 		<div class="panel-body">
 			<h2 class="text-center">Registro de usuario</h2>
-			<form id="formLogin" class="form">
+			<form id="formLogin" name="formLogin" class="form" novalidate>
 
 				<div class="mensajes" ng-if="mensajes.length > 0">
-					<p>{{mensajes}}</p>
+					<p ng-bind-html="mensajes"></p>
 				</div>
+				<br ng-if="mensajes.length > 0">
 
-				<div class="form-group has-feedback">
-					<label for="username">Usuario</label>
-					<input type="text" name="username" ng-model="usuario.username" class="form-control"/>
+				<div class="form-group has-feedback" ng-class="{'has-error': !formLogin.username.$pristine && formLogin.username.$invalid}">
+					<input type="text" name="username" ng-model="usuario.username" class="form-control" placeholder="Usuario" required/>
 				</div>
-				<div class="form-group has-feedback">
-					<label for="password">Contraseña</label>
-					<input type="password" name="password" ng-model="usuario.password" class="form-control"/>
+				<div class="form-group has-feedback" ng-class="{'has-error': !formLogin.password.$pristine && formLogin.password.$invalid}">
+					<input type="password" name="password" ng-model="usuario.password" class="form-control" placeholder="Contraseña" required/>
 				</div>
-				<div class="form-group has-feedback">
-					<label for="nombre">Nombre</label>
-					<input type="text" name="nombre" ng-model="usuario.nombre" class="form-control"/>
+				<div class="form-group has-feedback" ng-class="{'has-error': !formLogin.nombre.$pristine && formLogin.nombre.$invalid}">
+					<input type="text" name="nombre" ng-model="usuario.nombre" class="form-control" placeholder="Nombre" required/>
 				</div>
-				<div class="form-group has-feedback">
-					<label for="nombre">Apellido</label>
-					<input type="text" name="apellido" ng-model="usuario.apellido" class="form-control"/>
+				<div class="form-group has-feedback" ng-class="{'has-error': !formLogin.apellido.$pristine && formLogin.apellido.$invalid}">
+					<input type="text" name="apellido" ng-model="usuario.apellido" class="form-control" placeholder="Apellido" required/>
 				</div>
-				<div class="form-group has-feedback">
-					<label for="nombre">Email</label>
-					<input type="email" name="email" ng-model="usuario.email" class="form-control"/>
+				<div class="form-group has-feedback" ng-class="{'has-error': !formLogin.email.$pristine && formLogin.email.$invalid}">
+					<input type="email" name="email" ng-model="usuario.email" class="form-control"  placeholder="Email" required/>
 				</div>
-				<button type="button" class="btn btn-lg  btn-block btn-success" ng-click="register()" ng-disabled="user.username.length == 0 && user.password.length == 0">Registrarse</button>
+				<div class="form-group has-feedback" ng-class="{'has-error': !formLogin.direccion.$pristine && formLogin.direccion.$invalid}">
+					<input type="text" name="direccion" ng-model="usuario.direccion" class="form-control" placeholder="Dirección" required/>
+				</div>
+				<div class="form-group has-feedback" ng-class="{'has-error': !formLogin.localidad.$pristine && formLogin.localidad.$invalid}">
+					<input type="text" name="localidad" ng-model="usuario.localidad" class="form-control"  placeholder="Localidad" required/>
+				</div>
+				<button type="button" class="btn btn-lg  btn-block btn-success" ng-click="register()" ng-disabled="formLogin.$invalid">Registrarse</button>
 				<p class="text-center text-muted">
 					<small><a ng-href="#" ui-sref="auth.login">Cancelar</a></small>
 				</p>				

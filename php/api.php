@@ -155,7 +155,25 @@ switch ($request->datos->task) {
 
 		switch ($request->datos->endpoint) {
 			case 'usuarios':
-				$id = Usuario::insertar($request->datos->object);
+
+				$existeUsername = Usuario::existeUsername($request->datos->object->username);
+				$existeEmail = Usuario::existeEmail($request->datos->object->email);
+
+				if (!$existeEmail && !$existeUsername) {
+					$id = Usuario::insertar($request->datos->object);
+				} else {
+
+					$ret['error'] = 1;
+
+					if ($existeEmail) {
+						$ret['msg'] = 'El email ya esta registrado. Intente con otro email.';
+					}
+
+					if ($existeUsername) {
+						$ret['msg'] .= ($existeEmail ? '<br>' : '').'El username ya esta registrado. Intente con otro username.';
+					}
+				}
+
 				break;
 				
 			case 'locales':
@@ -184,7 +202,10 @@ switch ($request->datos->task) {
 		if ($id > 0) {
 			$ret['id'] = $id;
 		} else {
-			$ret['msg'] = 'No se pudo insertar.';
+
+			if (!isset($ret['error'])) {
+				$ret['msg'] = 'No se pudo insertar.';
+			}
 		}
 
 		echo json_encode($ret);

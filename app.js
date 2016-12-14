@@ -1,4 +1,4 @@
-angular.module('app', ['ui.router', 'ngMap', 'satellizer', 'angularFileUpload'])
+angular.module('app', ['ui.router', 'ngMap', 'satellizer', 'angularFileUpload', 'ngSanitize'])
 
 .constant('BASE_URL', '/lab4/tp/php')
 
@@ -13,14 +13,14 @@ angular.module('app', ['ui.router', 'ngMap', 'satellizer', 'angularFileUpload'])
 	.state('auth', {
 		url: '/auth',
 		abstract: true,
-		templateUrl: 'scripts/modules/auth/auth.html',
+		templateUrl: 'scripts/modules/auth/auth.html' + nocache,
 		controller:'AuthCtrl'
 	})
 	.state('auth.login', {
 		url: '/login',
 		views: {
 			'contenido': {
-				templateUrl: 'scripts/modules/auth/login.html',
+				templateUrl: 'scripts/modules/auth/login.html' + nocache,
 				controller:'AuthLoginCtrl'	
 			} 
 		}
@@ -29,7 +29,7 @@ angular.module('app', ['ui.router', 'ngMap', 'satellizer', 'angularFileUpload'])
 		url: '/register',
 		views: {
 			'contenido': {
-				templateUrl: 'scripts/modules/auth/register.html',
+				templateUrl: 'scripts/modules/auth/register.html' + nocache,
 				controller:'AuthRegisterCtrl'	
 			} 
 		}
@@ -39,14 +39,14 @@ angular.module('app', ['ui.router', 'ngMap', 'satellizer', 'angularFileUpload'])
 	.state('usuarios', {
 		url: '/usuarios',
 		abstract: true,
-		templateUrl: 'scripts/modules/usuarios/usuarios.html',
+		templateUrl: 'scripts/modules/usuarios/usuarios.html' + nocache,
 		controller:'UsuariosCtrl'
 	})
 	.state('usuarios.listar', {
 		url: '/listar',
 		views: {
 			'contenido': {
-				templateUrl: 'scripts/modules/usuarios/listar.html',
+				templateUrl: 'scripts/modules/usuarios/listar.html' + nocache,
 				controller: 'UsuariosListarCtrl'
 			} 
 		}
@@ -55,7 +55,7 @@ angular.module('app', ['ui.router', 'ngMap', 'satellizer', 'angularFileUpload'])
 		url: '/nuevo',
 		views: {
 			'contenido': {
-				templateUrl: 'scripts/modules/usuarios/nuevo.html',
+				templateUrl: 'scripts/modules/usuarios/nuevo.html' + nocache,
 				controller: 'UsuariosNuevoCtrl'
 			} 
 		}
@@ -64,7 +64,7 @@ angular.module('app', ['ui.router', 'ngMap', 'satellizer', 'angularFileUpload'])
 		url: '/modificar/:id',
 		views: {
 			'contenido': {
-				templateUrl: 'scripts/modules/usuarios/modificar.html',
+				templateUrl: 'scripts/modules/usuarios/modificar.html' + nocache,
 				controller: 'UsuariosModificarCtrl'
 			} 
 		}
@@ -73,7 +73,7 @@ angular.module('app', ['ui.router', 'ngMap', 'satellizer', 'angularFileUpload'])
 		url: '/local/:id',
 		views: {
 			'contenido': {
-				templateUrl: 'scripts/modules/usuarios/local.html',
+				templateUrl: 'scripts/modules/usuarios/local.html' + nocache,
 				controller: 'UsuariosLocalCtrl'
 			} 
 		}
@@ -83,14 +83,14 @@ angular.module('app', ['ui.router', 'ngMap', 'satellizer', 'angularFileUpload'])
 	.state('locales', {
 		url: '/locales',
 		abstract: true,
-		templateUrl: 'scripts/modules/locales/locales.html',
+		templateUrl: 'scripts/modules/locales/locales.html' + nocache,
 		controller: 'LocalesCtrl'
 	})
 	.state('locales.listar', {
 		url: '/listar',
 		views: {
 			'contenido': {
-				templateUrl: 'scripts/modules/locales/listar.html',
+				templateUrl: 'scripts/modules/locales/listar.html' + nocache,
 				controller: 'LocalesListarCtrl'
 			} 
 		}
@@ -99,7 +99,7 @@ angular.module('app', ['ui.router', 'ngMap', 'satellizer', 'angularFileUpload'])
 		url: '/nuevo',
 		views: {
 			'contenido': {
-				templateUrl: 'scripts/modules/locales/nuevo.html',
+				templateUrl: 'scripts/modules/locales/nuevo.html' + nocache,
 				controller: 'LocalesNuevoCtrl'
 			} 
 		}
@@ -108,7 +108,7 @@ angular.module('app', ['ui.router', 'ngMap', 'satellizer', 'angularFileUpload'])
 		url: '/modificar/:id',
 		views: {
 			'contenido': {
-				templateUrl: 'scripts/modules/locales/modificar.html',
+				templateUrl: 'scripts/modules/locales/modificar.html' + nocache,
 				controller: 'LocalesModificarCtrl'
 			} 
 		}
@@ -118,14 +118,14 @@ angular.module('app', ['ui.router', 'ngMap', 'satellizer', 'angularFileUpload'])
 	.state('ofertas', {
 		url: '/ofertas',
 		abstract: true,
-		templateUrl: 'scripts/modules/ofertas/ofertas.html',
+		templateUrl: 'scripts/modules/ofertas/ofertas.html' + nocache,
 		controller: 'OfertasCtrl'
 	})
 	.state('ofertas.listar', {
 		url: '/listar',
 		views: {
 			'contenido': {
-				templateUrl: 'scripts/modules/ofertas/listar.html',
+				templateUrl: 'scripts/modules/ofertas/listar.html' + nocache,
 				controller: 'OfertasListarCtrl'
 			} 
 		}
@@ -134,7 +134,7 @@ angular.module('app', ['ui.router', 'ngMap', 'satellizer', 'angularFileUpload'])
 		url: '/nuevo',
 		views: {
 			'contenido': {
-				templateUrl: 'scripts/modules/ofertas/nuevo.html',
+				templateUrl: 'scripts/modules/ofertas/nuevo.html' + nocache,
 				controller: 'OfertasNuevoCtrl'
 			} 
 		}
@@ -143,7 +143,7 @@ angular.module('app', ['ui.router', 'ngMap', 'satellizer', 'angularFileUpload'])
 		url: '/modificar/:id',
 		views: {
 			'contenido': {
-				templateUrl: 'scripts/modules/ofertas/modificar.html',
+				templateUrl: 'scripts/modules/ofertas/modificar.html' + nocache,
 				controller: 'OfertasModificarCtrl'
 			} 
 		}
@@ -153,14 +153,14 @@ angular.module('app', ['ui.router', 'ngMap', 'satellizer', 'angularFileUpload'])
 	.state('propiedades', {
 		url: '/propiedades',
 		abstract: true,
-		templateUrl: 'scripts/modules/propiedades/propiedades.html',
+		templateUrl: 'scripts/modules/propiedades/propiedades.html' + nocache,
 		controller: 'PropiedadesCtrl'
 	})
 	.state('propiedades.listar', {
 		url: '/listar',
 		views: {
 			'contenido': {
-				templateUrl: 'scripts/modules/propiedades/listar.html',
+				templateUrl: 'scripts/modules/propiedades/listar.html' + nocache,
 				controller: 'PropiedadesListarCtrl'
 			} 
 		}
@@ -169,7 +169,7 @@ angular.module('app', ['ui.router', 'ngMap', 'satellizer', 'angularFileUpload'])
 		url: '/nuevo',
 		views: {
 			'contenido': {
-				templateUrl: 'scripts/modules/propiedades/nuevo.html',
+				templateUrl: 'scripts/modules/propiedades/nuevo.html' + nocache,
 				controller: 'PropiedadesNuevoCtrl'
 			} 
 		}
@@ -178,7 +178,7 @@ angular.module('app', ['ui.router', 'ngMap', 'satellizer', 'angularFileUpload'])
 		url: '/modificar/:id',
 		views: {
 			'contenido': {
-				templateUrl: 'scripts/modules/propiedades/modificar.html',
+				templateUrl: 'scripts/modules/propiedades/modificar.html' + nocache,
 				controller: 'PropiedadesModificarCtrl'
 			} 
 		}
@@ -187,7 +187,7 @@ angular.module('app', ['ui.router', 'ngMap', 'satellizer', 'angularFileUpload'])
 		url: '/ver/:id',
 		views: {
 			'contenido': {
-				templateUrl: 'scripts/modules/propiedades/ver.html',
+				templateUrl: 'scripts/modules/propiedades/ver.html' + nocache,
 				controller: 'PropiedadesVerCtrl'
 			} 
 		}
@@ -197,14 +197,14 @@ angular.module('app', ['ui.router', 'ngMap', 'satellizer', 'angularFileUpload'])
 	.state('ventas_alquileres', {
 		url: '/ventas_alquileres',
 		abstract: true,
-		templateUrl: 'scripts/modules/ventas_alquileres/ventas_alquileres.html',
+		templateUrl: 'scripts/modules/ventas_alquileres/ventas_alquileres.html' + nocache,
 		controller: 'VentasAlquileresCtrl'
 	})
 	.state('ventas_alquileres.listar', {
 		url: '/listar',
 		views: {
 			'contenido': {
-				templateUrl: 'scripts/modules/ventas_alquileres/listar.html',
+				templateUrl: 'scripts/modules/ventas_alquileres/listar.html' + nocache,
 				controller: 'VentasAlquileresListarCtrl'
 			} 
 		}

@@ -2,6 +2,12 @@
 	<a ui-sref="{{modulo + '.nuevo'}}" ng-if="Permisos.puede(modulo+'.nuevo')" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i> Nuevo</a>
 	<a ng-click="modificar()" ng-if="Permisos.puede(modulo+'.modificar')" class="btn btn-default"><i class="glyphicon glyphicon-edit"></i> Modificar</a>
 	<a ng-click="eliminar()" ng-if="Permisos.puede(modulo+'.eliminar')" class="btn btn-default"><i class="glyphicon glyphicon-trash"></i> Eliminar</a>
+
+	<div class="pull-right" ng-if="Permisos.getTipoUsuario() != 'cliente'">
+
+		<a ng-click="exportPDF()" class="btn btn-default">Exportar PDF</a>
+		<a ng-click="exportExcel()" class="btn btn-default">Exportar Excel</a>
+	</div>
 </div>
 
 <div ng-if="vista == 'modificar' || vista == 'nuevo'">

@@ -12,6 +12,21 @@ angular.module('app')
 		});
 	}
 
+	this.listByIdLocal = function (id_local) {
+
+		id_local = id_local || 0;
+
+		return self.list().then(function(ofertas) {
+
+			return ofertas.filter(function(oferta, index, _array) {
+
+				return id_local > 0 ? oferta.id_local == id_local : true;
+
+			});
+
+		});
+	}
+
 	this.get = function(id) {
 		
 		return api.get('ofertas', id).then(function(local) {

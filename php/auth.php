@@ -17,11 +17,13 @@ if (Usuario::existe($request->username, $request->password) &&
 		// Create a JSON Web Token and send it back to the client.
 		$key = "1234";
 		$token["iat"] = time() ;
-		$token["exp"] = time() + 3600;
+		$token["exp"] = time() + 3600; // 1 hora.
 		$token["id_usuario"] = $usuario->id_usuario;
 		$token["username"] = $usuario->username;
 		$token["nombre"] = $usuario->nombre;
 		$token["apellido"] = $usuario->apellido;
+		$token["direccion"] = $usuario->direccion;
+		$token["localidad"] = $usuario->localidad;
 		$token["tipo"] = $usuario->tipo;
 		$token["local"] = $usuario->getLocal();
 

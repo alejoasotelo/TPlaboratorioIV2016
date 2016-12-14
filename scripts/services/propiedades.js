@@ -6,8 +6,11 @@ angular.module('app')
 
 	var self = this;
 
-	this.list = function () {
-		return api.list('propiedades').then(function(r) {
+	this.list = function (tipo) {
+
+		tipo = tipo || 0;
+
+		return api.list('propiedades', tipo).then(function(r) {
 			return r;
 		});
 	}
@@ -68,6 +71,34 @@ angular.module('app')
 		return api.update('propiedades', local).then(function(response) {
 
 			return response;
+
+		});
+
+	}
+
+	this.listByIdLocal = function(id_local) {
+
+		return self.list().then(function(propiedades) {
+
+			return propiedades.filter(function(propiedad, index, _array) {
+
+				return propiedad.id_local == id_local;
+
+			});
+
+		});
+
+	}
+
+	this.listAndExcludeById = function (id_propiedad) {
+
+		return self.list().then(function(propiedades) {
+
+			return propiedades.filter(function(propiedad, index, _array) {
+
+				return propiedad.id_propiedad != id_propiedad;
+
+			});
 
 		});
 

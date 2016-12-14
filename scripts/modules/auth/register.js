@@ -1,5 +1,5 @@
 angular.module('app')
-.controller('AuthRegisterCtrl', function($scope, $auth, UsuariosSvc, $timeout, $state) {
+.controller('AuthRegisterCtrl', function($scope, $auth, UsuariosSvc, $timeout, $state, $sce) {
 	
 	$scope.usuario = {};
 
@@ -15,6 +15,8 @@ angular.module('app')
 
 		$scope.usuario.tipo = 'cliente';
 
+		$scope.usuario.estado = 1;
+
 		UsuariosSvc.insert($scope.usuario).then(function(r) {
 
 			if (r.success) {
@@ -25,7 +27,9 @@ angular.module('app')
 				}, 2000);
 				
 			} else {
-				$scope.mensajes = r.msg;
+				console.log(r.msg);
+				console.log($sce.trustAsHtml(r.msg));
+				$scope.mensajes =  r.msg;
 			}
 
 		});		

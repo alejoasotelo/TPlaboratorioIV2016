@@ -39,7 +39,7 @@ angular.module('app')
 
 			console.log('login.success', response);
 
-			if (response.data.token_lab4 != false) {
+			if (typeof response.data.token_lab4 != 'undefined' && response.data.token_lab4 != false) {
 				console.log('token_lab4 != false');
 
     			// Redirect user here after a successful log in.

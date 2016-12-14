@@ -14,6 +14,9 @@
   margin-top: 20px; }
   .panel .panel-body .page-header {
     margin-top: 8px; }
+  .panel .panel-body .mensajes {
+    padding: 8px;
+    background-color: #fcfc8e66; }
 
 .panel-default > .panel-heading {
   font-size: 85%;
@@ -35,8 +38,41 @@ body {
 #mainbody {
   padding-top: 50px; }
   #mainbody .page-login {
-    background: url("../images/login.jpg");
+    background: #17568c;
     height: calc(100vh - 50px); }
+    #mainbody .page-login > div {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-top: -173px;
+      margin-left: -145px; }
+      @media (min-width: 320px) and (max-width: 767px) {
+        #mainbody .page-login > div {
+          width: 320px;
+          left: 50%;
+          margin-left: -160px; }
+          #mainbody .page-login > div .center-form {
+            width: 100%;
+            max-width: 320px; } }
+  #mainbody .page-register {
+    background: #17568c;
+    height: calc(100vh - 50px); }
+    #mainbody .page-register > div {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-top: -173px;
+      margin-left: -145px; }
+      @media (min-width: 320px) and (max-width: 767px) {
+        #mainbody .page-register > div {
+          width: 320px;
+          left: 50%;
+          margin-left: -160px; }
+          #mainbody .page-register > div .center-form {
+            width: 100%;
+            max-width: 320px; } }
+    #mainbody .page-register > div {
+      margin-top: -263px; }
 
 #login {
   margin-top: 0px; }

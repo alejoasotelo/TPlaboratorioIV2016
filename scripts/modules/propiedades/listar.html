@@ -1,13 +1,14 @@
 <tools-menu modulo="propiedades" vista="listar" ng-if="!esTipoCliente">
 </tools-menu>
 
+
 <div class="table-responsive" ng-if="!esTipoCliente">
-	<table class="table table-hover">
+	<table id="table" class="table table-hover">
 		<thead>
 			<tr>
 				<th width="40" class="text-center"><input type="checkbox" ng-model="tools.selectAll" ng-change="selectAllChange()" title="Marcar todo"/></th>
 				<th class="text-left">Nombre</th>
-				<th class="text-left">Dirección</th>
+				<th class="text-left">Direccion</th>
 				<th class="text-left" width="200">Local</th>
 				<th width="100" class="text-center">Precio</th>
 				<th width="100" class="text-center">Tipo</th>
@@ -72,7 +73,7 @@
 
 			<div>
 				<span class="price">${{p.precio}}</span>
-				<a ui-sref="propiedades.ver({id: p.id_propiedad})" ng-if="!Permisos.puede('propiedades.modificar') && Permisos.puede('propiedades.ver') && p.tipo == 1" class="pull-right btn btn-success">Comprar</a>
+				<a ui-sref="propiedades.ver({id: p.id_propiedad})" ng-if="!Permisos.puede('propiedades.modificar') && Permisos.puede('propiedades.ver') && p.tipo == 1" class="pull-right btn btn-success" ng-class="{disabled: p.esta_vendida}">{{p.esta_vendida ? 'Vendida' : 'Comprar'}}</a>
 
 				<a ui-sref="propiedades.ver({id: p.id_propiedad})" ng-if="!Permisos.puede('propiedades.modificar') && Permisos.puede('propiedades.ver') && p.tipo == 2" class="pull-right btn btn-info">Alquilar</a>
 			</div>

@@ -12,6 +12,8 @@ class Usuario
     public $apellido;
     public $email;
     public $password;
+    public $direccion;
+    public $localidad;
     public $tipo;
     public $estado;
 
@@ -26,6 +28,8 @@ class Usuario
             $this->apellido = $obj->apellido;
             $this->email = $obj->email;
             $this->password = $obj->password;
+            $this->direccion = $obj->direccion;
+            $this->localidad = $obj->localidad;
             $this->tipo = $obj->tipo;
             $this->estado = $obj->estado;
             $this->local = $this->getLocal();
@@ -79,9 +83,9 @@ class Usuario
     public static function modificar($usuario)
     {
         if (!empty($usuario->password)) {
-            $sql = 'UPDATE usuarios SET username = :username, nombre = :nombre, apellido = :apellido, email = :email, tipo = :tipo, estado = :estado, password = :password WHERE id_usuario = :id_usuario';
+            $sql = 'UPDATE usuarios SET username = :username, nombre = :nombre, apellido = :apellido, email = :email, tipo = :tipo, direccion = :direccion, localidad = :localidad, estado = :estado, password = :password WHERE id_usuario = :id_usuario';
         } else {
-            $sql = 'UPDATE usuarios SET username = :username, nombre = :nombre, apellido = :apellido, email = :email, tipo = :tipo, estado = :estado WHERE id_usuario = :id_usuario';
+            $sql = 'UPDATE usuarios SET username = :username, nombre = :nombre, apellido = :apellido, email = :email, tipo = :tipo, direccion = :direccion, localidad = :localidad, estado = :estado WHERE id_usuario = :id_usuario';
         }
 
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
@@ -91,6 +95,8 @@ class Usuario
         $consulta->bindValue(':email', $usuario->email, \PDO::PARAM_STR);
         $consulta->bindValue(':nombre', $usuario->nombre, \PDO::PARAM_STR);
         $consulta->bindValue(':apellido', $usuario->apellido, \PDO::PARAM_STR);
+        $consulta->bindValue(':direccion', $usuario->direccion, \PDO::PARAM_STR);
+        $consulta->bindValue(':localidad', $usuario->localidad, \PDO::PARAM_STR);
         $consulta->bindValue(':tipo', $usuario->tipo, \PDO::PARAM_STR);
         $consulta->bindValue(':estado', $usuario->estado, \PDO::PARAM_STR);
 
@@ -103,8 +109,8 @@ class Usuario
 
     public static function insertar($usuario)
     {
-        $sql = 'INSERT INTO usuarios (`id_usuario`, `username`, `email`, `nombre`, `apellido`, `password`, `tipo`, `estado`) 
-        VALUES (NULL, :username, :email, :nombre, :apellido, :password, :tipo, :estado)';
+        $sql = 'INSERT INTO usuarios (`id_usuario`, `username`, `email`, `nombre`, `apellido`, `password`, `tipo`, `direccion`, `localidad`, `estado`) 
+        VALUES (NULL, :username, :email, :nombre, :apellido, :password, :tipo, :direccion, :localidad, :estado)';
 
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->retornarConsulta($sql);
@@ -113,8 +119,10 @@ class Usuario
         $consulta->bindValue(':nombre', $usuario->nombre, \PDO::PARAM_STR);
         $consulta->bindValue(':apellido', $usuario->apellido, \PDO::PARAM_STR);
         $consulta->bindValue(':password', md5($usuario->password), \PDO::PARAM_STR);
+        $consulta->bindValue(':direccion', $usuario->direccion, \PDO::PARAM_STR);
+        $consulta->bindValue(':localidad', $usuario->localidad, \PDO::PARAM_STR);
         $consulta->bindValue(':tipo', $usuario->tipo, \PDO::PARAM_STR);
-        $consulta->bindValue(':estado', $usuario->tipo, \PDO::PARAM_STR);
+        $consulta->bindValue(':estado', $usuario->estado, \PDO::PARAM_STR);
         $consulta->execute();
 
         return $objetoAccesoDato->retornarUltimoIdInsertado();
@@ -132,6 +140,30 @@ class Usuario
 
         $user = $consulta->fetchObject(self::class);
         return isset($user->id_usuario) && $user->id_usuario > 0;
+    }
+
+    public static function existeUsername($username) {
+        $sql = 'SELECT * FROM usuarios WHERE username = :username';
+
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->retornarConsulta($sql);
+        $consulta->bindValue(':username', $username, \PDO::PARAM_STR);
+        $consulta->execute();
+
+        $user = $consulta->fetchObject(self::class);
+        return isset($user->id_usuario) && $user->id_usuario > 0;        
+    }
+
+    public static function existeEmail($email) {
+        $sql = 'SELECT * FROM usuarios WHERE email = :email';
+
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->retornarConsulta($sql);
+        $consulta->bindValue(':email', $email, \PDO::PARAM_STR);
+        $consulta->execute();
+
+        $user = $consulta->fetchObject(self::class);
+        return isset($user->id_usuario) && $user->id_usuario > 0;        
     }
 
     public static function traerPorUsername($username)
@@ -157,15 +189,11 @@ class Usuario
 
         if ($this->tipo == 'encargado') {
 
-            $sql = 'SELECT l.* FROM `locales` l
-            LEFT JOIN locales_has_encargado le ON (le.id_local = l.id_local)
-            WHERE le.id_usuario = :id_usuario';
+            $sql = 'SELECT l.* FROM `locales` l LEFT JOIN locales_has_encargado le ON (le.id_local = l.id_local) WHERE le.id_usuario = '.$this->id_usuario;
 
         } else if($this->tipo == 'empleado') {
 
-            $sql = 'SELECT l.* FROM `locales` l
-            LEFT JOIN locales_has_empleados le ON (le.id_local = l.id_local)
-            WHERE le.id_usuario = :id_usuario';
+            $sql = 'SELECT l.* FROM `locales` l LEFT JOIN locales_has_empleados le ON (le.id_local = l.id_local) WHERE le.id_usuario = '.$this->id_usuario;
 
         } else {
             return new \stdClass();
@@ -173,7 +201,6 @@ class Usuario
 
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->retornarConsulta($sql);
-        $consulta->bindValue(':id_usuario', $this->id_usuario, \PDO::PARAM_STR);
         $consulta->execute();
         $local = $consulta->fetchObject(Local::class);
 

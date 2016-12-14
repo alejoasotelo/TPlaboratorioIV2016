@@ -4,7 +4,7 @@ angular.module('app')
 	return {
 		restrict: 'EA',
 		transclude: true,
-		templateUrl: 'scripts/directives/ng-usuario.html',
+		templateUrl: 'scripts/directives/ng-usuario.html' + nocache,
 		scope: {
 			usuario: '=usuario',
 			mostrar_tipo: '=mostrarTipo'

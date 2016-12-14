@@ -10,12 +10,15 @@ angular.module('app')
 			base_url = url;
 		},
 
-		list: function (endpoint) {
+		list: function (endpoint, param) {
+
+			param = param || null;
 
 			return $http.post(base_url, {
 				datos: {
 					endpoint: endpoint,
-					task: 'listar'
+					task: 'listar',
+					param: param
 				}
 			}).then(function(r){
 

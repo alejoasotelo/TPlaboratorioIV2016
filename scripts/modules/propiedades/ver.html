@@ -34,6 +34,7 @@
 <input type="hidden" ng-model="propiedad.usuario.id_usuario"/>
 
 <div class="col-xs-12">
+
     <h3>Fotos</h3>
 
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -45,7 +46,7 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
             <div class="item" ng-repeat="img in propiedad.imagenes" ng-class="{active: $first}">
-                <img ng-src="{{img.imagen}}" alt="Slide {{$index}}" />
+                <img ng-src="{{img.imagen}}" alt="Slide {{$index}}"/>
             </div>
         </div>
 
@@ -63,38 +64,30 @@
 
     <hr>
 
-    <h3>Mapa</h3>
-    <ng-map zoom="10" center="Buenos Aires" style="height:90%" >
-        <directions draggable="false" panel="directions-panel" travel-mode="DRIVING" origin="Buenos Aires, Avellaneda" destination="{{propiedad.direccion}}">
-        </directions>
-    </ng-map>
-</div>
+    <div>
 
-<div class="col-xs-12">
-    <hr>
-</div>
+        <div class="col-xs-12 col-md-6">
 
-<form name="form" class="form" ng-if="ready" novalidate>
+            <h3>Mapa de la propiedad</h3>
+            <p>El punto A indica la ubicacion del cliente segun la dirección cargada al momento del registro. El punto B indica la direccion de la propiedad ({{propiedad.direccion}}).</p>
 
-    <div ng-if="propiedad.tipo == 1">
-        <div class="col-xs-12">
-            <h3>Formulario para comprar</h3>
-        </div>
-    </div>
+            <ng-map zoom="10" center="{{'Argentina, ' + usuario.localidad + ', ' + usuario.direccion}}" style="height:90%" >
+                <directions draggable="false" panel="directions-panel" travel-mode="DRIVING" origin="{{'Argentina, ' + usuario.localidad + ', ' + usuario.direccion}}" destination="{{propiedad.direccion}}">
+                </directions>
+            </ng-map>
 
-    <div ng-if="propiedad.tipo == 2">
-        <div class="col-xs-12">
-            <h3>Formulario para alquilar</h3>
         </div>
 
-        <div class="form-group col-xs-12 col-md-6">
-            <label for="fecha_desde">Fecha desde</label>
-            <input type="date" ng-model="venta_alquiler.fecha_desde" name="fecha_desde" class="form-control" required/>
-        </div>
+        <div class="col-xs-12 col-md-6">
 
-        <div class="form-group col-xs-12 col-md-6">
-            <label for="fecha_hasta">Fecha hasta</label>
-            <input type="date" ng-model="venta_alquiler.fecha_hasta" name="fecha_hasta" class="form-control" required/>
+            <h3>Mapa del resto de propiedades</h3>
+            <p>El punto A indica la ubicacion del cliente segun la dirección cargada al momento del registro. El resto de puntos indican las demas propiedades en venta/alquiler.</p>
+            
+            <ng-map zoom="10" center="{{'Argentina, ' + usuario.localidad + ', ' + usuario.direccion}}" style="height:90%">
+                <directions ng-repeat="dir in propiedades" draggable="false" panel="directions-panel" travel-mode="DRIVING" origin="{{'Argentina, ' + usuario.localidad + ', ' + usuario.direccion}}" destination="{{dir.direccion}}">
+                </directions>
+            </ng-map>
+
         </div>
     </div>
 
@@ -102,9 +95,31 @@
         <hr>
     </div>
 
-    <div class="form-group col-xs-12">
-        <button ng-if="propiedad.tipo == 1" type="button" ng-disabled="form.$invalid" ng-click="comprar_alquilar()" class="btn btn-success"><i class="glyphicon glyphicon-shopping-cart"></i> Comprar</button>
-        <button ng-if="propiedad.tipo == 2" type="button" ng-disabled="form.$invalid" ng-click="comprar_alquilar()" class="btn btn-success"><i class="glyphicon glyphicon-shopping-cart"></i> Alquilar</button>
-        <a ng-click="volver()" class="btn btn-default"><i class="glyphicon glyphicon-cancel"></i> Volver</a>
-    </div>
-</form>
+    <form name="form" class="form" ng-if="ready" novalidate>
+
+        <div ng-if="propiedad.tipo == 2">
+            <div class="col-xs-12">
+                <h3>Formulario para alquilar</h3>
+            </div>
+
+            <div class="form-group col-xs-12 col-md-6">
+                <label for="fecha_desde">Fecha desde</label>
+                <input type="date" ng-model="venta_alquiler.fecha_desde" name="fecha_desde" class="form-control" required/>
+            </div>
+
+            <div class="form-group col-xs-12 col-md-6">
+                <label for="fecha_hasta">Fecha hasta</label>
+                <input type="date" ng-model="venta_alquiler.fecha_hasta" name="fecha_hasta" class="form-control" required/>
+            </div>
+        </div>
+
+        <div class="col-xs-12">
+            <hr>
+        </div>
+
+        <div class="form-group col-xs-12">
+            <button ng-if="propiedad.tipo == 1" type="button" ng-disabled="form.$invalid" ng-click="comprar_alquilar()" class="btn btn-success"><i class="glyphicon glyphicon-shopping-cart"></i> Comprar</button>
+            <button ng-if="propiedad.tipo == 2" type="button" ng-disabled="form.$invalid" ng-click="comprar_alquilar()" class="btn btn-success"><i class="glyphicon glyphicon-shopping-cart"></i> Alquilar</button>
+            <a ng-click="volver()" class="btn btn-default"><i class="glyphicon glyphicon-cancel"></i> Volver</a>
+        </div>
+    </form>

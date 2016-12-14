@@ -5,7 +5,8 @@ angular.module('app')
 
 		ADMINISTRADOR: {
 			page_default: 'locales.listar',
-			ver_usuarios_tipo: 'todos',
+			ver_usuarios_tipo: 'empleado,cliente,administrador,encargado',
+			modificar_local_en_ofertas: true,
 			ofertas: {
 				listar: true,
 				nuevo: true,
@@ -130,7 +131,7 @@ angular.module('app')
 
 		var user = getUser();
 
-		return user.tipo;
+		return user != 'undefined' ? user.tipo : '';
 
 	}
 
@@ -216,5 +217,10 @@ angular.module('app')
 		}
 
 	}
+
+	this.getUser = function () {
+		return getUser();
+	}
+
 
 });

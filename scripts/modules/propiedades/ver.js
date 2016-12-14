@@ -1,5 +1,5 @@
 angular.module('app')
-.controller('PropiedadesVerCtrl', function($scope, $auth, $state, $stateParams, PropiedadesSvc, VentasAlquileresSvc, $window, NgMap) {
+.controller('PropiedadesVerCtrl', function($scope, $auth, $state, $stateParams, PropiedadesSvc, VentasAlquileresSvc, $window, NgMap, $q) {
 
 	$scope.ready = false;
 
@@ -9,26 +9,29 @@ angular.module('app')
 
 	$scope.venta_alquiler = {};
 
+	$scope.usuario = $auth.getPayload();
+
 	$scope.map = {};
+	$scope.propiedades = [];
 
-	NgMap.getMap().then(function(map) {
-		$scope.map = map;
-		console.log(map.getCenter());
-		console.log('markers', map.markers);
-		console.log('shapes', map.shapes);
-		console.log('directions', map.directions);
-	});
+	var p1 = PropiedadesSvc.get(id_propiedad);
+	var p2 = PropiedadesSvc.listAndExcludeById(id_propiedad);
 
-	var p1 = PropiedadesSvc.get(id_propiedad).then(function(propiedad) {
+	$q.all([NgMap.getMap(), p1, p2]).then(function(data){ 
+		$scope.map = data[0];
 
+		var propiedad = data[1];
 		$scope.propiedad = propiedad;
 
 		$scope.venta_alquiler.tipo = propiedad.tipo;
 		$scope.venta_alquiler.id_propiedad = propiedad.id_propiedad;
-		$scope.venta_alquiler.id_usuario = $auth.getPayload().id_usuario;
+		$scope.venta_alquiler.id_usuario = $scope.usuario.id_usuario;
+
+		// listAndExcludeById
+		$scope.propiedades = data[2];
+		console.log(data);
 
 		$scope.ready = true;
-
 	});
 
 	$scope.volver = function () {

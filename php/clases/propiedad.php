@@ -70,17 +70,58 @@ class Propiedad{
 
     public static function traerTodos()
     {
+        $sql = 'SELECT p.*, IF(p.tipo = :tipo_venta AND va.id_venta_alquiler > 0, 1, 0) esta_vendida FROM propiedades p 
+                LEFT JOIN ventas_alquileres va ON (p.id_propiedad = va.id_propiedad) GROUP BY p.id_propiedad';
+
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objetoAccesoDato->retornarConsulta("SELECT * FROM propiedades");
+        $consulta = $objetoAccesoDato->retornarConsulta($sql);
+        $consulta->bindValue(':tipo_venta', self::TIPO_VENTA, \PDO::PARAM_INT);
         $consulta->execute();
         $arrLocals = $consulta->fetchAll(\PDO::FETCH_CLASS, self::class);
 
         return $arrLocals;
     }
 
+    public static function traerTodosSinVender() {
+
+        $sql = 'SELECT * FROM propiedades WHERE id_propiedad NOT IN (SELECT id_propiedad FROM ventas_alquileres where tipo = :tipo)';
+
+        $con = AccesoDatos::dameUnObjetoAcceso();
+        $query = $con->retornarConsulta($sql);
+        $con->bindValue(':tipo', self::TIPO_VENTA, \PDO::PARAM_INT);
+        $con->execute();
+        return $con->fetchAll(\PDO::FETCHA_CLASS, self::class);
+
+    }
+
+    public static function traerTodosSinAlquilar() {
+
+        $sql = 'SELECT * FROM propiedades WHERE id_propiedad NOT IN (SELECT id_propiedad FROM ventas_alquileres where tipo = :tipo)';
+
+        $con = AccesoDatos::dameUnObjetoAcceso();
+        $query = $con->retornarConsulta($sql);
+        $con->bindValue(':tipo', self::TIPO_ALQUILER, \PDO::PARAM_INT);
+        $con->execute();
+        return $con->fetchAll(\PDO::FETCHA_CLASS, self::class);
+
+    }
+
+    public static function traerTodoSinAlquilarOVender() {
+
+        $sql = 'SELECT * FROM propiedades WHERE id_propiedad NOT IN (SELECT id_propiedad FROM ventas_alquileres where tipo IN(:tipo_alquiler, :tipo_venta))';
+
+        $con = AccesoDatos::dameUnObjetoAcceso();
+        $query = $con->retornarConsulta($sql);
+        $con->bindValue(':tipo_alquiler', self::TIPO_ALQUILER, \PDO::PARAM_INT);
+        $con->bindValue(':tipo_venta', self::TIPO_ALQUILER, \PDO::PARAM_INT);
+        $con->execute();
+        return $con->fetchAll(\PDO::FETCHA_CLASS, self::class);
+
+    }
+
     public static function insertar($obj)
     {
-        $sql = 'INSERT INTO propiedades (`id_propiedad`, `id_local`, `id_usuario`, `nombre`, `direccion`, `precio`, `tipo`) VALUES (NULL, :id_local, :id_usuario :nombre, :direccion, :precio, :tipo)';
+        $sql = 'INSERT INTO propiedades (`id_propiedad`, `id_local`, `id_usuario`, `nombre`, `direccion`, `precio`, `tipo`) VALUES (NULL, :id_local, :id_usuario, :nombre, :direccion, :precio, :tipo)';
 
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->retornarConsulta($sql);
