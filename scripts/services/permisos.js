@@ -126,6 +126,14 @@ angular.module('app')
 
 	}
 
+	this.getTipoUsuario = function() {
+
+		var user = getUser();
+
+		return user.tipo;
+
+	}
+
 	this.getUserPageDefault = function() {
 
 		var user = getUser();

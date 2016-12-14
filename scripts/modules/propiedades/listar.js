@@ -1,10 +1,11 @@
 angular.module('app')
-.controller('PropiedadesListarCtrl', function($scope, $window, $auth, $state, $window, PropiedadesSvc) {
+.controller('PropiedadesListarCtrl', function($scope, $window, $auth, $state, $window, PropiedadesSvc, PermisosSvc) {
 
 	if (!$auth.isAuthenticated()){
 		$state.go('auth.login');
 	}
 
+	$scope.esTipoCliente = PermisosSvc.getTipoUsuario() == 'cliente';
 	$scope.propiedades = new Array();
 
 	function cargar() {

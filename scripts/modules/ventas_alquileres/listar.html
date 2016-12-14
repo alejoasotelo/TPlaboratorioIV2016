@@ -15,7 +15,7 @@
 		<tbody>
 			<tr ng-repeat="va in ventas_alquileres">
 				<td class="text-left">{{va.propiedad}}</td>
-				<td class="text-left">{{va.tipo == '1' ? Venta : 'Alquiler'}}</td>
+				<td class="text-left">{{va.tipo == '1' ? 'Venta' : 'Alquiler'}}</td>
 				<td class="text-center">{{va.tipo == '1' ? ' - ' : va.fecha_desde}}</td>
 				<td class="text-center">{{va.tipo == '1' ? ' - ' : va.fecha_hasta}}</td>
 				<td class="text-center">{{va.id_venta_alquiler}}</td>

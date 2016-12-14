@@ -8,7 +8,17 @@ body{
 }
 
 #mainbody {
-	padding-top: 50px;
+	$mainbody-padding-top: 50px;
+	padding-top: $mainbody-padding-top;
+
+	.page{
+
+		&-login{
+			background: url('../images/login.jpg');
+			height: calc(100vh - #{$mainbody-padding-top});
+		}
+
+	}
 }
 
 #login {
@@ -36,4 +46,50 @@ body{
 
 .cursor-pointer{
 	cursor: pointer;
+}
+
+.propiedad{
+
+	$padding: 30px;
+
+	min-height: 500px;
+
+	.title{
+		font-size: 14px;
+		font-weight: bold;
+	}
+
+	&-bottom{
+
+		min-height: 160px;
+		margin-bottom: $padding / 2;
+		position: relative;
+
+		.list-group{
+
+			&-item{
+				font-size: 12px;
+
+				&:last-child{
+					border-radius: 0px;
+				}
+			}
+
+		}
+
+		div{
+			position: absolute;
+			bottom: 0px;
+			left: 15px;
+			width: calc(100% - #{$padding});
+
+			.price{
+				color: red;
+				font-weight: bold;
+				line-height: 34px;
+			}
+		}
+
+	}
+
 }

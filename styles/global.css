@@ -34,6 +34,9 @@ body {
 
 #mainbody {
   padding-top: 50px; }
+  #mainbody .page-login {
+    background: url("../images/login.jpg");
+    height: calc(100vh - 50px); }
 
 #login {
   margin-top: 0px; }
@@ -52,5 +55,28 @@ body {
 
 .cursor-pointer {
   cursor: pointer; }
+
+.propiedad {
+  min-height: 500px; }
+  .propiedad .title {
+    font-size: 14px;
+    font-weight: bold; }
+  .propiedad-bottom {
+    min-height: 160px;
+    margin-bottom: 15px;
+    position: relative; }
+    .propiedad-bottom .list-group-item {
+      font-size: 12px; }
+      .propiedad-bottom .list-group-item:last-child {
+        border-radius: 0px; }
+    .propiedad-bottom div {
+      position: absolute;
+      bottom: 0px;
+      left: 15px;
+      width: calc(100% - 30px); }
+      .propiedad-bottom div .price {
+        color: red;
+        font-weight: bold;
+        line-height: 34px; }
 
 /*# sourceMappingURL=global.css.map */

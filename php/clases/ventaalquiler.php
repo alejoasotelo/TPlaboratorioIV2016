@@ -23,8 +23,15 @@ class VentaAlquiler{
         $consulta->bindValue(':id_usuario', $obj->id_usuario, \PDO::PARAM_STR);
         $consulta->bindValue(':precio', 0, \PDO::PARAM_STR);
         $consulta->bindValue(':tipo', $obj->tipo, \PDO::PARAM_STR);
-        $consulta->bindValue(':fecha_desde', $obj->fecha_desde, \PDO::PARAM_STR);
-        $consulta->bindValue(':fecha_hasta', $obj->fecha_hasta, \PDO::PARAM_STR);
+
+        if ($obj->tipo == 2) {
+            $consulta->bindValue(':fecha_desde', $obj->fecha_desde, \PDO::PARAM_STR);
+            $consulta->bindValue(':fecha_hasta', $obj->fecha_hasta, \PDO::PARAM_STR);
+        } else {
+            $consulta->bindValue(':fecha_desde', '', \PDO::PARAM_STR);
+            $consulta->bindValue(':fecha_hasta', '', \PDO::PARAM_STR);
+        }
+
         $consulta->execute();
         return $objetoAccesoDato->retornarUltimoIdInsertado();
     }

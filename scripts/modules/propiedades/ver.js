@@ -1,5 +1,5 @@
 angular.module('app')
-.controller('PropiedadesVerCtrl', function($scope, $auth, $state, $stateParams, PropiedadesSvc, VentasAlquileresSvc, $window) {
+.controller('PropiedadesVerCtrl', function($scope, $auth, $state, $stateParams, PropiedadesSvc, VentasAlquileresSvc, $window, NgMap) {
 
 	$scope.ready = false;
 
@@ -8,6 +8,16 @@ angular.module('app')
 	$scope.propiedad = {};
 
 	$scope.venta_alquiler = {};
+
+	$scope.map = {};
+
+	NgMap.getMap().then(function(map) {
+		$scope.map = map;
+		console.log(map.getCenter());
+		console.log('markers', map.markers);
+		console.log('shapes', map.shapes);
+		console.log('directions', map.directions);
+	});
 
 	var p1 = PropiedadesSvc.get(id_propiedad).then(function(propiedad) {
 

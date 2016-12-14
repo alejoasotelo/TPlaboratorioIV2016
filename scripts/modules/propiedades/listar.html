@@ -1,7 +1,7 @@
-<tools-menu modulo="propiedades" vista="listar">
+<tools-menu modulo="propiedades" vista="listar" ng-if="!esTipoCliente">
 </tools-menu>
 
-<div class="table-responsive">
+<div class="table-responsive" ng-if="!esTipoCliente">
 	<table class="table table-hover">
 		<thead>
 			<tr>
@@ -30,4 +30,55 @@
 			</tr>
 		</tbody>
 	</table>
+</div>
+
+<div ng-if="esTipoCliente">
+
+	<div ng-repeat="p in propiedades" class="col-xs-12 col-md-4 propiedad">
+
+		<h3 class="title">{{p.nombre}}</h3>
+
+		<div id="carousel-{{p.id_propiedad}}" class="carousel slide" data-ride="carousel">
+			<!-- Indicators -->
+			<ol class="carousel-indicators">
+				<li data-target="#carousel-{{p.id_propiedad}}" ng-repeat="img in p.imagenes" data-slide-to="{{$index}}" ng-class="{active: $first}"></li>
+			</ol>
+
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner" role="listbox">
+				<div class="item" ng-repeat="img in p.imagenes" ng-class="{active: $first}" style="text-align: center">
+					<img ng-src="{{img.imagen}}" alt="Slide {{$index}}" style="max-height: 240px; margin: 0 auto;" />
+				</div>
+			</div>
+
+			<!-- Controls -->
+			<a class="left carousel-control" onclick="jQuery(this).parent().carousel('prev'); return false;" role="button" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				<span class="sr-only">Anterior</span>
+			</a>
+
+			<a class="right carousel-control" onclick="jQuery(this).parent().carousel('next'); return false;" role="button" data-slide="next">
+				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				<span class="sr-only">Siguiente</span>
+			</a>
+		</div>
+
+		<div class="propiedad-bottom">
+
+			<ul class="list-group">
+				<li class="list-group-item">Direccion: {{p.direccion}}</li>
+				<li class="list-group-item">Local: {{p.local.nombre}}</li>
+			</ul>
+
+			<div>
+				<span class="price">${{p.precio}}</span>
+				<a ui-sref="propiedades.ver({id: p.id_propiedad})" ng-if="!Permisos.puede('propiedades.modificar') && Permisos.puede('propiedades.ver') && p.tipo == 1" class="pull-right btn btn-success">Comprar</a>
+
+				<a ui-sref="propiedades.ver({id: p.id_propiedad})" ng-if="!Permisos.puede('propiedades.modificar') && Permisos.puede('propiedades.ver') && p.tipo == 2" class="pull-right btn btn-info">Alquilar</a>
+			</div>
+
+		</div>
+
+	</div>
+
 </div>

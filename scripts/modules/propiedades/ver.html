@@ -60,6 +60,14 @@
             <span class="sr-only">Siguiente</span>
         </a>
     </div>
+
+    <hr>
+
+    <h3>Mapa</h3>
+    <ng-map zoom="10" center="Buenos Aires" style="height:90%" >
+        <directions draggable="false" panel="directions-panel" travel-mode="DRIVING" origin="Buenos Aires, Avellaneda" destination="{{propiedad.direccion}}">
+        </directions>
+    </ng-map>
 </div>
 
 <div class="col-xs-12">
