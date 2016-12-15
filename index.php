@@ -40,7 +40,7 @@
     <script src="bower_components/dom-to-image/dist/dom-to-image.min.js"></script>
     <script src="bower_components/pdfmake/build/pdfmake.min.js"></script>
     <script src="bower_components/pdfmake/build/vfs_fonts.js"></script>
-    <script src="http://maps.google.com/maps/api/js?key=AIzaSyBEdc4hLGaPE9hdLTeQf935xC3R9h9L-8w"></script>
+    <script src="http://maps.google.com/maps/api/js?key=AIzaSyBXwcL3-gI_TM05ENcf8kgk38bm24bcziU"></script>
     <script src="bower_components/ngmap/build/scripts/ng-map.js"></script>
     <script src="bower_components/satellizer/dist/satellizer.min.js"></script>
     <script src="bower_components/angular-file-upload/dist/angular-file-upload.min.js" type="text/javascript" ></script>
