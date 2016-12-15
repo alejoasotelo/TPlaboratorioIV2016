@@ -1,9 +1,11 @@
 angular.module('app')
-.controller('OfertasListarCtrl', function($scope, $window, $auth, $state, OfertasSvc) {
+.controller('OfertasListarCtrl', function($scope, $window, $auth, $state, OfertasSvc, PermisosSvc) {
 
 	if (!$auth.isAuthenticated()){
 		$state.go('auth.login');
 	}
+
+	$scope.esTipoCliente = PermisosSvc.getTipoUsuario() == 'cliente';
 
 	$scope.ofertas = [];
 

@@ -148,6 +148,15 @@ angular.module('app', ['ui.router', 'ngMap', 'satellizer', 'angularFileUpload', 
 			} 
 		}
 	})
+	.state('ofertas.ver', {
+		url: '/ver/:id',
+		views: {
+			'contenido': {
+				templateUrl: 'scripts/modules/ofertas/ver.html' + nocache,
+				controller: 'OfertasVerCtrl'
+			} 
+		}
+	})
 
 	// Propiedades
 	.state('propiedades', {

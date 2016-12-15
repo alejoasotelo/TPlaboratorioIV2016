@@ -1,7 +1,7 @@
 <tools-menu modulo="ofertas" vista="listar">
 </tools-menu>
 
-<div class="table-responsive">
+<div class="table-responsive" ng-if="!esTipoCliente">
 	<table id="table" class="table table-hover">
 		<thead>
 			<tr>
@@ -22,4 +22,56 @@
 			</tr>
 		</tbody>
 	</table>
+</div>
+
+<div ng-if="esTipoCliente">
+
+	<div ng-repeat="o in ofertas" class="col-xs-12 col-md-4 oferta">
+
+		<h3 class="title">{{o.nombre}}</h3>
+
+		<div id="carousel-{{o.id_propiedad}}" class="carousel slide" data-ride="carousel">
+			<!-- Indicators -->
+			<ol class="carousel-indicators">
+				<li data-target="#carousel-{{o.id_propiedad}}" ng-repeat="img in o.propiedad.imagenes" data-slide-to="{{$index}}" ng-class="{active: $first}"></li>
+			</ol>
+
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner" role="listbox">
+				<div class="item" ng-repeat="img in o.propiedad.imagenes" ng-class="{active: $first}" style="text-align: center">
+					<img ng-src="{{img.imagen}}" alt="Slide {{$index}}" style="max-height: 240px; margin: 0 auto;" />
+				</div>
+			</div>
+
+			<!-- Controls -->
+			<a class="left carousel-control" onclick="jQuery(this).parent().carousel('prev'); return false;" role="button" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				<span class="sr-only">Anterior</span>
+			</a>
+
+			<a class="right carousel-control" onclick="jQuery(this).parent().carousel('next'); return false;" role="button" data-slide="next">
+				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				<span class="sr-only">Siguiente</span>
+			</a>
+		</div>
+
+		<div class="propiedad-bottom">
+
+			<ul class="list-group">
+				<li class="list-group-item">Descripcion: {{o.descripcion}}</li>
+				<li class="list-group-item">Direccion: {{o.propiedad.direccion}}</li>
+				<li class="list-group-item">Local: {{o.local.nombre}}</li>
+			</ul>
+
+			<div>
+				<span class="price"><strike style="color: grey;">${{o.propiedad.precio}}</strike> - ${{o.propiedad.precio * (1-(o.descuento/100))}} ({{o.descuento}}%)</span>
+				<a ui-sref="ofertas.ver({id: o.id_oferta})" ng-if="!Permisos.puede('propiedades.modificar') && Permisos.puede('propiedades.ver') && o.propiedad.tipo == 1" class="pull-right btn btn-success" ng-class="{disabled: o.esta_vendida}">{{o.esta_vendida ? 'Vendida' : 'Comprar'}}</a>
+
+				<a ui-sref="ofertas.ver({id: o.id_oferta})" ng-if="!Permisos.puede('propiedades.modificar') && Permisos.puede('propiedades.ver') && o.propiedad.tipo == 2" class="pull-right btn btn-info">Alquilar</a>
+			</div>
+
+		</div>
+
+	</div>
+
 </div>

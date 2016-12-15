@@ -24,7 +24,7 @@ class VentaAlquiler{
         $consulta = $objetoAccesoDato->retornarConsulta($sql);
         $consulta->bindValue(':id_propiedad', $obj->id_propiedad, \PDO::PARAM_STR);
         $consulta->bindValue(':id_usuario', $obj->id_usuario, \PDO::PARAM_STR);
-        $consulta->bindValue(':precio', 0, \PDO::PARAM_STR);
+        $consulta->bindValue(':precio', isset($obj->precio) ? $obj->precio : 0, \PDO::PARAM_STR);
         $consulta->bindValue(':tipo', $obj->tipo, \PDO::PARAM_STR);
 
         if ($obj->tipo == self::TIPO_ALQUILER) {

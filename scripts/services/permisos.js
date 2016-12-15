@@ -106,7 +106,8 @@ angular.module('app')
 			page_default: 'ofertas.listar',
 			ver_usuarios_tipo: 'ninguno',
 			ofertas: {
-				listar: true
+				listar: true,
+				ver: true
 			},
 			encuestas: {
 				nuevo: true

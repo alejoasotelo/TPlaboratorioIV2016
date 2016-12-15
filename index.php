@@ -73,6 +73,7 @@
     <script src="scripts/modules/ofertas/listar.js<?php echo $nocache;?>"></script>
     <script src="scripts/modules/ofertas/nuevo.js<?php echo $nocache;?>"></script>
     <script src="scripts/modules/ofertas/modificar.js<?php echo $nocache;?>"></script>
+    <script src="scripts/modules/ofertas/ver.js<?php echo $nocache;?>"></script>
 
     <script src="scripts/modules/propiedades/propiedades.js<?php echo $nocache;?>"></script>
     <script src="scripts/modules/propiedades/listar.js<?php echo $nocache;?>"></script>

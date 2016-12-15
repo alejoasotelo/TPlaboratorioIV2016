@@ -126,3 +126,13 @@ body{
 	}
 
 }
+
+.oferta{
+	@extend .propiedad;
+
+	min-height: 550px;
+
+	.propiedad-bottom{
+		min-height: 210px;
+	}
+}

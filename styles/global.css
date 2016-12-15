@@ -92,9 +92,9 @@ body {
 .cursor-pointer {
   cursor: pointer; }
 
-.propiedad {
+.propiedad, .oferta {
   min-height: 500px; }
-  .propiedad .title {
+  .propiedad .title, .oferta .title {
     font-size: 14px;
     font-weight: bold; }
   .propiedad-bottom {
@@ -114,5 +114,10 @@ body {
         color: red;
         font-weight: bold;
         line-height: 34px; }
+
+.oferta {
+  min-height: 550px; }
+  .oferta .propiedad-bottom {
+    min-height: 210px; }
 
 /*# sourceMappingURL=global.css.map */
